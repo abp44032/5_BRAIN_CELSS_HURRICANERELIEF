@@ -1,0 +1,20 @@
+[
+    {
+        "name" : "Columbia Community Shelter",
+        "capacity" : 100,
+        "resources" : [
+            { "resourceID" : 301, "name" : "Bottled Water", "quantity" : 100 },
+            { "resourceID" : 302, "name" : "First Aid Kits", "quantity" : 50 }
+        ],
+        "accommodations" : ["PET_FRIENDLY", "CHILD_FRIENDLY", "MEDICAL_NEEDS"]
+    },
+    {
+        "name" : "Downtown Emergency Shelter",
+        "capacity" : 150,
+        "resources" : [
+            { "resourceID" : 303, "name" : "Blankets", "quantity" : 100 },
+            { "resourceID" : 304, "name" : "Infant Formula", "quantity" : 20 }
+        ],
+        "accommodations" : ["FAMILIES_TRAVELING_TOGETHER", "ALL_AGES"]
+    }   
+]

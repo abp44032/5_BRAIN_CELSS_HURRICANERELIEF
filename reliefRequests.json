@@ -1,0 +1,36 @@
+[
+    {
+        "requestID" : 201,
+        "timeStamp" : "2026-09-27 12:00:00",
+        "status" : "RECEIVED",
+        "requestType": "MEDICAL",
+        "severity": "HIGH",
+        "urgency": "CRITICAL",
+        "location": {
+            "address" : "29 Main Street",
+            "city" : "Austin",
+            "state" : "TX"
+        },
+        "description" : "Resident needs immediate medical attention",
+        "totalPets" : 1,
+        "pets" : [
+            {"name" : "Buddy", "type" : "Dog"}
+        ]
+    },
+    {
+        "requestID" : 202,
+        "timeStamp" : "2026-09-27 12:30:00",
+        "status" : "ACCEPTED",
+        "requestType": "FIREPROTECTION",
+        "severity": "CRITICAL",
+        "urgency": "HIGH",
+        "location": {
+            "address" : "45 Elm Street",
+            "city" : "North Charleston",
+            "state" : "SC"
+        },
+        "description" : "Resident needs food supplies",
+        "totalPets" : 0,
+        "pets" : []
+    }
+]

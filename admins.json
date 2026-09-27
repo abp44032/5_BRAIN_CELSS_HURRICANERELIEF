@@ -1,0 +1,30 @@
+{
+    "admins": [
+     {
+        "firstName" :"Jolie",
+        "lastName" :"Petal",
+        "email" :"jolie.petal@example.com",
+        "userName" :"jolie.petal",
+        "location" : {
+            "address" : "123 Main St",
+            "city" : "Freemont",
+            "state" : "CA",
+            "zip" : "94536"
+        },
+        "shareLocation" : true
+     },
+     {
+        "firstName" :"Walter",
+        "lastName" :"Greene",
+        "email" :"walter.greene@example.com",
+        "userName" :"walter.greene",
+        "location" : {
+            "address" : "456 Elm St",
+            "city" : "Aiken",
+            "state" : "SC",
+            "zip" : "29801"
+        },
+        "shareLocation" : false
+     }
+    ]
+}

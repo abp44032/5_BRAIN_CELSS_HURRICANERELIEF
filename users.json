@@ -1,0 +1,28 @@
+[
+    {
+        "firstName" :"Thomas",
+        "lastName" :"Cooper",
+        "email" :"thomas.cooper@example.com",
+        "userName" :"thomas.cooper",
+        "location" : {
+            "address" : "789 Pine St",
+            "city" : "Columbia",
+            "state" : "SC",
+            "zip" : "29201"
+        },
+        "shareLocation" : true
+    },
+    {
+        "firstName" :"Maya",
+        "lastName" :"Johnson",
+        "email" :"maya.johnson@example.com",
+        "userName" :"maya.johnson",
+        "location" : {
+            "address" : "321 Harden St",
+            "city" : "Charleston",
+            "state" : "SC",
+            "zip" : "29401"
+        },
+        "shareLocation" : false
+    }
+]

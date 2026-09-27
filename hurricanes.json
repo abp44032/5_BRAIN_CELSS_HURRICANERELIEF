@@ -1,0 +1,20 @@
+[
+    {
+        "hurricaneZipCodes" : ["73301", "75201"],
+        "hurricaneStatus" : "ACTIVE",
+        "evacuationSteps" : ["Prepare emergency supplies", "Follow local evacuation orders"],
+        "emergencySupplies" : [
+            {"resourceID" : 301, "name" : "Bottled Water", "quantity" : 100} ,
+            {"resourceID" : 302, "name" : "First Aid Kit", "quantity" : 20}
+        ] 
+    },
+    {
+        "hurricaneZipCodes" : ["73301", "75201"],
+        "hurricaneStatus" : "WEAKENING",
+        "evacuationSteps" : ["Avoid flooded roads", "Check official local alerts"],
+        "emergencySupplies" : [
+            {"resourceID" : 303, "name" : "Blankets", "quantity" : 100} ,
+            {"resourceID" : 304, "name" : "Infant Formula", "quantity" : 20}
+        ] 
+    }
+]

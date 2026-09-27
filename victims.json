@@ -1,0 +1,32 @@
+[
+    {
+        "firstName" :"Esha",
+        "lastName" :"Patel",
+        "email" :"esha.patel@example.com",
+        "userName" :"esha.patel",
+        "location" : {
+            "address" : "123 Gervais St",
+            "city" : "Freemont",
+            "state" : "CA",
+            "zip" : "94536"
+        },
+        "shareLocation" : true,
+        "isSafe" : false,
+        "specialNeeds" : ["Wheelchair access", "Medication"]   
+    },
+    {
+        "firstName" :"Alex",
+        "lastName" :"Smith",
+        "email" :"alex.smith@example.com",
+        "userName" :"alex.smith",
+        "location" : {
+            "address" : "301 Bay Street",
+            "city" : "Mount Pleasant",
+            "state" : "SC",
+            "zip" : "29464"
+        },
+        "shareLocation" : false,
+        "isSafe" : true,
+        "specialNeeds" : ["Dietary restrictions"]
+    }
+]

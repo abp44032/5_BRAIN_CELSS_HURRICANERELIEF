@@ -1,0 +1,22 @@
+[
+    {
+        "resourceID" : 301,
+        "name" : "Bottled Water",
+        "quantity" : 100
+    },
+    {
+        "resourceID" : 302,
+        "name" : "First Aid Kits",
+        "quantity" : 50
+    },
+    {
+        "resourceID" : 303,
+        "name" : "Blankets",
+        "quantity" : 100
+    },
+    {
+        "resourceID" : 304,
+        "name" : "Infant Formula",
+        "quantity" : 20
+    }
+]
