@@ -79,5 +79,40 @@ public class Shelter {
         this.hoursOfOperation = hoursOfOperation;
     }
 
-
+    public void updateCapacity(int newCapacity) {
+        
+    }
     
+    public void updateResources(ArrayList<Resource> newResources) {
+        
+    }
+
+    public boolean getAvailability() {
+        return false;
+    }
+
+    public Map getMap() {
+        return null;
+    }
+
+    public double getDistanceFromUser(Location userLocation) {
+        return 0.0;
+    }
+
+    public void cacheLocation() {
+
+    }
+
+
+    @Override 
+    public String toString() {
+        return "Shelter{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", capacity=" + capacity +
+                ", resources=" + resources +
+                ", accommodations=" + accommodations +
+                ", location=" + location +
+                ", hoursOfOperation='" + hoursOfOperation + '\'' +
+                '}';
+    }
