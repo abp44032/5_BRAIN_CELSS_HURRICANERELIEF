@@ -1,9 +1,10 @@
 package com.model;
+import java.util.ArrayList;
 
 public class ShelterFacade {
     private User currentUser;
     private UserList userList;
-
+    private ShelterList shelterList;
     public ShelterFacade() {   
 
     }
@@ -20,7 +21,20 @@ public class ShelterFacade {
         return null;
     }
 
-    public ReliefRequest submitReliefRequest(String targetShelter, String details) {
+    public ArrayList<Shelter> getShelters() {
         return null;
     }
+
+    public Shelter findShelter(String name) {
+        return null;
+    }
+
+    public boolean checkShelterAvailability(String shelterName) {
+        return false;
+    }
+
+    public double getDistanceToShelter(String shelterName, Location userLoc) {
+        return 0.0;
+    }
+
 }

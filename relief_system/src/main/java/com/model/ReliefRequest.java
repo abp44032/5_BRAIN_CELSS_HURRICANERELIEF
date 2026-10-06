@@ -3,11 +3,6 @@ package com.model;
 import java.util.UUID;
 
 public class ReliefRequest {
-    public enum Status {
-        PENDING,
-        APPROVED,
-        REJECTED
-    }
 
     private UUID requestId;
     private DateTime timestamp;
