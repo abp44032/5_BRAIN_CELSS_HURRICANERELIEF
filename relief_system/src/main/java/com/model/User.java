@@ -25,15 +25,47 @@ public abstract class User {
         this.shareLocation = false;
     }
 
+    public UUID getId() {
+        return this.id;
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public Location getLocation() {
+        return this.location;
+    }
+
+    public boolean isShareLocation() {
+        this.shareLocation = shareLocation;
+    }
+
     public Information viewHurricaneInfo() {
         return null;
     }
     public List<Shelter> viewShelters() {
-        return null;
+        return new ArrayList<>();
     }
 
     public  List<Service> viewServices() {
-        return null;
+        return new ArrayList<>();
     }
 
     public void commentOnRequest(ReliefRequest request, String comment) {

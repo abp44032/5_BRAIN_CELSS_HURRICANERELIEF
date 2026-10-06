@@ -13,10 +13,21 @@ public class UserList {
     }
 
     public static UserList getInstance() {
-        return null;
+        if (userList == null) {
+            userList = new UserList();
+        }
+        return userList;
     }
 
     public User getUser(String username, String password) {
+        if (username == null || password == null) {
+            return null;
+        }
+        for (User user : users) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
         return null;
     }
 
@@ -25,10 +36,14 @@ public class UserList {
     }
 
     public void addUser(UUID id, String firstName, String lastName, String username, String password, String email, Location location, boolean shareLocation) {
-        return;
+        if (id == null || firstName == null || lastName == null || username == null || password == null || email == null) {
+            return;
+        }
+        User newUser = new User(id, firstName, lastName, username, password, email, location, shareLocation);
+        users.add(newUser);
     }
 
     public boolean save() {
-        return false;
+        return DataWriter.saveUsers(this.users);
     }
 }
