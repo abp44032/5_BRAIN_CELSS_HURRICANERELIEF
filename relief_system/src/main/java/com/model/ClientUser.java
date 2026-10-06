@@ -10,17 +10,14 @@ public class ClientUser extends User {
 
     public ClientUser(String username, String password, String email) {
         super(id, username, password, email);
-        this.reliefRequests = new ArrayList<>();
     }
 
     public ReliefRequest makeRequest(String targetShelter, String details) {
-        ReliefRequest newRequest = new ReliefRequest(this, targetShelter, details);
-        this.reliefRequests.add(newRequest);
-        return newRequest;
-        }
+        return null;
+    }
 
     public List<ReliefRequest> getReliefRequests() {
-        return reliefRequests;
+        return null;
     }
 
 }

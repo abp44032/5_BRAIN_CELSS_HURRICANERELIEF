@@ -2,9 +2,9 @@ package com.model;
 
 public class AdminUser extends User {
     private String organization;
+
     public AdminUser(String username, String password, String email, String organization) {
-        super(username, password, email);
-        this.organization = organization;
+        super(null, username, password, email);
     }
 
     public String getOrganization() {
@@ -12,7 +12,7 @@ public class AdminUser extends User {
     }
 
     public void processRequest(ReliefRequest request, ReliefRequest.Status newStatus) {
-        request.setStatus(newStatus);
+    
     }
     
 }

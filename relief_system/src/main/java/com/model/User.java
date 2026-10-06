@@ -16,22 +16,22 @@ public abstract class User {
     }
 
     public UUID getId() {
-        return id;
+        return this.id;
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public boolean checkPassword(String password) {
-        return this.password != null && this.password.equals(password);
+        return false;
     }
 }
