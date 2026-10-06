@@ -1,6 +1,6 @@
 [
     {
-        "requestID" : "44e2a4eb-ff42-40a5-b918-e197efa1d0ab"
+        "requestID" : "44e2a4eb-ff42-40a5-b918-e197efa1d0ab",
         "timeStamp" : "2026-09-27 12:00:00",
         "status" : "RECEIVED",
         "requestType": "MEDICAL",
@@ -18,7 +18,7 @@
         ]
     },
     {
-        "requestID" : "d4684f52-9afb-4bc8-a179-b42dc30b9cd8"
+        "requestID" : "d4684f52-9afb-4bc8-a179-b42dc30b9cd8",
         "timeStamp" : "2026-09-27 12:30:00",
         "status" : "ACCEPTED",
         "requestType": "FIREPROTECTION",
