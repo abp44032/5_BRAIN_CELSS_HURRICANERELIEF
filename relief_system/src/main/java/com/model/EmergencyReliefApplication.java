@@ -2,6 +2,21 @@ package com.model;
 import java.util.ArrayList;
 
 public class EmergencyReliefApplication {
+        
+    public User createAccount(String username, String password, String email) {
+        // TODO
+        return null;
+    }
+
+    public User login(String username, String password) {
+        // TODO
+        return null;
+    }
+
+    public ArrayList<Shelter> getShelters() {
+        // TODO
+        return null;
+    }
     
     public boolean login(String username, String password) {
         User user = userList.getUserByUsername(username);
