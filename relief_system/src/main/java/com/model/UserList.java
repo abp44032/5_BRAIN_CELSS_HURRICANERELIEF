@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class UserList {
-    private List<User> users;
+    private static UserList userList;
+    private ArrayList<User> users;
 
     public UserList() {
         this.users = new ArrayList<>();
@@ -15,21 +16,19 @@ public class UserList {
         return null;
     }
 
-    public void addUser(User user) {
-    }
-
-    public User getUserById(UUID id) {
+    public User getUser(String username, String password) {
         return null;
     }
 
-    public User getUserByUsername(String username) {
-        return null;
+    public ArrayList<User> getUsers() {
+        return this.users;
     }
 
-    public void removeUser(User user) {
+    public void addUser(UUID id, String firstName, String lastName, String username, String password, String email, Location location, boolean shareLocation) {
+        return;
     }
 
-    public List<User> getUsers() {
-        return null;
+    public boolean save() {
+        return false;
     }
 }
