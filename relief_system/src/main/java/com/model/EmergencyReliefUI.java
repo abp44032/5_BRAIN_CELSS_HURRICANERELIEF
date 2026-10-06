@@ -54,22 +54,22 @@ public class EmergencyReliefUI {
     }
 
     private void login() {
-        // TODO: Implement login
+        
     }
 
     private void createAccount() {
-        // TODO: Implement account creation
+       
     }
 
     private void displayVictimMenu() {
-        // TODO: Implement victim menu
+       
     }
 
     private void displayVolunteerMenu() {
-        // TODO: Implement volunteer menu
+        
     }
 
     private void displayAdminMenu() {
-        // TODO: Implement admin menu
+        
     }
 }
