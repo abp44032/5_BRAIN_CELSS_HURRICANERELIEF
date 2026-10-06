@@ -10,40 +10,49 @@ public class ReliefRequest {
     }
 
     private UUID requestId;
-    private User requester;
-    private String targetShelter;
-    private String details;
-    private Status status;
+    private DateTime timestamp;
+    private RequestStatus status;
+    private RequestType type;
+    private SeverityLevel severity;
+    private UrgencyLevel urgency;
+    private String description;
+    private int totalPeople;
+    private ArrayList<Pets> pets;
 
-    public ReliefRequest(User requester, String targetShelter, String details) {
-        this.requestId = UUID.randomUUID();
-        this.requester = requester;
-        this.targetShelter = targetShelter;
-        this.details = details;
-        this.status = Status.PENDING;
+    public ReliefRequest(UUID requestId, DateTime timestamp, RequestStatus status, RequestType type, SeverityLevel severity, UrgencyLevel urgency, String description, int totalPeople, ArrayList<Pets> pets) {
+        this.requestId = requestId;
+        this.timestamp = timestamp;
+        this.status = status;
+        this.type = type;
+        this.severity = severity;
+        this.urgency = urgency;
+        this.description = description;
+        this.totalPeople = totalPeople;
+        this.pets = pets;
     }
 
-    public UUID getrequestId() {
-        return requestId;
+    public int priority() {
+        return 0;
     }
 
-    public User getRequester() {
-        return requester;
+    public boolean delete() {
+        return false;
     }
 
-    public String getTargetShelter() {
-        return targetShelter;
+    public void updateStatus(RequestStatus newStatus) {
+    }
+
+    public void notifyUser(String message) {
     }
 
     public String getDetails() {
-        return details;
+        return null;
     }
 
-    public Status getStatus() {
-        return status;
+    public void assignVolunteer(Volunteer volunteer) {
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public boolean isResolved() {
+        return false;
     }
 }
