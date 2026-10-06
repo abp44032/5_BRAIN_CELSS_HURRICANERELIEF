@@ -2,11 +2,11 @@ package com.model;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.UUID:
+import java.util.UUID;
 
 
 public class Shelter {
-    private UUID id:
+    private UUID id;
     private String name;
     private int capacity;   
     private ArrayList<Resource> resources;

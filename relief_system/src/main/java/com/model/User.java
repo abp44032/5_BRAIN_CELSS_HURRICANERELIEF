@@ -11,7 +11,7 @@ public abstract class User {
     protected String username;
     protected String password;
     protected String email;
-    protected Location location
+    protected Location location;
     protected boolean shareLocation;
 
     public User(UUID id, String firstName, String lastName, String username, String password, String email, Location location, boolean shareLocation) {

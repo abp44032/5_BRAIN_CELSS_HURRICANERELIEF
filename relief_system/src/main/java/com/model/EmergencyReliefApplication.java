@@ -2,8 +2,13 @@ package com.model;
 import java.util.ArrayList;
 
 public class EmergencyReliefApplication {
-        
-    
+
+    private UserList userList;
+
+    public EmergencyReliefApplication(){
+        userList = UserList.getInstance();
+    }
+
     public boolean login(String username, String password) {
         User user = userList.getUserByUsername(username);
 
