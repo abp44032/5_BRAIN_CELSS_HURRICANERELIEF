@@ -61,9 +61,9 @@ public class EmergencyReliefUI {
         System.out.print("Password: ");
         String password = scanner.nextLine();
 
-        User user = app.login(username, password);
+        boolean successful = app.login(username, password);
 
-        if (user != null) {
+        if (successful) {
             System.out.println("Login successful!");
             displayUserMenu();
         } else {
