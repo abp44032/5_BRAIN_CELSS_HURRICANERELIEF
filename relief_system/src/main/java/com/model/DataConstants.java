@@ -12,5 +12,9 @@ public class DataConstants {
     public static final String USER_USERNAME = "userName";
     public static final String USER_SHARE_LOCATION = "shareLocation";
     public static final String SHELTER_ID_KEY = "uuid";
+    public static final String SHELTER_NAME = "name";
+    public static final String SHELTER_CAPACITY = "capacity";
+    public static final String SHELTER_RESOURCES = "resources";
+    public static final String SHELTER_ACCOMMODATIONS = "accommodations";
     public static final String REQUEST_ID_KEY = "requestID";
 }
