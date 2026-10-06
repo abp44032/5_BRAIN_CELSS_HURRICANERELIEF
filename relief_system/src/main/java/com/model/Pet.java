@@ -1,6 +1,6 @@
 package com.model;
 
-public class Pet {
+public class Pet extends ReliefRequest{
     private String name;
     private String type;
 
