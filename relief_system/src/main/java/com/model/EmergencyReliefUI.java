@@ -1,3 +1,4 @@
+package com.model;
 /*
 package com.hurricane;
 
