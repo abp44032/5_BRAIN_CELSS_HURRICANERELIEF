@@ -23,11 +23,13 @@ public class Location {
         return city;
     }
 
+
     public void setCity(String city) {
         this.city = city;
     }
 
     public String getState() {
+        return state;
     }
 
     public void setState(String state) {
