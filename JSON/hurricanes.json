@@ -1,5 +1,6 @@
 [
     {
+        "name" : "Tracy",
         "hurricaneZipCodes" : ["73301", "75201"],
         "hurricaneStatus" : "ACTIVE",
         "evacuationSteps" : ["Prepare emergency supplies", "Follow local evacuation orders"],
@@ -9,6 +10,7 @@
         ] 
     },
     {
+        "name" : "Andrew",
         "hurricaneZipCodes" : ["73301", "75201"],
         "hurricaneStatus" : "WEAKENING",
         "evacuationSteps" : ["Avoid flooded roads", "Check official local alerts"],

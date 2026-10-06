@@ -1,5 +1,6 @@
 [
     {
+        "uuid" : "679a1b72-e1bb-4bdd-8d0d-f0cd50c89864",
         "name" : "Columbia Community Shelter",
         "capacity" : 100,
         "resources" : [
@@ -9,6 +10,7 @@
         "accommodations" : ["PET_FRIENDLY", "CHILD_FRIENDLY", "MEDICAL_NEEDS"]
     },
     {
+        "uuid" : "3cc4c1c3-4f38-4744-b330-a27245caf4de",
         "name" : "Downtown Emergency Shelter",
         "capacity" : 150,
         "resources" : [
