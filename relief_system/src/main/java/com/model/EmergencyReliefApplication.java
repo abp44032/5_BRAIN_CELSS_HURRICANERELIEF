@@ -3,6 +3,15 @@ import java.util.ArrayList;
 
 public class EmergencyReliefApplication {
     
+    public boolean login(String username, String password) {
+        User user = userList.getUserByUsername(username);
+
+        if (user == null) {
+            return false;
+        }
+        return user.checkPassword(password);
+    }
+    
     public void sendMessage(User recipient, String message) {
         //TODO
     }
