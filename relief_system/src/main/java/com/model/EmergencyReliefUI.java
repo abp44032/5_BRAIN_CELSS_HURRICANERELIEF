@@ -61,14 +61,17 @@ public class EmergencyReliefUI {
 
     private void createReliefRequest() {
         // TODO
+        
     }
 
     private void viewReliefRequests() {
         // TODO
+        
     }
    
     private void logout() {
         // TODO
+        
     }
 
     public static void main(String[] args) {
