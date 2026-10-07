@@ -15,6 +15,9 @@ public class DataConstants {
     public static final String SHELTER_NAME = "name";
     public static final String SHELTER_CAPACITY = "capacity";
     public static final String SHELTER_RESOURCES = "resources";
+    public static final String RESOURCE_ID = "resourceID";
+    public static final String RESOURCE_NAME = "name";
+    public static final String RESOURCE_QUANTITY = "quantity";
     public static final String SHELTER_ACCOMMODATIONS = "accommodations";
     public static final String REQUEST_ID_KEY = "requestID";
 }
