@@ -47,7 +47,16 @@ public class ShelterList {
     }
 
     public boolean save() {
-        return DataWriter.saveShelters(this.shelters);
+        return DataWriter.saveShelters();
     }
 
+    public static void main(String[] args) {
+        ShelterList list = ShelterList.getInstance();
+        
+        System.out.println("Loaded shelters count: " + list.getShelters().size());
+        
+        for (Shelter s : list.getShelters()) {
+            System.out.println("- " + s.getName());
+        }
+    }
 }

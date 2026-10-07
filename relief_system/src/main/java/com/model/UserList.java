@@ -39,11 +39,20 @@ public class UserList {
         if (id == null || firstName == null || lastName == null || username == null || password == null || email == null) {
             return;
         }
-        User newUser = new User(id, firstName, lastName, username, password, email, location, shareLocation);
+        User newUser = User.create(id, firstName, lastName, username, password, email, location, shareLocation);
         users.add(newUser);
     }
 
     public boolean save() {
-        return DataWriter.saveUsers(this.users);
+        return DataWriter.saveUsers();
+    }
+    public static void main(String[] args) {
+        UserList list = UserList.getInstance();
+        list.addUser(UUID.randomUUID(), "Jane", "Doe", "janedoe", "pass123", "jane@example.com", null, true);
+
+        System.out.println("Total Users: " + list.getUsers().size());
+        System.out.println("Valid User: " + list.getUser("janedoe", "pass123").getUsername());
+        System.out.println("Invalid User: " + list.getUser("janedoe", "wrong"));
+        System.out.println("Singleton Match: " + (list == UserList.getInstance()));
     }
 }

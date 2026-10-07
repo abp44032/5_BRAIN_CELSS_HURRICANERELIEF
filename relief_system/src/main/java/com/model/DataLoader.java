@@ -16,7 +16,7 @@ public class DataLoader {
         return null;
     }
     
-    public ArrayList<Shelter> getShelters() {
+    public static ArrayList<Shelter> getShelters() {
         return null;
     }
 
