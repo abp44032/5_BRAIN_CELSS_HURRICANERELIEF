@@ -1,6 +1,16 @@
 package com.model;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class DataWriter extends DataConstants{
+
+   
+
+
     public static boolean saveUsers(List<User> users) {
         if (users == null) {
             for (User u : users) {
@@ -17,7 +27,7 @@ public class DataWriter extends DataConstants{
                 }
             }
         }
-        return writeToFile(USER_FILE_NAME, users.json());
+        return writeToFile(USER_FILE_NAME, ((Object) users).json());
 
         
     }
@@ -66,25 +76,10 @@ public class DataWriter extends DataConstants{
                 }
             }
         }
-        return writeToFile(HURRICANE_FILE_NAME, hurricanes.json());
+        return writeToFile(HURRICANE_FILE_NAME, ((Object) hurricanes).json());
         
     }
 
-    public boolean savePets(List<Pet> pets) {
-        if (pets == null) {
-            for (Pet p : pets) {
-                if (p == null) continue; {
-                    Map<String, Object> obj = new HashMap<>();
-                    obj.put(PET_ID_KEY, p.getId().toString());
-                    obj.put(PET_NAME, p.getName());
-                    obj.put(PET_TYPE, p.getType());
-                    obj.put(PET_OWNER, p.getOwner() != null ? p.getOwner().toString() : null);
-                }
-            }
-        }
-        return writeToFile(PET_FILE_NAME, pets.json());
-
-    }
 
     private static boolean writeToFile(String fileName, List<Map<String, Object>>, jsonData) {
         try (FileWriter fileWriter = new FileWriter(fileName)) {

@@ -118,12 +118,25 @@ public abstract class User {
         System.out.println("Email: " + testUser.getEmail());
         System.out.println("Location: " + testUser.getLocation());
         System.out.println("Share Location: " + testUser.isShareLocation());
-    }
+    
 
-    public static User create(UUID id2, String firstName2, String lastName2, String username2, String password2,
-            String email2, Location location2, boolean shareLocation2) {
-                System.out.println("Creating user with ID: " + id2);
-        return new ConcreteUser(id2, firstName2, lastName2, username2, password2, email2, location2, shareLocation2);
-    }
+    System.out.println("\n--- Testing DataWriter.saveUsers ---");
+        ArrayList<User> testList = new ArrayList<>();
+        testList.add(testUser);
 
+        boolean saved = DataWriter.saveUsers(testList);
+        System.out.println("Save returned: " + saved);
+
+        if (saved) {
+            System.out.println("\n--- Content written to " + DataConstants.USER_FILE_NAME + " ---");
+            try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(DataConstants.USER_FILE_NAME))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                }
+            } catch (Exception e) {
+                System.err.println("Error reading JSON file: " + e.getMessage());
+            }
+        }
+    }
 }
