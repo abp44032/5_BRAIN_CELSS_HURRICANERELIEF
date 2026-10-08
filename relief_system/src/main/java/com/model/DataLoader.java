@@ -36,7 +36,6 @@ public class DataLoader extends DataConstants {
         return null;
     }
     
-<<<<<<< HEAD
     public ArrayList<Shelter> getShelters() {
         ArrayList<Shelter> shelters = new ArrayList<>();
 
@@ -73,10 +72,6 @@ public class DataLoader extends DataConstants {
             e.printStackTrace();
         }
         return shelters;
-=======
-    public static ArrayList<Shelter> getShelters() {
-        return null;
->>>>>>> ecafeda (cleaning up classes and adding main methods)
     }
 
     public ArrayList<ReliefRequest> getReliefRequests() {
