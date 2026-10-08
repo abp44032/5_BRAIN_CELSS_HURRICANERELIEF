@@ -35,9 +35,9 @@ public class Resource {
         this.quantity = quantity;
     }
 
-    public void addQuantity(int newQty) {
-        if (newQty >+ 0) {
-            this.quantity += newQty;
+    public void updateQuantity(int newQty) {
+        if (newQty >= 0) {
+            this.quantity = newQty;
         }
     }
 
