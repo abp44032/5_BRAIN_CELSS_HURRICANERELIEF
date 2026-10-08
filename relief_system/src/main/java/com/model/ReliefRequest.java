@@ -1,13 +1,11 @@
 package com.model;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class ReliefRequest<timestamp> {
+public class ReliefRequest {
 
     private UUID requestId;
-    private static LocalDateTime timestamp;
     private RequestStatus status;
     private RequestType type;
     private SeverityLevel severity;
@@ -15,11 +13,9 @@ public class ReliefRequest<timestamp> {
     private String description;
     private int totalPeople;
     private ArrayList<Pet> pets;
-    private ArrayList<Pet> pets2;
 
-    public ReliefRequest(UUID requestId, LocalDateTime timestamp, RequestStatus status, RequestType type, SeverityLevel severity, UrgencyLevel urgency, String description, int totalPeople, ArrayList<Pet> pets) {
+    public ReliefRequest(UUID requestId, RequestStatus status, RequestType type, SeverityLevel severity, UrgencyLevel urgency, String description, int totalPeople, ArrayList<Pet> pets) {
         this.requestId = requestId;
-        this.timestamp = timestamp;
         this.status = status;
         this.type = type;
         this.severity = severity;
@@ -31,10 +27,6 @@ public class ReliefRequest<timestamp> {
 
     public UUID getRequestId() {
         return requestId;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
     }
 
     public RequestType getType() {
@@ -52,7 +44,6 @@ public class ReliefRequest<timestamp> {
     public String getDescription() {
         return "ReliefRequest{" +
                 "requestId=" + requestId +
-                ", timestamp=" + timestamp +
                 ", status=" + status +
                 ", type=" + type +
                 ", severity=" + severity +
@@ -78,7 +69,6 @@ public class ReliefRequest<timestamp> {
     public static void main(String[] args) {
         ReliefRequest request = new ReliefRequest(
             UUID.randomUUID(),
-            LocalDateTime.now(),
             RequestStatus.ACCEPTED,   
             RequestType.MEDICAL,      
             SeverityLevel.HIGH,        
@@ -88,7 +78,7 @@ public class ReliefRequest<timestamp> {
             new ArrayList<Pet>()
         );
 
-        System.out.println(request.getDetails());
+        System.out.println(request.getDescription());
     }
 }
 
