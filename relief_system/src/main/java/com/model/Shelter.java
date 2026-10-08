@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.UUID;
 
 
-public class Shelter {
+public class Shelter  {
     private UUID id;
     private String name;
     private int capacity;   
@@ -13,7 +13,7 @@ public class Shelter {
     private ArrayList<AccommodationType> accommodations;
     private Location location;
     private String hoursOfOperation;
-
+    
 
     public Shelter(UUID id, String name, int capacity, ArrayList<Resource> resources, ArrayList<AccommodationType> accommodations) {
         this.id = id;
@@ -80,23 +80,41 @@ public class Shelter {
     }
 
     public void updateCapacity(int newCapacity) {
-        
+        if (newCapacity >= 0) {
+            this.capacity = newCapacity;
+        }
     }
     
     public void updateResources(ArrayList<Resource> newResources) {
-        
+        for (Resource existing : resources) {
+            if (existing.getResourceID().equals(resources.getResourceID())) {
+                existing.updateQuantity(resources.getQuantity());
+                return;
+         }
+      }
+      resources.add(resources);
     }
+    
 
     public boolean getAvailability() {
-        return false;
+        return this.capacity > 0;
     }
 
     public Map getMap() {
-        return null;
+        Map<String, String> map = new HashMap<>();
+        map.put("name", this.name);
+        if(location != null) {
+            map.put("location", this.location.toString());
+        }
+        return map;
     }
 
+
     public double getDistanceFromUser(Location userLocation) {
-        return 0.0;
+        if(location == null || userLocation == null{
+            return "unavailable";
+        }
+        location.getDistanceFrom(userLocation);
     }
 
     public void cacheLocation() {
