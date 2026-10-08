@@ -9,7 +9,10 @@ public class UserList {
     private ArrayList<User> users;
 
     public UserList() {
-        this.users = new ArrayList<>();
+        users = DataLoader.getUsers();
+        if (users == null) {
+            users = new ArrayList<>();
+        }
     }
 
     public static UserList getInstance() {
@@ -35,7 +38,7 @@ public class UserList {
         return this.users;
     }
 
-    public void addUser(UUID id, String firstName, String lastName, String username, String password, String email, Location location, boolean shareLocation) {
+    public boolean addUser(UUID id, String firstName, String lastName, String username, String password, String email, Location location, boolean shareLocation) {
         if (id == null || firstName == null || lastName == null || username == null || password == null || email == null) {
             return;
         }
@@ -44,6 +47,6 @@ public class UserList {
     }
 
     public boolean save() {
-        return DataWriter.saveUsers(this.users);
+        return DataWriter.saveUsers();
     }
 }

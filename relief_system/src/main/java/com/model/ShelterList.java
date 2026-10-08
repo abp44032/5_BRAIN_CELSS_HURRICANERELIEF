@@ -1,6 +1,7 @@
 package com.model;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class ShelterList {
     private static ShelterList shelterList;
@@ -25,7 +26,7 @@ public class ShelterList {
             return null;
         }
         for (Shelter shelter : shelters) {
-            if (shelter.getName().equals(name)) {
+            if (shelter.getName().equalsIgnoreCase(name)) {
                 return shelter;
             
             }
@@ -37,17 +38,19 @@ public class ShelterList {
         return this.shelters;
     }
 
-    public void addShelter(Shelter shelter) {
-        if (shelter != null) {
-            this.shelters.add(shelter);
+    public boolean addShelter(UUID id, String name, int capacity, String hoursOfOperation, ArrayList<Resource> resources, ArrayList<AccommodationType> accommodations) {
+        if (getShelter(name)!= null) {
+            return false;
         }
-        if (getShelter(shelter.getName()) == null) {
-            this.shelters.add(shelter);
+        Shelter shelter = new Shelter(id, name, capacity, resources, accommodations);
+        shelter.setHoursOfOperation(hoursOfOperation);
+        this.shelters.add(shelter);
+        return true;
         }
     }
 
     public boolean save() {
-        return DataWriter.saveShelters(this.shelters);
+        return DataWriter.saveShelters();
     }
 
 }
