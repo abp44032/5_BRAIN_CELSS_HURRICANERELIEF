@@ -28,8 +28,6 @@ public class DataWriter extends DataConstants{
             }
         }
         return writeToFile(USER_FILE_NAME, ((Object) users).json());
-
-        
     }
 
     public static boolean saveShelters(List<Shelter> shelters) {
@@ -52,16 +50,14 @@ public class DataWriter extends DataConstants{
             for (ReliefRequest r : requests) {
                 if (r == null) continue; {
                     Map<String, Object> obj = new HashMap<>();
-                    obj.put(REQUEST_ID_KEY, r.getId().toString());
+                    obj.put(REQUEST_ID_KEY, r.getRequestId().toString());
                     obj.put(REQUEST_TYPE, r.getType().toString());
                     obj.put(REQUEST_URGENCY, r.getUrgency().toString());
                     obj.put(REQUEST_SEVERITY, r.getSeverity().toString());
-                    obj.put(REQUEST_LOCATION, r.getLocation() != null ? r.getLocation().toString() : null);
                 }
             }
         }
         return writeToFile(REQUEST_FILE_NAME, requests.json());
-          
     }
 
     public boolean saveHurricanes(List<Hurricane> hurricanes) {
@@ -77,11 +73,10 @@ public class DataWriter extends DataConstants{
             }
         }
         return writeToFile(HURRICANE_FILE_NAME, ((Object) hurricanes).json());
-        
     }
 
 
-    private static boolean writeToFile(String fileName, List<Map<String, Object>>, jsonData) {
+    private static boolean writeToFile(String fileName, List<Map<String, Object>> data, String jsonData) {
         try (FileWriter fileWriter = new FileWriter(fileName)) {
             fileWriter.write(jsonData);
             return true;

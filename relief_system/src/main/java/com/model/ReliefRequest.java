@@ -15,14 +15,9 @@ public class ReliefRequest<timestamp> {
     private String description;
     private int totalPeople;
     private ArrayList<Pet> pets;
-<<<<<<< HEAD
     private ArrayList<Pet> pets2;
 
-    public ReliefRequest(UUID requestId, DateTime timestamp, RequestStatus status, RequestType type, SeverityLevel severity, UrgencyLevel urgency, String description, int totalPeople, ArrayList<Pet> pets) {
-=======
-
     public ReliefRequest(UUID requestId, LocalDateTime timestamp, RequestStatus status, RequestType type, SeverityLevel severity, UrgencyLevel urgency, String description, int totalPeople, ArrayList<Pet> pets) {
->>>>>>> ecafeda (cleaning up classes and adding main methods)
         this.requestId = requestId;
         this.timestamp = timestamp;
         this.status = status;
@@ -34,23 +29,27 @@ public class ReliefRequest<timestamp> {
         this.pets = pets;
     }
 
-    public int priority() {
-        return 0;
+    public UUID getRequestId() {
+        return requestId;
     }
 
-    public boolean delete() {
-        return false;
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 
-    public void updateStatus(RequestStatus newStatus) {
-        this.status = newStatus;
+    public RequestType getType() {
+        return type;
     }
 
-    public void notifyUser(String message) {
-        System.out.println("Notification to user: " + message);
+    public SeverityLevel getSeverity() {
+        return severity;
     }
 
-    public String getDetails() {
+    public UrgencyLevel getUrgency() {
+        return urgency;
+    }
+
+    public String getDescription() {
         return "ReliefRequest{" +
                 "requestId=" + requestId +
                 ", timestamp=" + timestamp +
@@ -68,10 +67,18 @@ public class ReliefRequest<timestamp> {
         return false;
     }
 
+    public int getTotalPeople() {
+        return totalPeople;
+    }
+
+    public ArrayList<Pet> getPets() {
+        return pets;
+    }
+
     public static void main(String[] args) {
         ReliefRequest request = new ReliefRequest(
             UUID.randomUUID(),
-            LocalDateTime.now(timestamp),
+            LocalDateTime.now(),
             RequestStatus.ACCEPTED,   
             RequestType.MEDICAL,      
             SeverityLevel.HIGH,        
@@ -84,3 +91,4 @@ public class ReliefRequest<timestamp> {
         System.out.println(request.getDetails());
     }
 }
+
