@@ -139,4 +139,11 @@ public abstract class User {
             }
         }
     }
+
+    protected static User getInstance() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getInstance'");
+    }
+
+    protected abstract ArrayList<User> getUser();
 }
