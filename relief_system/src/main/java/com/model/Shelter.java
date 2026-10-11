@@ -3,7 +3,7 @@ package com.model;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
-
+import java.util.HashMap;
 
 public class Shelter  {
     private UUID id;

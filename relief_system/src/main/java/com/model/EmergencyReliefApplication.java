@@ -4,18 +4,27 @@ import java.util.ArrayList;
 public class EmergencyReliefApplication {
 
     private UserList userList;
+    private User currentUser;
 
     public EmergencyReliefApplication(){
         userList = UserList.getInstance();
     }
 
     public boolean login(String username, String password) {
-        User user = userList.getUserByUsername(username);
+        User user = userList.getUser(username);
 
         if (user == null) {
             return false;
         }
-        return user.checkPassword(password);
+        if(user.checkPassword(password)) {
+            currentUser = user;
+            return true;
+        }
+        return false;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
     }
 
     public User createAccount(String username, String password, String email) {
