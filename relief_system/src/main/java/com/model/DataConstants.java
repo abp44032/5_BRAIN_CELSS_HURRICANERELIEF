@@ -24,4 +24,17 @@ public class DataConstants {
     public static final String SHELTER_ACCOMMODATIONS = "accommodations";
 
     public static final String REQUEST_ID_KEY = "requestID";
+    public static final String REQUEST_DESCRIPTION = "description";
+    public static final String REQUEST_STATUS = "status";
+    public static final String REQUEST_TYPE = "type";
+    public static final String REQUEST_SEVERITY = "severity";
+    public static final String REQUEST_URGENCY = "urgency";
+    public static final String REQUEST_TOTAL_PEOPLE = "totalPeople";
+
+    public static final String HURRICANE_ID_KEY = "hurricaneID";
+    public static final String HURRICANE_ZIP_CODES = "hurricaneZipCodes";
+    public static final String HURRICANE_STATUS = "hurricaneStatus";
+    public static final String HURRICANE_EVACUATION_STEPS = "evacuationSteps";
+    public static final String HURRICANE_EMERGENCY_SUPPLIES = "emergencySupplies";
+
 }
