@@ -1,6 +1,7 @@
 package com.model;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class EmergencyReliefApplication {
 
@@ -12,6 +13,11 @@ public class EmergencyReliefApplication {
     }
 
     public boolean login(String username, String password) {
+        if (username == null || password == null
+                || username.isBlank() || password.isBlank()) {
+            return false;
+        }
+
         User user = userList.getUser(username, password);
 
         if (user == null) {
@@ -26,40 +32,45 @@ public class EmergencyReliefApplication {
         return currentUser;
     }
 
-    public User createAccount(String username, String password, String email) {
-    if (username == null || password == null || email == null
-            || username.isBlank() || password.isBlank() || email.isBlank()) {
-        return null;
-    }
+    public User createAccount(String firstName, String lastName,
+            String username, String password, String email) {
 
-    // Check whether the username already exists.
-    for (User user : userList.getUsers()) {
-        if (username.equals(user.getUsername())) {
+        if (firstName == null || lastName == null
+                || username == null || password == null || email == null
+                || firstName.isBlank() || lastName.isBlank()
+                || username.isBlank() || password.isBlank()
+                || email.isBlank()) {
             return null;
         }
-    }
 
-    User newUser = new User(
-        java.util.UUID.randomUUID(),
-        "Julian",
-        "Parker",
-        username,
-        password,
-        email,
-        null,
-        false
-    );
+        // Check whether the username already exists.
+        for (User user : userList.getUsers()) {
+            if (username.equals(user.getUsername())) {
+                return null;
+            }
+        }
 
-    boolean added = userList.addUser(
-        newUser.getId(),
-        newUser.getFirstName(),
-        newUser.getLastName(),
-        newUser.getUsername(),
-        newUser.getPassword(),
-        newUser.getEmail(),
-        newUser.getLocation(),
-        newUser.isShareLocation()
-    );
+        User newUser = new User(
+            UUID.randomUUID(),
+            firstName,
+            lastName,
+            username,
+            password,
+            email,
+            null,
+            false
+        );
+
+        boolean added = userList.addUser(
+            newUser.getId(),
+            newUser.getFirstName(),
+            newUser.getLastName(),
+            newUser.getUsername(),
+            newUser.getPassword(),
+            newUser.getEmail(),
+            newUser.getLocation(),
+            newUser.isShareLocation()
+        );
 
         return added ? newUser : null;
     }
@@ -70,107 +81,107 @@ public class EmergencyReliefApplication {
     }
 
     public void sendMessage(User recipient, String message) {
-        //TODO
+        // TODO
     }
 
     public void shareLocation(Location location) {
-        //TODO
+        // TODO
     }
 
     public void commentOnRequest(ReliefRequest request, String comment) {
-        //TODO
+        // TODO
     }
 
     public boolean acceptRequest(ReliefRequest request, Volunteer volunteer) {
-        //TODO
+        // TODO
         return false;
     }
 
     public void updateVolunteerStatus(String status) {
-        //TODO
+        // TODO
     }
 
     public String getVolunteerStatus() {
-        //TODO
+        // TODO
         return null;
     }
 
     public ArrayList<ReliefRequest> viewRequestsNearby(double radius) {
-        //TODO
+        // TODO
         return null;
     }
 
     public ArrayList<String> getNeeds() {
-        //TODO
+        // TODO
         return null;
     }
 
     public String getLiveLocation() {
-        //TODO
+        // TODO
         return null;
     }
 
     public boolean contactEMS() {
-        //TODO
+        // TODO
         return false;
     }
 
     public void requestAid(ReliefRequest request) {
-        //TODO
+        // TODO
     }
 
     public void markSafe() {
-        //TODO
+        // TODO
     }
 
     public int viewETA() {
-        //TODO
+        // TODO
         return 0;
     }
 
     public void submitRequest(ReliefRequest request) {
-        //TODO
+        // TODO
     }
 
     public void deleteRequest(ReliefRequest request) {
-        //TODO
+        // TODO
     }
 
     public void verifyInfo(Information info) {
-        //TODO
+        // TODO
     }
 
     public void updateInfo(Information info) {
-        //TODO
+        // TODO
     }
 
     public void reviewRequest(ReliefRequest request) {
-        //TODO
+        // TODO
     }
 
     public boolean approveRequest(ReliefRequest request) {
-        //TODO
+        // TODO
         return false;
     }
 
     public void flagRequest(ReliefRequest request) {
-        //TODO
+        // TODO
     }
 
     public void updateOutdated() {
-        //TODO
+        // TODO
     }
 
     public void reportDamage() {
-        //TODO
+        // TODO
     }
 
     public void attachDamagePhoto(String photo) {
-        //TODO
+        // TODO
     }
 
     public ArrayList<Resource> viewEmergencySupplies() {
-        //TODO
+        // TODO
         return null;
     }
 }
