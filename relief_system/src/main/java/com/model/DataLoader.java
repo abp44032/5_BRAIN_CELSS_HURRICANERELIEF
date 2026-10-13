@@ -61,11 +61,6 @@ public class DataLoader extends DataConstants {
 
         return users;
     }
-<<<<<<< HEAD
-    
-    public static ArrayList<Shelter> getShelters() {
-        return null;
-=======
 
     public ArrayList<Shelter> getShelters() {
         ArrayList<Shelter> shelters = new ArrayList<>();
@@ -138,7 +133,7 @@ public class DataLoader extends DataConstants {
         }
 
         return shelters;
->>>>>>> 8733308a23c8d6f838ca5019af191beaff6e89d7
+
     }
 
     public ArrayList<ReliefRequest> getReliefRequests() {
