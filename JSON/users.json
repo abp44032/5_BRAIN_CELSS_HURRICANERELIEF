@@ -5,6 +5,7 @@
         "lastName" :"Cooper",
         "email" :"thomas.cooper@example.com",
         "userName" :"thomas.cooper",
+        "password": "12345",
         "location" : {
             "address" : "789 Pine St",
             "city" : "Columbia",
@@ -19,6 +20,7 @@
         "lastName" :"Johnson",
         "email" :"maya.johnson@example.com",
         "userName" :"maya.johnson",
+        "password": "12345",
         "location" : {
             "address" : "321 Harden St",
             "city" : "Charleston",

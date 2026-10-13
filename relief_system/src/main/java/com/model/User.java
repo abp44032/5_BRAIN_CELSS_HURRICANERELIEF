@@ -10,19 +10,14 @@ class Location{
         //TODO Auto-generated constructor stub
     }
 
-    public Location() {
-        //TODO Auto-generated constructor stub
-    }
-
-    public Location() {
-        //TODO Auto-generated constructor stub
-    }}
+}
 class Information{}
 class Shelter{}
 class Service{}
 class ReliefRequest{}
 
 public abstract class User {
+public class User {
     protected UUID id;
     protected String firstName;
     protected String lastName;
@@ -39,8 +34,48 @@ public abstract class User {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.location = null;
-        this.shareLocation = false;
+        this.location = location;
+        this.shareLocation = shareLocation;
+    }
+    
+    public String getUsername() {
+    return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public UUID getId() {
+        return this.id;
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public Location getLocation() {
+        return this.location;
+    }
+
+    public boolean isShareLocation() {
+    return this.shareLocation;
     }
 
     public UUID getId() {
