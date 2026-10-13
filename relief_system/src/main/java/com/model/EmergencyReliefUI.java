@@ -148,11 +148,7 @@ public class EmergencyReliefUI {
         );
 
         if (user == null) {
-            System.out.println(
-                "Sorry, we couldn't create the account. "
-                + "The username may already exist, or some "
-                + "information may be missing."
-            );
+            System.out.println("Sorry, we couldn't create the account.");
             return;
         }
 
