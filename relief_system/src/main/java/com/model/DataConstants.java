@@ -5,12 +5,15 @@ public class DataConstants {
     public static final String SHELTER_FILE_NAME = "JSON/shelters.json";
     public static final String REQUEST_FILE_NAME = "JSON/reliefRequests.json";
     public static final String HURRICANE_FILE_NAME = "JSON/hurricanes.json";
+
     public static final String USER_ID_KEY = "uuid";
     public static final String USER_FIRSTNAME = "firstName";
     public static final String USER_LASTNAME = "lastName";
     public static final String USER_EMAIL = "email";
     public static final String USER_USERNAME = "userName";
+    public static final String USER_PASSWORD_KEY = "password";
     public static final String USER_SHARE_LOCATION = "shareLocation";
+
     public static final String SHELTER_ID_KEY = "uuid";
     public static final String SHELTER_NAME = "name";
     public static final String SHELTER_CAPACITY = "capacity";
@@ -19,5 +22,6 @@ public class DataConstants {
     public static final String RESOURCE_NAME = "name";
     public static final String RESOURCE_QUANTITY = "quantity";
     public static final String SHELTER_ACCOMMODATIONS = "accommodations";
+
     public static final String REQUEST_ID_KEY = "requestID";
 }

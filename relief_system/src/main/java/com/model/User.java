@@ -62,7 +62,7 @@ public class User {
     }
 
     public boolean isShareLocation() {
-        this.shareLocation = shareLocation;
+    return this.shareLocation;
     }
 
     public Information viewHurricaneInfo() {

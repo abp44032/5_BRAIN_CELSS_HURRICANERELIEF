@@ -27,8 +27,41 @@ public class EmergencyReliefApplication {
     }
 
     public User createAccount(String username, String password, String email) {
-        //TODO
+    if (username == null || password == null || email == null
+            || username.isBlank() || password.isBlank() || email.isBlank()) {
         return null;
+    }
+
+    // Check whether the username already exists.
+    for (User user : userList.getUsers()) {
+        if (username.equals(user.getUsername())) {
+            return null;
+        }
+    }
+
+    User newUser = new User(
+        java.util.UUID.randomUUID(),
+        "Julian",
+        "Parker",
+        username,
+        password,
+        email,
+        null,
+        false
+    );
+
+    boolean added = userList.addUser(
+        newUser.getId(),
+        newUser.getFirstName(),
+        newUser.getLastName(),
+        newUser.getUsername(),
+        newUser.getPassword(),
+        newUser.getEmail(),
+        newUser.getLocation(),
+        newUser.isShareLocation()
+    );
+
+        return added ? newUser : null;
     }
 
     public ArrayList<Shelter> getShelters() {

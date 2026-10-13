@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class UserList {
+
     private static UserList userList;
     private ArrayList<User> users;
 
     public UserList() {
-        users = DataLoader.getUsers();
+        users = new DataLoader().getUsers();
 
         if (users == null) {
             users = new ArrayList<>();
@@ -41,7 +42,7 @@ public class UserList {
     }
 
     public ArrayList<User> getUsers() {
-        return this.users;
+        return users;
     }
 
     public boolean addUser(UUID id, String firstName, String lastName,
@@ -53,11 +54,25 @@ public class UserList {
             return false;
         }
 
-        // User is abstract, so a concrete subclass is needed here.
-        return false;
+        // Prevent duplicate usernames.
+        for (User user : users) {
+            if (user.getUsername() != null
+                    && user.getUsername().equals(username)) {
+                return false;
+            }
+        }
+
+        User newUser = new User(
+            id, firstName, lastName, username, password,
+            email, location, shareLocation
+        );
+
+        users.add(newUser);
+
+        return true;
     }
 
     public boolean save() {
-        return DataWriter.saveUsers();
+        return new DataWriter().saveUsers();
     }
 }
