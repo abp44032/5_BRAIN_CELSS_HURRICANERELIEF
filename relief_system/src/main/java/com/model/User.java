@@ -4,19 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-class Location{
 
-    public Location() {
-        //TODO Auto-generated constructor stub
-    }
-
-}
-class Information{}
-class Shelter{}
-class Service{}
-class ReliefRequest{}
-
-public abstract class User {
 public class User {
     protected UUID id;
     protected String firstName;
