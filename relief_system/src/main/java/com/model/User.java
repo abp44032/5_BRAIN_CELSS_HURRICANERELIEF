@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public abstract class User {
+public class User {
     protected UUID id;
     protected String firstName;
     protected String lastName;
@@ -21,8 +21,16 @@ public abstract class User {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.location = null;
-        this.shareLocation = false;
+        this.location = location;
+        this.shareLocation = shareLocation;
+    }
+    
+    public String getUsername() {
+    return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public Information viewHurricaneInfo() {

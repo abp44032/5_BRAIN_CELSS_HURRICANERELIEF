@@ -40,8 +40,12 @@ public class DataLoader extends DataConstants {
         ArrayList<Shelter> shelters = new ArrayList<>();
 
         try {
-            FileReader reader = new FileReader(SHELTER_FILE_NAME);
-            JSONArray sheltersJSON = (JSONArray) new JSONParser().parse(reader);
+            
+            JSONArray sheltersJSON;
+
+            try (FileReader reader = new FileReader(SHELTER_FILE_NAME)) {
+                sheltersJSON = (JSONArray) new JSONParser().parse(reader);
+            }
 
             for(int i = 0; i < sheltersJSON.size(); i++) {
                 JSONObject shelter = (JSONObject) sheltersJSON.get(i);

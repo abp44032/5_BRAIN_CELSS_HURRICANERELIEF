@@ -12,7 +12,7 @@ public class EmergencyReliefUI {
 
     public void run() {
         scenario1();
-        scenario2();
+        //scenario2();
     }
 
     // Scenario 1

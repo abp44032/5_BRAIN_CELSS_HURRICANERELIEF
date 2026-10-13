@@ -3,19 +3,21 @@ import java.util.ArrayList;
 
 public class EmergencyReliefApplication {
 
-    private UserList userList;
+    private UserList userList = UserList.getInstance();
+    private User currentUser;
 
     public EmergencyReliefApplication(){
         userList = UserList.getInstance();
     }
 
     public boolean login(String username, String password) {
-        User user = userList.getUserByUsername(username);
+        User user = userList.getUser(username, password);
 
         if (user == null) {
             return false;
         }
-        return user.checkPassword(password);
+        currentUser = user;
+        return true;
     }
 
     public User createAccount(String username, String password, String email) {
@@ -24,9 +26,9 @@ public class EmergencyReliefApplication {
     }
 
     public ArrayList<Shelter> getShelters() {
-        //TODO
-        return null;
-    }
+    DataLoader dataLoader = new DataLoader();
+    return dataLoader.getShelters();
+    }   
     
     public void sendMessage(User recipient, String message) {
         //TODO

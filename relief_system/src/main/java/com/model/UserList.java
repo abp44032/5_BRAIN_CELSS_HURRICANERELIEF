@@ -10,13 +10,18 @@ public class UserList {
 
     public UserList() {
         this.users = new ArrayList<>();
+        //add temparory data
     }
 
     public static UserList getInstance() {
-        return null;
+        if (userList == null) {
+            userList = new UserList();
+        }
+        return userList;        
     }
 
     public User getUser(String username, String password) {
+        //finish
         return null;
     }
 
