@@ -33,8 +33,8 @@ public class EmergencyReliefApplication {
     }
 
     public ArrayList<Shelter> getShelters() {
-        //TODO
-        return null;
+        ShelterList shelterList = ShelterList.getInstance();
+        return shelterList.getShelters();
     }
     
     public void sendMessage(User recipient, String message) {

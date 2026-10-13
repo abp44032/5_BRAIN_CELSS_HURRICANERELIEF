@@ -111,10 +111,10 @@ public class Shelter  {
 
 
     public double getDistanceFromUser(Location userLocation) {
-        if(location == null || userLocation == null{
+        if(location == null || userLocation == null){
             return "unavailable";
         }
-        location.getDistanceFrom(userLocation);
+        return location.getDistanceFrom(userLocation);
     }
 
     public void cacheLocation() {

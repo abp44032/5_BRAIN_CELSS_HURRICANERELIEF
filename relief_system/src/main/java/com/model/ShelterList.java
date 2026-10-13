@@ -47,7 +47,7 @@ public class ShelterList {
         this.shelters.add(shelter);
         return true;
         }
-    }
+    
 
     public boolean save() {
         return DataWriter.saveShelters();
