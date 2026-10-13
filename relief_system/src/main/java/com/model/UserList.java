@@ -28,11 +28,7 @@ public class UserList {
         if (username == null || password == null) {
             return null;
         }
-        for (User user : users) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                return user;
-            }
-        }
+        
         for (User user : users) {
             if (user.getUsername() != null
                     && user.getPassword() != null
@@ -48,26 +44,7 @@ public class UserList {
     public ArrayList<User> getUsers() {
         return users;
     }
-
-    public void addUser(UUID id, String firstName, String lastName, String username, String password, String email, Location location, boolean shareLocation) {
-        if (id == null || firstName == null || lastName == null || username == null || password == null || email == null) {
-            return;
-        }
-        User newUser = User.create(id, firstName, lastName, username, password, email, location, shareLocation);
-        users.add(newUser);
-    }
-
-    public boolean save() {
-        return DataWriter.saveUsers();
-    }
-    public static void main(String[] args) {
-        UserList list = UserList.getInstance();
-        list.addUser(UUID.randomUUID(), "Jane", "Doe", "janedoe", "pass123", "jane@example.com", null, true);
-
-        System.out.println("Total Users: " + list.getUsers().size());
-        System.out.println("Valid User: " + list.getUser("janedoe", "pass123").getUsername());
-        System.out.println("Invalid User: " + list.getUser("janedoe", "wrong"));
-        System.out.println("Singleton Match: " + (list == UserList.getInstance()));
+    
     public boolean addUser(UUID id, String firstName, String lastName,
             String username, String password, String email,
             Location location, boolean shareLocation) {

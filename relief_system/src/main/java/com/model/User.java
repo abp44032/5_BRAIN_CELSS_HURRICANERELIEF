@@ -16,7 +16,6 @@ class Shelter{}
 class Service{}
 class ReliefRequest{}
 
-public abstract class User {
 public class User {
     protected UUID id;
     protected String firstName;
