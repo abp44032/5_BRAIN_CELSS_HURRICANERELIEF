@@ -1,12 +1,13 @@
 package com.model;
+
 import java.util.ArrayList;
 
 public class EmergencyReliefApplication {
 
-    private UserList userList = UserList.getInstance();
+    private UserList userList;
     private User currentUser;
 
-    public EmergencyReliefApplication(){
+    public EmergencyReliefApplication() {
         userList = UserList.getInstance();
     }
 
@@ -16,8 +17,13 @@ public class EmergencyReliefApplication {
         if (user == null) {
             return false;
         }
+
         currentUser = user;
         return true;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
     }
 
     public User createAccount(String username, String password, String email) {
@@ -26,10 +32,10 @@ public class EmergencyReliefApplication {
     }
 
     public ArrayList<Shelter> getShelters() {
-    DataLoader dataLoader = new DataLoader();
-    return dataLoader.getShelters();
-    }   
-    
+        DataLoader dataLoader = new DataLoader();
+        return dataLoader.getShelters();
+    }
+
     public void sendMessage(User recipient, String message) {
         //TODO
     }
@@ -47,7 +53,7 @@ public class EmergencyReliefApplication {
         return false;
     }
 
-    public void updateVolunteerStatus(String status){
+    public void updateVolunteerStatus(String status) {
         //TODO
     }
 
@@ -61,12 +67,12 @@ public class EmergencyReliefApplication {
         return null;
     }
 
-    public ArrayList<String> getNeeds(){
+    public ArrayList<String> getNeeds() {
         //TODO
         return null;
     }
 
-    public String getLiveLocation(){
+    public String getLiveLocation() {
         //TODO
         return null;
     }
@@ -80,7 +86,7 @@ public class EmergencyReliefApplication {
         //TODO
     }
 
-    public void markSafe(){
+    public void markSafe() {
         //TODO
     }
 
@@ -118,7 +124,7 @@ public class EmergencyReliefApplication {
         //TODO
     }
 
-    public void updateOutdated(){
+    public void updateOutdated() {
         //TODO
     }
 
@@ -130,10 +136,8 @@ public class EmergencyReliefApplication {
         //TODO
     }
 
-    public ArrayList<Resource> viewEmergencySupplies(){
+    public ArrayList<Resource> viewEmergencySupplies() {
         //TODO
         return null;
-
     }
 }
-

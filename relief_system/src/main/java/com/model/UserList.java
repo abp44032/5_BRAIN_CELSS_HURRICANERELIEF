@@ -1,7 +1,6 @@
 package com.model;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class UserList {
@@ -9,19 +8,35 @@ public class UserList {
     private ArrayList<User> users;
 
     public UserList() {
-        this.users = new ArrayList<>();
-        //add temparory data
+        users = DataLoader.getUsers();
+
+        if (users == null) {
+            users = new ArrayList<>();
+        }
     }
 
     public static UserList getInstance() {
         if (userList == null) {
             userList = new UserList();
         }
-        return userList;        
+
+        return userList;
     }
 
     public User getUser(String username, String password) {
-        //finish
+        if (username == null || password == null) {
+            return null;
+        }
+
+        for (User user : users) {
+            if (user.getUsername() != null
+                    && user.getPassword() != null
+                    && user.getUsername().equals(username)
+                    && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+
         return null;
     }
 
@@ -29,11 +44,20 @@ public class UserList {
         return this.users;
     }
 
-    public void addUser(UUID id, String firstName, String lastName, String username, String password, String email, Location location, boolean shareLocation) {
-        return;
+    public boolean addUser(UUID id, String firstName, String lastName,
+            String username, String password, String email,
+            Location location, boolean shareLocation) {
+
+        if (id == null || firstName == null || lastName == null
+                || username == null || password == null || email == null) {
+            return false;
+        }
+
+        // User is abstract, so a concrete subclass is needed here.
+        return false;
     }
 
     public boolean save() {
-        return false;
+        return DataWriter.saveUsers();
     }
 }
