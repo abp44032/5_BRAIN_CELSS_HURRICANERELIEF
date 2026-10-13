@@ -13,6 +13,7 @@ public class ReliefRequest {
     private String description;
     private int totalPeople;
     private ArrayList<Pet> pets;
+    private String file;
 
     public ReliefRequest(UUID requestId, RequestStatus status, RequestType type, SeverityLevel severity, UrgencyLevel urgency, String description, int totalPeople, ArrayList<Pet> pets) {
         this.requestId = requestId;
@@ -80,5 +81,23 @@ public class ReliefRequest {
 
         System.out.println(request.getDescription());
     }
+
+    public static ReliefRequest getInstance() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getInstance'");
+    }
+
+    public Object getFile() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getFile'");
+    }
+
+    public Object getLocation() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getLocation'");
+    }
+
+
+    
 }
 

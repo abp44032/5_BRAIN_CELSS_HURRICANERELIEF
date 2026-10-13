@@ -28,7 +28,7 @@ public class DataConstants {
     public static final String REQUEST_LOCATION = "location";
     public static final String HURRICANE_ID_KEY = "hurricaneID";
     public static final String HURRICANE_NAME = "name";
-    public static final String HURRICANE_CATEGORY = "category";
+    public static final String HURRICANE_CATAGORY = "category";
     public static final String HURRICANE_LOCATION = "location";
     
 }

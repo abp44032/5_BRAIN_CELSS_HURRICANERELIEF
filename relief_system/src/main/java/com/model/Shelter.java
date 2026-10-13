@@ -116,4 +116,14 @@ public class Shelter {
                 ", hoursOfOperation='" + hoursOfOperation + '\'' +
                 '}';
     }
+
+    public static Shelter getInstance() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getInstance'");
+    }
+
+    public ArrayList<Shelter> getShelter() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getShelter'");
+    }
 }

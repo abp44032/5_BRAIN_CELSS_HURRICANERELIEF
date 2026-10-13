@@ -12,7 +12,17 @@ public class Hurricane {
 
     public Hurricane(UUID id, ArrayList<String> hurricaneZipCodes, HurricaneStatus hurricaneStatus, ArrayList<String> evacuationSteps, ArrayList<Resource> emergencySupplies) {
 
+        this.id = id;
+        this.hurricaneZipCodes = hurricaneZipCodes;
+        this.hurricaneStatus = hurricaneStatus;
+        this.evacuationSteps = evacuationSteps;
+        this.emergencySupplies = emergencySupplies;
     }
+
+    public UUID getId() {
+        return id;
+    }
+
 
     public void reportDamage() {
         //TODO
@@ -28,5 +38,30 @@ public class Hurricane {
 
     public ArrayList<Resource> viewEmergencySupplies() {
         return null;
+    }
+
+	public static Hurricane getInstance() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getInstance'");
+	}
+
+    public ArrayList<User> getUsers() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUsers'");
+    }
+
+    public Object getName() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getName'");
+    }
+
+    public Object getCategory() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getCategory'");
+    }
+
+    public Object getLocation() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getLocation'");
     }
 }
