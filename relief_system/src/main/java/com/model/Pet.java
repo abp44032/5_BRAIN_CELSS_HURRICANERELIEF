@@ -16,4 +16,10 @@ public class Pet extends ReliefRequest{
     public String getType() {
         return type;
     }
+    
+    public static void main(String[] args) {
+        Pet pet = new Pet("Buddy", "Dog");
+        System.out.println("Pet Name: " + pet.getName());
+        System.out.println("Pet Type: " + pet.getType());
+    }
 }

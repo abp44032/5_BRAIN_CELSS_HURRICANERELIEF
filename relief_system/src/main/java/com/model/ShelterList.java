@@ -26,6 +26,7 @@ public class ShelterList {
             return null;
         }
         for (Shelter shelter : shelters) {
+            if (shelter.getName().equals(name)) {
             if (shelter.getName().equalsIgnoreCase(name)) {
                 return shelter;
             
@@ -38,6 +39,14 @@ public class ShelterList {
         return this.shelters;
     }
 
+    public void addShelter(Shelter shelter) {
+        if (shelter != null) {
+            this.shelters.add(shelter);
+        }
+        if (getShelter(shelter.getName()) == null) {
+            this.shelters.add(shelter);
+        }
+    }
     public boolean addShelter(UUID id, String name, int capacity, String hoursOfOperation, ArrayList<Resource> resources, ArrayList<AccommodationType> accommodations) {
         if (getShelter(name)!= null) {
             return false;
@@ -53,4 +62,13 @@ public class ShelterList {
         return DataWriter.saveShelters();
     }
 
+    public static void main(String[] args) {
+        ShelterList list = ShelterList.getInstance();
+        
+        System.out.println("Loaded shelters count: " + list.getShelters().size());
+        
+        for (Shelter s : list.getShelters()) {
+            System.out.println("- " + s.getName());
+        }
+    }
 }

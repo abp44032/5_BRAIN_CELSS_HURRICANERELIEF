@@ -1,11 +1,11 @@
 package com.model;
 
 public class DataWriter {
-    public boolean saveUsers() {
+    public static boolean saveUsers() {
         return true;
     }
 
-    public boolean saveShelters() {
+    public static boolean saveShelters() {
         return true;
     }
 
