@@ -38,16 +38,12 @@ public class EmergencyReliefUI {
                     break;
 
                 case "3":
-                    System.out.println(
-                        "Thank you for using the Hurricane Relief System."
-                    );
+                    System.out.println("Thank you for using the Hurricane Relief System.");
                     running = false;
                     break;
 
                 default:
-                    System.out.println(
-                        "Invalid option. Please try again."
-                    );
+                    System.out.println("Invalid option. Please try again.");
             }
         }
     }
@@ -96,9 +92,7 @@ public class EmergencyReliefUI {
                     break;
 
                 default:
-                    System.out.println(
-                        "Invalid option. Please try again."
-                    );
+                    System.out.println("Invalid option. Please try again.");
             }
         }
     }
@@ -111,9 +105,7 @@ public class EmergencyReliefUI {
         System.out.println("===== Available Shelters =====");
 
         if (shelters == null || shelters.isEmpty()) {
-            System.out.println(
-                "Sorry, there are no shelters available."
-            );
+            System.out.println("Sorry, there are no shelters available.");
             return;
         }
 
@@ -156,9 +148,7 @@ public class EmergencyReliefUI {
         System.out.println(
             "Welcome, " + user.getFirstName() + "!"
         );
-        System.out.println(
-            "You can now log in using your new account."
-        );
+        System.out.println("You can now log in using your new account.");
     }
 
     public static void main(String[] args) {
