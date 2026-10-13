@@ -24,7 +24,7 @@ public class DataLoader extends DataConstants {
                     (String) userJSON.get(USER_ID_KEY)
                 );
 
-                String firstName =
+                String firstName = 
                     (String) userJSON.get(USER_FIRSTNAME);
                 String lastName =
                     (String) userJSON.get(USER_LASTNAME);
@@ -52,11 +52,9 @@ public class DataLoader extends DataConstants {
                     userJSON.get(USER_SHARE_LOCATION)
                 );
 
-                users.add(new User(
-                    id, firstName, lastName, username,
-                    password, email, location, shareLocation
-                ));
+                users.add(new User(id, firstName, lastName, username, password, email, location, shareLocation));
             }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
