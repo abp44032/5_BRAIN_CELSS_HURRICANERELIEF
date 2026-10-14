@@ -14,6 +14,9 @@ public class Shelter {
     private Location location;
     private String hoursOfOperation;
 
+    private static Shelter instance;
+    private ArrayList<Shelter> shelters = new ArrayList<>();
+
     public Shelter(UUID id, String name, int capacity, ArrayList<Resource> resources, ArrayList<AccommodationType> accommodations, Location location, String hoursOfOperation) {
         this.id = id;
         this.name = name;
@@ -22,8 +25,25 @@ public class Shelter {
         this.accommodations = accommodations;
         this.location = location;
         this.hoursOfOperation = hoursOfOperation;
-}
+    }
 
+    public static Shelter getInstance() {
+        if (instance == null) {
+            instance = new Shelter(
+                UUID.randomUUID(),
+                "",
+                0,
+                new ArrayList<Resource>(),
+                new ArrayList<AccommodationType>(),
+                null, 
+                "");
+        }
+        return instance;
+    }
+
+    public ArrayList<Shelter> getShelters() {
+        return shelters;
+    }
     public UUID getId() {
         return this.id;
     }
@@ -113,6 +133,12 @@ public class Shelter {
     public void cacheLocation() {
     }
 
+    public void addShelter(Shelter shelter) {
+        if (shelter != null && !shelters.contains(shelter)) {
+            shelters.add(shelter);
+        }
+    }
+    
     @Override
     public String toString() {
         return "Shelter{" +
