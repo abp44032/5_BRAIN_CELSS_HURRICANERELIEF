@@ -1,6 +1,5 @@
 package com.model;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -14,7 +13,9 @@ public class ReliefRequest {
     private String description;
     private int totalPeople;
     private ArrayList<Pet> pets;
-    private ArrayList<Pet> pets2;
+
+    private static ReliefRequest instance;
+    private ArrayList<ReliefRequest> requests = new ArrayList<>();
 
     public ReliefRequest(UUID requestId, RequestStatus status, RequestType type, SeverityLevel severity, UrgencyLevel urgency, String description, int totalPeople, ArrayList<Pet> pets) {
         this.requestId = requestId;
@@ -27,8 +28,60 @@ public class ReliefRequest {
         this.pets = pets;
     }
 
-    public int priority() {
-        return 0;
+    public static ReliefRequest getInstance() {
+    if (instance == null) {
+        instance = new ReliefRequest(UUID.randomUUID(),
+            RequestStatus.ACCEPTED,
+            RequestType.MEDICAL,
+            SeverityLevel.HIGH,
+            UrgencyLevel.CRITICAL,
+            "",
+            0,
+            new ArrayList<Pet>());
+    }
+    return instance;
+}
+
+    public UUID getId() {
+        return requestId;
+    }
+
+    public RequestStatus getStatus() {
+        return status;
+    }
+
+    public RequestType getType() {
+        return type;
+    }
+
+    public SeverityLevel getSeverity() {
+        return severity;
+    }
+
+    public UrgencyLevel getUrgency() {
+        return urgency;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getTotalPeople() {
+        return totalPeople;
+    }
+
+    public ArrayList<Pet> getPets() {
+        return pets;
+    }
+
+    public ArrayList<ReliefRequest> getRequests() {
+        return requests;
+    }
+
+    public void addRequest(ReliefRequest request) {
+        if (request != null && !requests.contains(request)) {
+            requests.add(request);
+        }
     }
 
     public boolean delete() {
