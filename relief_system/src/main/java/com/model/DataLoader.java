@@ -12,8 +12,8 @@ import org.json.simple.parser.JSONParser;
 public class DataLoader extends DataConstants {
 
     public ArrayList<User> getUsers() {
-        // TODO: commented out to priortize getShelters() working properly
-        /* ArrayList<User> users = new ArrayList<>();
+        
+         ArrayList<User> users = new ArrayList<>();
 
         try {
             FileReader reader = new FileReader(USER_FILE_NAME);
@@ -21,19 +21,35 @@ public class DataLoader extends DataConstants {
             for(int i = 0; i < usersJSON.size(); i++) {
                 JSONObject user = (JSONObject) usersJSON.get(i);
                 UUID id = UUID.fromString((String) user.get(USER_ID_KEY));
+                String userName = (String)user.get(USER_USERNAME);
                 String firstName = (String)user.get(USER_FIRSTNAME);
                 String lastName = (String)user.get(USER_LASTNAME);
                 String email = (String)user.get(USER_EMAIL);
-                String userName = (String)user.get(USER_USERNAME);
-                // TODO: location
-                boolean shareLocation = (boolean)user.get(USER_SHARE_LOCATION);
+                String password = (String)user.get(USER_PASSWORD_KEY);
+                
+                JSONObject locationJSON = (JSONObject) userJSON.get("location");
+                Location location = null;
+
+                if (locationJSON != null) {
+                    String address = (String) locationJSON.get("address");
+                    String city = (String) locationJSON.get("city");
+                    String state = (String)locationJSON.get("state");
+
+                    location = new Location(address, city, state);
+                }
+                
+                boolean shareLocation = Boolean.TRUE.equals(userJSON.get(USER_SHARE_LOCATION));
 
                 users.add(new User(id, firstName, lastName, userName, password, email, location, shareLocation));
             }
+
+            reader.close();
+
         } catch (Exception e) {
             e.printStackTrace();
-        } */
-        return null;
+        } 
+        
+        return users;
     }
 
     public ArrayList<Shelter> getShelters() {
