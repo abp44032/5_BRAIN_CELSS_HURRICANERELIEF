@@ -97,15 +97,15 @@ public class ReliefRequest {
     }
 
     public String getDetails() {
-        return "ReliefRequest{" +
-                "requestId=" + requestId +
-                ", status=" + status +
-                ", type=" + type +
-                ", severity=" + severity +
-                ", urgency=" + urgency +
-                ", description='" + description + '\'' +
-                ", totalPeople=" + totalPeople +
-                ", pets=" + pets +
+        return "ReliefRequest{\n" +
+                "requestId=" + requestId + "\n" +
+                ", status=" + status + "\n" +
+                ", type=" + type + "\n" +
+                ", severity=" + severity + "\n" +
+                ", urgency=" + urgency + "\n" +
+                ", description='" + description + "\n" +
+                ", totalPeople=" + totalPeople + "\n" +
+                ", pets=" + pets + "\n" +
                 '}';
     }
 
