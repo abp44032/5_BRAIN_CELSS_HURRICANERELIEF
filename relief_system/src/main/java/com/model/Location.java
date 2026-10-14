@@ -13,6 +13,10 @@ public class Location {
         this.zip = zip;
     }
 
+    public Location() {
+        //TODO Auto-generated constructor stub
+    }
+
     public String getAddress() {
         return address;
     }
