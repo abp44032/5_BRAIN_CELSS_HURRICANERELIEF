@@ -26,10 +26,8 @@ public class ShelterList {
             return null;
         }
         for (Shelter shelter : shelters) {
-            if (shelter.getName().equals(name)) {
             if (shelter.getName().equalsIgnoreCase(name)) {
                 return shelter;
-            
             }
         }
         return null;
@@ -47,15 +45,15 @@ public class ShelterList {
             this.shelters.add(shelter);
         }
     }
-    public boolean addShelter(UUID id, String name, int capacity, String hoursOfOperation, ArrayList<Resource> resources, ArrayList<AccommodationType> accommodations) {
+    public boolean addShelter(UUID id, String name, int capacity, ArrayList<Resource> resources, ArrayList<AccommodationType> accommodations, Location location, String hoursOfOperation) {
         if (getShelter(name)!= null) {
             return false;
         }
-        Shelter shelter = new Shelter(id, name, capacity, resources, accommodations);
+        Shelter shelter = new Shelter(id, name, capacity, resources, accommodations, location, hoursOfOperation);
         shelter.setHoursOfOperation(hoursOfOperation);
         this.shelters.add(shelter);
         return true;
-        }
+    }
     
 
     public boolean save() {
