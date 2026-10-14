@@ -99,13 +99,13 @@ public class ReliefRequest {
     public String getDetails() {
         return "ReliefRequest{\n" +
                 "requestId=" + requestId + "\n" +
-                ", status=" + status + "\n" +
-                ", type=" + type + "\n" +
-                ", severity=" + severity + "\n" +
-                ", urgency=" + urgency + "\n" +
-                ", description='" + description + "\n" +
-                ", totalPeople=" + totalPeople + "\n" +
-                ", pets=" + pets + "\n" +
+                "Status=" + status + "\n" +
+                "Type=" + type + "\n" +
+                "Severity=" + severity + "\n" +
+                "Urgency=" + urgency + "\n" +
+                "Description='" + description + "\n" +
+                "TotalPeople=" + totalPeople + "\n" +
+                "Pets=" + pets + "\n" +
                 '}';
     }
 
