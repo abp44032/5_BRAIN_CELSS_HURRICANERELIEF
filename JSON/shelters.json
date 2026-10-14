@@ -7,7 +7,17 @@
             { "resourceID" : 301, "name" : "Bottled Water", "quantity" : 100 },
             { "resourceID" : 302, "name" : "First Aid Kits", "quantity" : 50 }
         ],
-        "accommodations" : ["PET_FRIENDLY", "CHILD_FRIENDLY", "MEDICAL_NEEDS"]
+        "accommodations" : ["PET_FRIENDLY", "CHILD_FRIENDLY", "MEDICAL_NEEDS"],
+        "location" : {
+            "address" : "123 Main St",
+            "city" : "Columbia",
+            "state" : "SC",
+            "zip" : "29201"
+        },
+        "hours" : {
+            "open" : "08:00",
+            "close" : "20:00"
+        }
     },
     {
         "uuid" : "3cc4c1c3-4f38-4744-b330-a27245caf4de",
@@ -17,6 +27,16 @@
             { "resourceID" : 303, "name" : "Blankets", "quantity" : 100 },
             { "resourceID" : 304, "name" : "Infant Formula", "quantity" : 20 }
         ],
-        "accommodations" : ["FAMILIES_TRAVELING_TOGETHER", "ALL_AGES"]
+        "accommodations" : ["FAMILIES_TRAVELING_TOGETHER", "ALL_AGES"],
+        "location" : {
+            "address" : "456 Elm St",
+            "city" : "Columbia",
+            "state" : "SC",
+            "zip" : "29201"
+        },
+        "hours" : {
+            "open" : "09:00",
+            "close" : "21:00"
+        }
     }   
 ]

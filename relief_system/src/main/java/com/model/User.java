@@ -4,25 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-class Location{
-
-    public Location() {
-        //TODO Auto-generated constructor stub
-    }
-
-    public Location() {
-        //TODO Auto-generated constructor stub
-    }
-
-    public Location() {
-        //TODO Auto-generated constructor stub
-    }}
-class Information{}
-class Shelter{}
-class Service{}
-class ReliefRequest{}
-
-public abstract class User {
+public class User {
     protected UUID id;
     protected String firstName;
     protected String lastName;
@@ -39,12 +21,12 @@ public abstract class User {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.location = null;
-        this.shareLocation = false;
+        this.location = location;
+        this.shareLocation = shareLocation;
     }
 
     public UUID getId() {
-        return this.id;
+    return this.id;
     }
 
     public String getFirstName() {

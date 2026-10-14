@@ -15,8 +15,10 @@ public class ReliefRequest<timestamp> {
     private String description;
     private int totalPeople;
     private ArrayList<Pet> pets;
-
     public ReliefRequest(UUID requestId, LocalDateTime timestamp, RequestStatus status, RequestType type, SeverityLevel severity, UrgencyLevel urgency, String description, int totalPeople, ArrayList<Pet> pets) {
+    private ArrayList<Pet> pets2;
+
+    public ReliefRequest(UUID requestId, DateTime timestamp, RequestStatus status, RequestType type, SeverityLevel severity, UrgencyLevel urgency, String description, int totalPeople, ArrayList<Pet> pets) {
         this.requestId = requestId;
         this.timestamp = timestamp;
         this.status = status;
