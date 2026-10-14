@@ -19,13 +19,13 @@ public class DataLoader extends DataConstants {
             FileReader reader = new FileReader(USER_FILE_NAME);
             JSONArray usersJSON = (JSONArray) new JSONParser().parse(reader);
             for(int i = 0; i < usersJSON.size(); i++) {
-                JSONObject user = (JSONObject) usersJSON.get(i);
-                UUID id = UUID.fromString((String) user.get(USER_ID_KEY));
-                String userName = (String)user.get(USER_USERNAME);
-                String firstName = (String)user.get(USER_FIRSTNAME);
-                String lastName = (String)user.get(USER_LASTNAME);
-                String email = (String)user.get(USER_EMAIL);
-                String password = (String)user.get(USER_PASSWORD_KEY);
+                JSONObject userJSON = (JSONObject) usersJSON.get(i);
+                UUID id = UUID.fromString((String) userJSON.get(USER_ID_KEY));
+                String userName = (String)userJSON.get(USER_USERNAME);
+                String firstName = (String)userJSON.get(USER_FIRSTNAME);
+                String lastName = (String)userJSON.get(USER_LASTNAME);
+                String email = (String)userJSON.get(USER_EMAIL);
+                String password = (String)userJSON.get(USER_PASSWORD_KEY);
                 
                 JSONObject locationJSON = (JSONObject) userJSON.get("location");
                 Location location = null;
@@ -48,7 +48,7 @@ public class DataLoader extends DataConstants {
         } catch (Exception e) {
             e.printStackTrace();
         } 
-        
+
         return users;
     }
 
@@ -58,14 +58,9 @@ public class DataLoader extends DataConstants {
         try {
             FileReader reader = new FileReader(SHELTER_FILE_NAME);
             JSONArray sheltersJSON = (JSONArray) new JSONParser().parse(reader);
-            
-            JSONArray sheltersJSON;
+            reader.close();
 
-            try (FileReader reader = new FileReader(SHELTER_FILE_NAME)) {
-                sheltersJSON = (JSONArray) new JSONParser().parse(reader);
-            }
-
-            for(int i = 0; i < sheltersJSON.size(); i++) {
+            for (int i = 0; i < sheltersJSON.size(); i++) {
                 JSONObject shelter = (JSONObject) sheltersJSON.get(i);
                 UUID id = UUID.fromString((String) shelter.get(SHELTER_ID_KEY));
                 String shelterName = (String)shelter.get(SHELTER_NAME);
@@ -83,6 +78,7 @@ public class DataLoader extends DataConstants {
 
                 ArrayList<AccommodationType> accommodations = new ArrayList<>();
                 JSONArray accommodationJSON = (JSONArray) shelter.get(SHELTER_ACCOMMODATIONS);
+
                 for(int j = 0; j < accommodationJSON.size(); j++) {
                     String accommodationName = (String) accommodationJSON.get(j);
                     accommodations.add(AccommodationType.valueOf(accommodationName));
