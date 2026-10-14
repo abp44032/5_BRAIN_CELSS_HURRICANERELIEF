@@ -34,16 +34,16 @@ public class DataWriter extends DataConstants {
 	
 	public static JSONObject getUserJSON(User user) {
 		JSONObject userDetails = new JSONObject();
-		userDetails.put(USER_ID_KEY, user.getId().toString());
+	    userDetails.put(USER_ID_KEY, user.getId().toString());
 		userDetails.put(USER_USERNAME, user.getUserName());
 		userDetails.put(USER_FIRSTNAME, user.getFirstName());
 		userDetails.put(USER_LASTNAME, user.getLastName());
         userDetails.put(USER_EMAIL, user.getEmail());
         userDetails.put(USER_PASSWORD_KEY, user.getPassword());
-        userDetails.put(USER_SHARE_LOCATION, user.getShareLocation());
+        userDetails.put(USER_SHARE_LOCATION, user.isShareLocation());
 
 
-        return shelterDetails;
+        return userDetails;
 	}
 
 	public static void main(String[] args){

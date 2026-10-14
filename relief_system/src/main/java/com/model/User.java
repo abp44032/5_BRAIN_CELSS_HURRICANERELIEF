@@ -14,6 +14,9 @@ public class User {
     protected Location location;
     protected boolean shareLocation;
 
+    private static User instance;
+    private ArrayList<User> users = new ArrayList<>();
+
     public User(UUID id, String firstName, String lastName, String username, String password, String email, Location location, boolean shareLocation) {
         this.id = id;
         this.firstName = firstName;
@@ -23,6 +26,25 @@ public class User {
         this.email = email;
         this.location = location;
         this.shareLocation = shareLocation;
+    }
+
+    public static User getInstance() {
+        if (instance == null) {
+            instance = new User(UUID.randomUUID(),
+                "",
+                "",
+                "",
+                "",
+                "",
+                null,
+                false
+            );
+        }
+        return instance;
+    }
+
+    public ArrayList<User> getUsers() {
+        return users;
     }
 
     public UUID getId() {
@@ -37,7 +59,7 @@ public class User {
         return this.lastName;
     }
 
-    public String getUsername() {
+    public String getUserName() {
         return this.username;
     }
 
@@ -92,6 +114,8 @@ public class User {
         false
         );
 
+        User.getInstance().getUsers().add(testUser); 
+
         System.out.println("User ID: " + testUser.getId());
         System.out.println("First Name: " + testUser.getFirstName());
         System.out.println("Last Name: " + testUser.getLastName());
@@ -100,6 +124,8 @@ public class User {
         System.out.println("Email: " + testUser.getEmail());
         System.out.println("Location: " + testUser.getLocation());
         System.out.println("Share Location: " + testUser.isShareLocation());
+
+        System.out.println("Total users: " + User.getInstance().getUsers().size());
     }
 
     public static User create(UUID id2, String firstName2, String lastName2, String username2, String password2,
