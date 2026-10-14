@@ -1,5 +1,7 @@
 package com.model;
-
+/**
+ * AccommodationType enum that extends shelter
+ */
 public enum AccommodationType {
     PET_FRIENDLY,
     CHILD_FRIENDLY,

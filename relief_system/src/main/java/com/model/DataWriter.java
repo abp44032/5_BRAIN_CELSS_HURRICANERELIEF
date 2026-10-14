@@ -9,7 +9,10 @@ import org.json.simple.JSONObject;
 
 public class DataWriter extends DataConstants {
 	
-	
+	/**
+     * Saves users to the user's JSON file
+     * @return true if user is successfully saved
+     */
 	public static boolean saveUsers() {
 		User user = User.getInstance();
 		ArrayList<User> userList = user.getUsers();
@@ -21,7 +24,7 @@ public class DataWriter extends DataConstants {
 			jsonUser.add(getUserJSON(userList.get(i)));
 		}
 		
-		//Write JSON file
+		//writing JSON file
         try (FileWriter file = new FileWriter(USER_FILE_NAME)) {
  
             file.write(jsonUser.toJSONString());
@@ -33,6 +36,7 @@ public class DataWriter extends DataConstants {
         }
 	}
 	
+    //data constants
 	public static JSONObject getUserJSON(User user) {
 		JSONObject userDetails = new JSONObject();
 
@@ -47,8 +51,10 @@ public class DataWriter extends DataConstants {
 
         return userDetails;
 	}
-
-
+    /**
+     * Saves shelters to the shelters's JSON file
+     * @return true if shelter is successfully saved
+     */
     public static boolean saveShelters() {
         Shelter shelter = Shelter.getInstance();
 		ArrayList<Shelter> ShelterList = shelter.getShelters();
@@ -60,7 +66,7 @@ public class DataWriter extends DataConstants {
 			jsonShelter.add(getShelterJSON(ShelterList.get(i)));
 		}
 		
-		//Write JSON file
+		//writing JSON file
         try (FileWriter file = new FileWriter(SHELTER_FILE_NAME)) {
  
             file.write(jsonShelter.toJSONString());
@@ -71,7 +77,7 @@ public class DataWriter extends DataConstants {
             return false;
         }
 	}
-	
+	//data constants
 	public static JSONObject getShelterJSON(Shelter shelter) {
 		JSONObject shelterDetails = new JSONObject();
 
@@ -83,7 +89,10 @@ public class DataWriter extends DataConstants {
 
 		return shelterDetails;
 	}
-
+    /**
+     * Saves relief requests to the JSON file
+     * @return true if request is successfully saved
+     */
     public static boolean saveReliefRequests() {
         ReliefRequest request = ReliefRequest.getInstance();
 		ArrayList<ReliefRequest> requestList = request.getRequests();
@@ -95,7 +104,7 @@ public class DataWriter extends DataConstants {
 			jsonRequest.add(getReliefRequestJSON(requestList.get(i)));
 		}
 		
-		//Write JSON file
+		//writing JSON file
         try (FileWriter file = new FileWriter(REQUEST_FILE_NAME)) {
  
             file.write(jsonRequest.toJSONString());
@@ -106,8 +115,7 @@ public class DataWriter extends DataConstants {
             return false;
         }
 	}
-
-	
+    //data constants
 	public static JSONObject getReliefRequestJSON(ReliefRequest request) {
 		JSONObject requestDetails = new JSONObject();
 		requestDetails.put(REQUEST_ID_KEY, request.getId().toString());
@@ -121,7 +129,10 @@ public class DataWriter extends DataConstants {
 		return requestDetails;
 	}
 
-
+    /**
+     * Saves hurricane to the hurricane's JSON file
+     * @return true if hurricane is successfully saved
+     */
     public static boolean saveHurricanes() {
         Hurricane hurricane = Hurricane.getInstance();
 		ArrayList<Hurricane> hurricaneList = hurricane.getHurricane();
@@ -133,7 +144,7 @@ public class DataWriter extends DataConstants {
             jsonHurricane.add(getHurricaneJSON(hurricaneList.get(i)));
         }
 		
-		//Write JSON file
+		//writing JSON file
         try (FileWriter file = new FileWriter(HURRICANE_FILE_NAME)) {
  
             file.write(jsonHurricane.toJSONString());
@@ -144,7 +155,7 @@ public class DataWriter extends DataConstants {
             return false;
         }
 	}
-
+    //data constants
 	public static JSONObject getHurricaneJSON(Hurricane hurricane) {
 		JSONObject hurricaneDetails = new JSONObject();
 		hurricaneDetails.put(HURRICANE_ID_KEY, hurricane.getId().toString());
@@ -154,6 +165,7 @@ public class DataWriter extends DataConstants {
         hurricaneDetails.put(HURRICANE_EMERGENCY_SUPPLIES, hurricane.getEmergencySupplies());
 		return hurricaneDetails;
 	}
+    //main method that tests if the data writer saved all instances to JSON files
     public static void main(String[] args){
 		System.out.println("Saving users: " + saveUsers());
         System.out.println("Saving shelters: " + saveShelters());

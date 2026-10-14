@@ -12,6 +12,12 @@ public class EmergencyReliefApplication {
         userList = UserList.getInstance();
     }
 
+    /**
+     * ---------LOGGING IN--------------
+     * @param username
+     * @param password
+     * @return
+     */
     public boolean login(String username, String password) {
         if (username == null || password == null
                 || username.isBlank() || password.isBlank()) {
@@ -32,6 +38,15 @@ public class EmergencyReliefApplication {
         return currentUser;
     }
 
+    /**
+     * ---------CREATING ACCOUNT--------------
+     * @param firstName
+     * @param lastName
+     * @param username
+     * @param password
+     * @param email
+     * @return
+     */
     public User createAccount(String firstName, String lastName,
             String username, String password, String email) {
 

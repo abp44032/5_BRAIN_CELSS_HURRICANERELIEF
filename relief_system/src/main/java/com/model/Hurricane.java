@@ -3,6 +3,10 @@ package com.model;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * Represents a hurricane and stores information about affected 
+ * ZIP codes, hurricane status, evacuation steps, and emergency supplies.
+ */
 public class Hurricane {
     private UUID id;
     private ArrayList<String> hurricaneZipCodes;
@@ -22,6 +26,10 @@ public class Hurricane {
         
     }
 
+    /**
+     * Returns the singleton Hurricane instance or creating it.
+     * @return the singleton Hurricane instance
+     */
     public static Hurricane getInstance() {
         if (instance == null) {
             instance = new Hurricane(
@@ -35,6 +43,9 @@ public class Hurricane {
         return instance;
     }
 
+    /**
+     * @returns list of hurricane objects
+     */
     public ArrayList<Hurricane> getHurricane() {
         return hurricanes;
     }
