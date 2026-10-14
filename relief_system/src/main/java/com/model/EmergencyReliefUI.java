@@ -68,7 +68,7 @@ public class EmergencyReliefUI {
         mainMenu();
     }
 
-    // Main menu displayed after a successful login
+    // Main menu shown after a successful login
     private void mainMenu() {
         boolean loggedIn = true;
 
@@ -145,10 +145,13 @@ public class EmergencyReliefUI {
         }
 
         System.out.println("Account created successfully!");
-        System.out.println(
-            "Welcome, " + user.getFirstName() + "!"
-        );
+        System.out.println("Welcome, " + user.getFirstName() + "!"); 
         System.out.println("You can now log in using your new account.");
+    }
+
+    // implement relief request scenario
+    private void implementReliefRequest() {
+        // TODO
     }
 
     public static void main(String[] args) {

@@ -1,19 +1,18 @@
 package com.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.HashMap;
 
-public class Shelter  {
+public class Shelter {
     private UUID id;
     private String name;
-    private int capacity;   
+    private int capacity;
     private ArrayList<Resource> resources;
     private ArrayList<AccommodationType> accommodations;
     private Location location;
     private String hoursOfOperation;
-    
 
     public Shelter(UUID id, String name, int capacity, ArrayList<Resource> resources, ArrayList<AccommodationType> accommodations, Location location, String hoursOfOperation) {
         this.id = id;
@@ -30,7 +29,7 @@ public class Shelter  {
     }
 
     public void setId(UUID id) {
-        this.id =id;
+        this.id = id;
     }
 
     public String getName() {
@@ -86,45 +85,35 @@ public class Shelter  {
             this.capacity = newCapacity;
         }
     }
-    
+
     public void updateResources(ArrayList<Resource> newResources) {
-        for (Resource existing : resources) {
-            if (existing.getResourceID().equals(resources.getResourceID())) {
-                existing.updateQuantity(resources.getQuantity());
-                return;
-         }
-      }
-      resources.add(resources);
+        this.resources = newResources;
     }
-    
 
     public boolean getAvailability() {
         return this.capacity > 0;
     }
 
-    public Map getMap() {
+    public Map<String, String> getMap() {
         Map<String, String> map = new HashMap<>();
         map.put("name", this.name);
-        if(location != null) {
+        if (location != null) {
             map.put("location", this.location.toString());
         }
         return map;
     }
 
-
     public double getDistanceFromUser(Location userLocation) {
-        if(location == null || userLocation == null){
+        if (location == null || userLocation == null) {
             return -1.0;
         }
         return location.getDistanceFrom(userLocation);
     }
 
     public void cacheLocation() {
-
     }
 
-
-    @Override 
+    @Override
     public String toString() {
         return "Shelter{" +
                 "id=" + id +

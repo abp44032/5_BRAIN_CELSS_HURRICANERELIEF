@@ -1,19 +1,165 @@
 package com.model;
 
-public class DataWriter {
-    public boolean saveUsers() {
-        return true;
-    }
+	
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
-    public boolean saveShelters() {
-        return true;
-    }
+public class DataWriter extends DataConstants {
+	
+	
+	public static void saveUsers() {
+		User user = User.getInstance();
+		ArrayList<User> userList = user.getUsers();
+
+		JSONArray jsonUser = new JSONArray();
+		
+		//creating all the json objects
+		for(int i=0; i< userList.size(); i++) {
+			jsonUser.add(getUserJSON(userList.get(i)));
+		}
+		
+		//Write JSON file
+        try (FileWriter file = new FileWriter(USER_FILE_NAME)) {
+ 
+            file.write(jsonUser.toJSONString());
+            file.flush();
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public static JSONObject getUserJSON(User user) {
+		JSONObject userDetails = new JSONObject();
+		userDetails.put(USER_ID_KEY, user.getId().toString());
+		userDetails.put(USER_USERNAME, user.getUserName());
+		userDetails.put(USER_FIRSTNAME, user.getFirstName());
+		userDetails.put(USER_LASTNAME, user.getLastName());
+        userDetails.put(USER_EMAIL, user.getEmail());
+        userDetails.put(USER_PASSWORD_KEY, user.getPassword());
+        userDetails.put(USER_SHARE_LOCATION, user.getShareLocation());
+
+
+        return shelterDetails;
+	}
+
+	public static void main(String[] args){
+		DataWriter.saveUsers();
+	}
+
+
+    public static boolean saveShelters() {
+        Shelter shelter = Shelter.getInstance();
+		ArrayList<Shelter> ShelterList = shelter.getShelters();
+
+		JSONArray jsonShelter = new JSONArray();
+		
+		//creating all the json objects
+		for(int i=0; i< ShelterList.size(); i++) {
+			jsonShelter.add(getShelterJSON(ShelterList.get(i)));
+		}
+		
+		//Write JSON file
+        try (FileWriter file = new FileWriter(SHELTER_FILE_NAME)) {
+ 
+            file.write(jsonShelter.toJSONString());
+            file.flush();
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public static JSONObject getShelterJSON(Shelter shelter) {
+		JSONObject shelterDetails = new JSONObject();
+		shelterDetails.put(SHELTER_ID_KEY, shelter.getId().toString());
+		shelterDetails.put(SHELTER_NAME, shelter.getName());
+		shelterDetails.put(SHELTER_RESOURCES, shelter.getResources());
+		shelterDetails.put(SHELTER_CAPACITY, shelter.getCapacity());
+		shelterDetails.put(SHELTER_ACCOMMODATIONS, shelter.getAccommodations());
+
+		return shelterDetails;
+	}
+    public static void main(String[] args){
+		DataWriter.saveShelters();
+	}
+
 
     public boolean saveReliefRequests() {
-        return true;   
-    }
+        ReliefRequest request = ReliefRequest.getInstance();
+		ArrayList<ReliefRequest> requestList = request.getRequests();
+
+		JSONArray jsonRequest = new JSONArray();
+		
+		//creating all the json objects
+		for(int i=0; i< requestList.size(); i++) {
+			jsonRequest.add(getRequestJSON(requestList.get(i)));
+		}
+		
+		//Write JSON file
+        try (FileWriter file = new FileWriter(REQUEST_FILE_NAME)) {
+ 
+            file.write(jsonRequest.toJSONString());
+            file.flush();
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+
+	
+	public static JSONObject getReliefRequestJSON(ReliefRequest request) {
+		JSONObject requestDetails = new JSONObject();
+		requestDetails.put(REQUEST_ID_KEY, request.getId().toString());
+		requestDetails.put(REQUEST_DESCRIPTION, request.getDescription());
+        requestDetails.put(REQUEST_TOTAL_PEOPLE, request.getTotalPeople());
+        requestDetails.put(REQUEST_TYPE, request.getType().toString());
+        requestDetails.put(REQUEST_SEVERITY, request.getSeverity());
+        requestDetails.put(REQUEST_URGENCY, request.getUrgency());
+		requestDetails.put(REQUEST_STATUS, request.getStatus());
+		return requestDetails;
+	}
+    public static void main(String[] args){
+		DataWriter.saveReliefRequests();
+	}
+
+
 
     public boolean saveHurricanes() {
-        return true;
-    }
+        Hurricane hurricane = Hurricane.getInstance();
+		ArrayList<Hurricane> hurricaneList = hurricane.getHurricane();
+
+		JSONArray jsonHurricane = new JSONArray();
+		
+		//creating all the json objects
+		for(int i=0; i< hurricaneList.size(); i++) {
+            jsonHurricane.add(getHurricaneJSON(hurricaneList.get(i)));
+        }
+		
+		//Write JSON file
+        try (FileWriter file = new FileWriter(HURRICANE_FILE_NAME)) {
+ 
+            file.write(jsonHurricane.toJSONString());
+            file.flush();
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+
+	public static JSONObject getHurricaneJSON(Hurricane hurricane) {
+		JSONObject hurricaneDetails = new JSONObject();
+		hurricaneDetails.put(HURRICANE_ID_KEY, hurricane.getId().toString());
+		hurricaneDetails.put(HURRICANE_ZIP_CODES, hurricane.getZipCodes());
+        hurricaneDetails.put(HURRICANE_STATUS, hurricane.getStatus());
+        hurricaneDetails.put(HURRICANE_EVACUATION_STEPS, hurricane.getEvacuationSteps());
+        hurricaneDetails.put(HURRICANE_EMERGENCY_SUPPLIES, hurricane.getEmergencySupplies());
+		return hurricaneDetails;
+	}
+    public static void main(String[] args){
+		DataWriter.saveHurricane();
+	}
 }

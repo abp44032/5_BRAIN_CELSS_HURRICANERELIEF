@@ -24,17 +24,9 @@ public class User {
         this.location = location;
         this.shareLocation = shareLocation;
     }
-    
-    public String getUsername() {
-    return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
 
     public UUID getId() {
-        return this.id;
+    return this.id;
     }
 
     public String getFirstName() {
@@ -62,7 +54,7 @@ public class User {
     }
 
     public boolean isShareLocation() {
-    return this.shareLocation;
+        return this.shareLocation;
     }
 
     public Information viewHurricaneInfo() {
@@ -78,4 +70,42 @@ public class User {
 
     public void commentOnRequest(ReliefRequest request, String comment) {
     }
+
+    private static class ConcreteUser extends User {
+        public ConcreteUser(UUID id, String firstName, String lastName, String username, String password, String email, Location location, boolean shareLocation) {
+            super(id, firstName, lastName, username, password, email, location, shareLocation);
+        }
+    }
+
+    public static void main(String[] args) {
+        UUID testId = UUID.randomUUID();
+        Location testLocation = new Location();
+
+        User testUser = new ConcreteUser(
+        testId,
+        "John",
+        "Doe",
+        "johndoe",
+        "password",
+        "johndoe@example.com",
+        testLocation,
+        false
+        );
+
+        System.out.println("User ID: " + testUser.getId());
+        System.out.println("First Name: " + testUser.getFirstName());
+        System.out.println("Last Name: " + testUser.getLastName());
+        System.out.println("Username: " + testUser.getUsername());
+        System.out.println("Password: " + testUser.getPassword());
+        System.out.println("Email: " + testUser.getEmail());
+        System.out.println("Location: " + testUser.getLocation());
+        System.out.println("Share Location: " + testUser.isShareLocation());
+    }
+
+    public static User create(UUID id2, String firstName2, String lastName2, String username2, String password2,
+            String email2, Location location2, boolean shareLocation2) {
+                System.out.println("Creating user with ID: " + id2);
+        return new ConcreteUser(id2, firstName2, lastName2, username2, password2, email2, location2, shareLocation2);
+    }
+
 }

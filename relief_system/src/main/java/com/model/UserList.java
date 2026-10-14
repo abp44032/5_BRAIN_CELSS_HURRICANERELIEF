@@ -28,7 +28,7 @@ public class UserList {
         if (username == null || password == null) {
             return null;
         }
-
+        
         for (User user : users) {
             if (user.getUsername() != null
                     && user.getPassword() != null
@@ -44,7 +44,7 @@ public class UserList {
     public ArrayList<User> getUsers() {
         return users;
     }
-
+    
     public boolean addUser(UUID id, String firstName, String lastName,
             String username, String password, String email,
             Location location, boolean shareLocation) {
