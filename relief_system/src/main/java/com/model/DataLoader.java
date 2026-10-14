@@ -10,7 +10,7 @@ import org.json.simple.parser.JSONParser;
 
 public class DataLoader extends DataConstants {
 
-    public ArrayList<User> getUsers() {
+    public static ArrayList<User> getUsers() {
         ArrayList<User> users = new ArrayList<>();
 
         try (FileReader reader = new FileReader(USER_FILE_NAME)) {
@@ -44,7 +44,8 @@ public class DataLoader extends DataConstants {
                     location = new Location(
                         (String) locationJSON.get("address"),
                         (String) locationJSON.get("city"),
-                        (String) locationJSON.get("state")
+                        (String) locationJSON.get("state"),
+                        (String) locationJSON.get("zip")
                     );
                 }
 
@@ -64,7 +65,14 @@ public class DataLoader extends DataConstants {
         return users;
     }
 
-    public ArrayList<Shelter> getShelters() {
+    public static void main(String[] args) {
+        ArrayList<User> users = DataLoader.getUsers();
+        for (User user : users) {
+            System.out.println(user);
+        }
+    }
+
+    public static ArrayList<Shelter> getShelters() {
         ArrayList<Shelter> shelters = new ArrayList<>();
 
         try {
@@ -93,11 +101,9 @@ public class DataLoader extends DataConstants {
                 ArrayList<Resource> resources = new ArrayList<>();
                 JSONArray resourcesJSON =
                     (JSONArray) shelter.get(SHELTER_RESOURCES);
-
                 for (int j = 0; j < resourcesJSON.size(); j++) {
                     JSONObject resource =
                         (JSONObject) resourcesJSON.get(j);
-
                     int resourceID =
                         (int) (long) resource.get(RESOURCE_ID);
                     String resourceName =
@@ -112,10 +118,8 @@ public class DataLoader extends DataConstants {
 
                 ArrayList<AccommodationType> accommodations =
                     new ArrayList<>();
-
                 JSONArray accommodationJSON =
                     (JSONArray) shelter.get(SHELTER_ACCOMMODATIONS);
-
                 for (int j = 0; j < accommodationJSON.size(); j++) {
                     String accommodationName =
                         (String) accommodationJSON.get(j);
@@ -125,9 +129,27 @@ public class DataLoader extends DataConstants {
                     );
                 }
 
+                JSONObject locationJSON =
+                    (JSONObject) shelter.get("location");
+                Location location = null;
+                if (locationJSON != null) {
+                    location = new Location(
+                        (String) locationJSON.get("address"),
+                        (String) locationJSON.get("city"),
+                        (String) locationJSON.get("state"),
+                        (String) locationJSON.get("zip")
+                    );
+                }
+
+                JSONObject hoursJSON = (JSONObject) shelter.get(SHELTER_HOURS_OF_OPERATION);
+                String hoursOfOperation = null;
+                if (hoursJSON != null) {
+                    hoursOfOperation = hoursJSON.get("open") + " - " + hoursJSON.get("close");
+                }
+
                 shelters.add(new Shelter(
                     id, shelterName, capacity,
-                    resources, accommodations
+                    resources, accommodations, location, hoursOfOperation
                 ));
             }
         } catch (Exception e) {

@@ -15,12 +15,14 @@ public class Shelter  {
     private String hoursOfOperation;
     
 
-    public Shelter(UUID id, String name, int capacity, ArrayList<Resource> resources, ArrayList<AccommodationType> accommodations) {
+    public Shelter(UUID id, String name, int capacity, ArrayList<Resource> resources, ArrayList<AccommodationType> accommodations, Location location, String hoursOfOperation) {
         this.id = id;
         this.name = name;
         this.capacity = capacity;
         this.resources = resources;
         this.accommodations = accommodations;
+        this.location = location;
+        this.hoursOfOperation = hoursOfOperation;
 }
 
     public UUID getId() {
@@ -112,7 +114,7 @@ public class Shelter  {
 
     public double getDistanceFromUser(Location userLocation) {
         if(location == null || userLocation == null){
-            return "unavailable";
+            return -1.0;
         }
         return location.getDistanceFrom(userLocation);
     }

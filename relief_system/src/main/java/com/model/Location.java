@@ -4,11 +4,13 @@ public class Location {
     private String address;
     private String city;
     private String state;
+    private String zip;
 
-    public Location(String address, String city, String state) {
+    public Location(String address, String city, String state, String zip) {
         this.address = address;
         this.city = city;
         this.state = state;
+        this.zip = zip;
     }
 
     public String getAddress() {
@@ -34,6 +36,14 @@ public class Location {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 
     public double getDistanceFrom(Location other) {
