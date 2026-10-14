@@ -10,7 +10,7 @@ import org.json.simple.JSONObject;
 public class DataWriter extends DataConstants {
 	
 	
-	public static void saveUsers() {
+	public static boolean saveUsers() {
 		User user = User.getInstance();
 		ArrayList<User> userList = user.getUsers();
 
@@ -25,15 +25,17 @@ public class DataWriter extends DataConstants {
         try (FileWriter file = new FileWriter(USER_FILE_NAME)) {
  
             file.write(jsonUser.toJSONString());
-            file.flush();
+            return true;
  
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
 	}
 	
 	public static JSONObject getUserJSON(User user) {
 		JSONObject userDetails = new JSONObject();
+
 	    userDetails.put(USER_ID_KEY, user.getId().toString());
 		userDetails.put(USER_USERNAME, user.getUserName());
 		userDetails.put(USER_FIRSTNAME, user.getFirstName());
@@ -44,10 +46,6 @@ public class DataWriter extends DataConstants {
 
 
         return userDetails;
-	}
-
-	public static void main(String[] args){
-		DataWriter.saveUsers();
 	}
 
 
@@ -66,15 +64,17 @@ public class DataWriter extends DataConstants {
         try (FileWriter file = new FileWriter(SHELTER_FILE_NAME)) {
  
             file.write(jsonShelter.toJSONString());
-            file.flush();
+            return true;
  
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
 	}
 	
 	public static JSONObject getShelterJSON(Shelter shelter) {
 		JSONObject shelterDetails = new JSONObject();
+
 		shelterDetails.put(SHELTER_ID_KEY, shelter.getId().toString());
 		shelterDetails.put(SHELTER_NAME, shelter.getName());
 		shelterDetails.put(SHELTER_RESOURCES, shelter.getResources());
@@ -83,12 +83,8 @@ public class DataWriter extends DataConstants {
 
 		return shelterDetails;
 	}
-    public static void main(String[] args){
-		DataWriter.saveShelters();
-	}
 
-
-    public boolean saveReliefRequests() {
+    public static boolean saveReliefRequests() {
         ReliefRequest request = ReliefRequest.getInstance();
 		ArrayList<ReliefRequest> requestList = request.getRequests();
 
@@ -96,17 +92,18 @@ public class DataWriter extends DataConstants {
 		
 		//creating all the json objects
 		for(int i=0; i< requestList.size(); i++) {
-			jsonRequest.add(getRequestJSON(requestList.get(i)));
+			jsonRequest.add(getReliefRequestJSON(requestList.get(i)));
 		}
 		
 		//Write JSON file
         try (FileWriter file = new FileWriter(REQUEST_FILE_NAME)) {
  
             file.write(jsonRequest.toJSONString());
-            file.flush();
+            return true;
  
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
 	}
 
@@ -120,15 +117,12 @@ public class DataWriter extends DataConstants {
         requestDetails.put(REQUEST_SEVERITY, request.getSeverity());
         requestDetails.put(REQUEST_URGENCY, request.getUrgency());
 		requestDetails.put(REQUEST_STATUS, request.getStatus());
+
 		return requestDetails;
 	}
-    public static void main(String[] args){
-		DataWriter.saveReliefRequests();
-	}
 
 
-
-    public boolean saveHurricanes() {
+    public static boolean saveHurricanes() {
         Hurricane hurricane = Hurricane.getInstance();
 		ArrayList<Hurricane> hurricaneList = hurricane.getHurricane();
 
@@ -143,10 +137,11 @@ public class DataWriter extends DataConstants {
         try (FileWriter file = new FileWriter(HURRICANE_FILE_NAME)) {
  
             file.write(jsonHurricane.toJSONString());
-            file.flush();
+            return true;
  
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
 	}
 
@@ -160,6 +155,9 @@ public class DataWriter extends DataConstants {
 		return hurricaneDetails;
 	}
     public static void main(String[] args){
-		DataWriter.saveHurricane();
+		System.out.println("Saving users: " + saveUsers());
+        System.out.println("Saving shelters: " + saveShelters());
+        System.out.println("Saving relief requests: " + saveReliefRequests());
+        System.out.println("Saving hurricanes: " + saveHurricanes());
 	}
 }
