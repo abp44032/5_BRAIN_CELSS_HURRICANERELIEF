@@ -59,7 +59,7 @@ public class User {
         return this.lastName;
     }
 
-    public String getUserName() {
+    public String getUsername() {
         return this.username;
     }
 
@@ -78,10 +78,11 @@ public class User {
     public boolean isShareLocation() {
         return this.shareLocation;
     }
-
+/* 
     public Information viewHurricaneInfo() {
         return null;
     }
+*/
     public List<Shelter> viewShelters() {
         return new ArrayList<>();
     }

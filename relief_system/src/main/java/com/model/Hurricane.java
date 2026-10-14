@@ -10,8 +10,53 @@ public class Hurricane {
     private ArrayList<String> evacuationSteps;
     private ArrayList<Resource> emergencySupplies;
 
-    public Hurricane(UUID id, ArrayList<String> hurricaneZipCodes, HurricaneStatus hurricaneStatus, ArrayList<String> evacuationSteps, ArrayList<Resource> emergencySupplies) {
+    private static Hurricane instance;
+    private ArrayList<Hurricane> hurricanes = new ArrayList<>();
 
+    public Hurricane(UUID id, ArrayList<String> hurricaneZipCodes, HurricaneStatus hurricaneStatus, ArrayList<String> evacuationSteps, ArrayList<Resource> emergencySupplies) {
+        this.id = id;
+        this.hurricaneZipCodes = hurricaneZipCodes;
+        this.hurricaneStatus = hurricaneStatus;
+        this.evacuationSteps = evacuationSteps;
+        this.emergencySupplies = emergencySupplies;
+        
+    }
+
+    public static Hurricane getInstance() {
+        if (instance == null) {
+            instance = new Hurricane(
+                UUID.randomUUID(),
+                new ArrayList<String>(),
+                null,
+                new ArrayList<String>(),
+                new ArrayList<Resource>()
+            );
+        }
+        return instance;
+    }
+
+    public ArrayList<Hurricane> getHurricane() {
+        return hurricanes;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public ArrayList<String> getZipCodes() {
+        return hurricaneZipCodes;
+    }
+
+    public HurricaneStatus getStatus() {
+        return hurricaneStatus;
+    }
+
+    public ArrayList<String> getEvacuationSteps() {
+        return evacuationSteps;
+    }
+
+    public ArrayList<Resource> getEmergencySupplies() {
+        return emergencySupplies;
     }
 
     public void reportDamage() {
@@ -28,5 +73,11 @@ public class Hurricane {
 
     public ArrayList<Resource> viewEmergencySupplies() {
         return null;
+    }
+
+    public void addHurricane(Hurricane hurricane) {
+        if (hurricane != null && !hurricanes.contains(hurricane)) {
+            hurricanes.add(hurricane);
+        }
     }
 }
