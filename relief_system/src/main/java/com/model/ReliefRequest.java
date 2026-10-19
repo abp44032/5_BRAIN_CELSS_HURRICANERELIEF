@@ -13,6 +13,7 @@ public class ReliefRequest {
     private String description;
     private int totalPeople;
     private ArrayList<Pet> pets;
+    private ArrayList<String> comments;
 
     private static ReliefRequest instance;
     private ArrayList<ReliefRequest> requests = new ArrayList<>();
@@ -108,6 +109,15 @@ public class ReliefRequest {
                 "Pets=" + pets + "\n" +
                 '}';
     }
+
+    public ArrayList<String> getComments() {
+        return comments;
+    }
+
+    public void addComment(String comment) {
+        comments.add(comment);
+    }
+
 
     public boolean isResolved() {
         return false;

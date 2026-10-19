@@ -3,13 +3,14 @@ package com.model;
 import java.util.ArrayList;
 import java.util.UUID;
 
+
 public class UserList {
 
     private static UserList userList;
     private ArrayList<User> users;
 
     public UserList() {
-        users = new DataLoader().getUsers();
+        users = DataLoader.getUsers();
 
         if (users == null) {
             users = new ArrayList<>();
@@ -24,18 +25,27 @@ public class UserList {
         return userList;
     }
 
-    public User getUser(String username, String password) {
-        if (username == null || password == null) {
+     public User getUser(String username) {
+        if (username == null) {
             return null;
         }
-        
+
         for (User user : users) {
             if (user.getUsername() != null
-                    && user.getPassword() != null
-                    && user.getUsername().equals(username)
-                    && user.getPassword().equals(password)) {
+                    && user.getUsername().equalsIgnoreCase(username)) {
                 return user;
             }
+        }
+
+        return null;
+    }
+    
+    public User getUser(String username, String password) {
+        User user = getUser(username);
+
+        if (user != null && user.getPassword() != null
+                && user.getPassword().equals(password)) {
+            return user;
         }
 
         return null;
@@ -44,12 +54,13 @@ public class UserList {
     public ArrayList<User> getUsers() {
         return users;
     }
+
     
-    public boolean addUser(UUID id, String firstName, String lastName,
+    public boolean addUser(String firstName, String lastName,
             String username, String password, String email,
             Location location, boolean shareLocation) {
 
-        if (id == null || firstName == null || lastName == null
+        if (firstName == null || lastName == null
                 || username == null || password == null || email == null) {
             return false;
         }
@@ -61,18 +72,22 @@ public class UserList {
                 return false;
             }
         }
+        
+        users.add(new User(firstName, lastName, username, password,
+                email, location, shareLocation));
 
-        User newUser = new User(
-            id, firstName, lastName, username, password,
-            email, location, shareLocation
-        );
+        return save();
+    }
 
-        users.add(newUser);
-
-        return true;
+    public boolean removeUser(User user) {
+        return users.remove(user);
     }
 
     public boolean save() {
-        return new DataWriter().saveUsers();
+        return DataWriter.saveUsers();
+    }
+
+    private static boolean isBlank(String s) {
+        return s == null || s.isBlank();
     }
 }

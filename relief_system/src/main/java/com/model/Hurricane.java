@@ -9,6 +9,7 @@ import java.util.UUID;
  */
 public class Hurricane {
     private UUID id;
+    private String name;
     private ArrayList<String> hurricaneZipCodes;
     private HurricaneStatus hurricaneStatus;
     private ArrayList<String> evacuationSteps;
@@ -17,8 +18,9 @@ public class Hurricane {
     private static Hurricane instance;
     private ArrayList<Hurricane> hurricanes = new ArrayList<>();
 
-    public Hurricane(UUID id, ArrayList<String> hurricaneZipCodes, HurricaneStatus hurricaneStatus, ArrayList<String> evacuationSteps, ArrayList<Resource> emergencySupplies) {
+    public Hurricane(UUID id, String name, ArrayList<String> hurricaneZipCodes, HurricaneStatus hurricaneStatus, ArrayList<String> evacuationSteps, ArrayList<Resource> emergencySupplies) {
         this.id = id;
+        this.name = name;
         this.hurricaneZipCodes = hurricaneZipCodes;
         this.hurricaneStatus = hurricaneStatus;
         this.evacuationSteps = evacuationSteps;
@@ -74,9 +76,21 @@ public class Hurricane {
         //TODO
     }
 
-    public String viewHurricaneInfo() {
-        return null;
+     public String viewHurricaneInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Hurricane ").append(name).append(" (").append(hurricaneStatus).append(")\n");
+        sb.append("Affected zip codes: ").append(String.join(", ", hurricaneZipCodes)).append("\n");
+        sb.append("Evacuation steps:\n");
+        int n = 1;
+        for (String step : evacuationSteps) {
+            sb.append("  ").append(n++).append(". ").append(step).append("\n");
+        }
+        sb.append("Emergency supplies:\n");
+        for (Resource supply : emergencySupplies) {
+            sb.append("  - ").append(supply.getName()).append("\n");
+
     }
+
 
     public void attachDamagePhoto(String photo) {
         //TODO
@@ -91,4 +105,5 @@ public class Hurricane {
             hurricanes.add(hurricane);
         }
     }
+
 }
