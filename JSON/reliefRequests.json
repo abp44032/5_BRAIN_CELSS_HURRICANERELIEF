@@ -12,6 +12,7 @@
             "state" : "TX"
         },
         "description" : "Resident needs immediate medical attention",
+        "totalPeople": 10,
         "totalPets" : 1,
         "pets" : [
             {"name" : "Buddy", "type" : "Dog"}
@@ -21,7 +22,7 @@
         "requestID" : "d4684f52-9afb-4bc8-a179-b42dc30b9cd8",
         "timeStamp" : "2026-09-27 12:30:00",
         "status" : "ACCEPTED",
-        "requestType": "FIREPROTECTION",
+        "requestType": "FIRE_PROTECTION",
         "severity": "CRITICAL",
         "urgency": "HIGH",
         "location": {
@@ -30,6 +31,7 @@
             "state" : "SC"
         },
         "description" : "Resident needs food supplies",
+        "totalPeople": 10,
         "totalPets" : 0,
         "pets" : []
     }
