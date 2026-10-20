@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+        "type": "java",
+        "name": "UI",
+        "request": "launch",
+        "mainClass": "com.hurricane/com.model.UI",
+        "projectName": "relief_system"
+    },
+    {
+        "type": "java",
+        "name": "Run Map App",
+        "request": "launch",
+        "mainClass": "com.movement/com.movement.App",
+        "projectName": "distance",
+        "envFile": "${workspaceFolder}/.env"
+    }
+]
+}

@@ -20,7 +20,8 @@ public abstract class User {
                 email, location, shareLocation);
  
     }
-    public User(UUID id, String firstName, String lastName, String username, String password, String email, Location location, boolean shareLocation) {
+    public User(UUID id, String firstName, String lastName, String username, String password, 
+        String email, Location location, boolean shareLocation) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -85,10 +86,6 @@ public abstract class User {
 
     public  ArrayList<Service> viewServices() {
         ArrayList<Service> services = new ArrayList<>();
-       services.add(new ShelterService());
-        services.add(new RequestService());
-        services.add(new EmergencyInfoService());
-        services.add(new DamageReportService());
         return services;
     }
 
