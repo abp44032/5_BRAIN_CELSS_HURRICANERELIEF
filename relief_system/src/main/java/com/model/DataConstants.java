@@ -54,7 +54,8 @@ public class DataConstants {
     /**
      * Hurricane constants
      */
-    public static final String HURRICANE_ID_KEY = "hurricaneID";
+    public static final String HURRICANE_ID_KEY = "uuid";
+    public static final String HURRICANE_NAME = "name";
     public static final String HURRICANE_ZIP_CODES = "hurricaneZipCodes";
     public static final String HURRICANE_STATUS = "hurricaneStatus";
     public static final String HURRICANE_EVACUATION_STEPS = "evacuationSteps";

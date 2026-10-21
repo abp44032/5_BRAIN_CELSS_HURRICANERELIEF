@@ -11,6 +11,10 @@ import org.json.simple.parser.JSONParser;
 
 public class DataLoader extends DataConstants {
 
+    /**
+     * Loads users from the JSON file and returns them as an ArrayList of User objects
+     * @return ArrayList of User objects loaded from the JSON file
+     */
     public static ArrayList<User> getUsers() {
         ArrayList<User> users = new ArrayList<>();
 
@@ -52,6 +56,10 @@ public class DataLoader extends DataConstants {
         return users;
     }
 
+    /**
+     * Loads shelters from the JSON file and returns them as an ArrayList of Shelter objects
+     * @return ArrayList of Shelter objects loaded from the JSON file
+     */
     public static ArrayList<Shelter> getShelters() {
         ArrayList<Shelter> shelters = new ArrayList<>();
 
@@ -126,13 +134,10 @@ public class DataLoader extends DataConstants {
         return shelters;
     }
     
-    public static void main(String[] args) {
-        ArrayList<ReliefRequest> requests = DataLoader.getReliefRequests();
-        for (ReliefRequest request : requests) {
-            System.out.println(request);
-        }
-    }
-
+    /**
+     * Loads relief requests from the JSON file and returns them as an ArrayList of ReliefRequest objects
+     * @return ArrayList of ReliefRequest objects loaded from the JSON file
+     */
     public static ArrayList<ReliefRequest> getReliefRequests() {
         ArrayList<ReliefRequest> requests = new ArrayList<>();
 
@@ -174,7 +179,68 @@ public class DataLoader extends DataConstants {
         return requests;
     }
 
-    public ArrayList<Hurricane> getHurricanes() {
-        return null;
+    /**
+     * Main method for testing getHurricanes() 
+     * @param args
+     */
+    public static void main(String[] args) {
+        ArrayList<Hurricane> hurricanes = DataLoader.getHurricanes();
+        for (Hurricane hurricane : hurricanes) {
+            System.out.println(hurricane);
+        }
+    }
+
+    /**
+     * Loads hurricanes from the JSON file and returns them as an ArrayList of Hurricane objects
+     * @return ArrayList of Hurricane objects loaded from the JSON file
+     */
+    public static ArrayList<Hurricane> getHurricanes() {
+        ArrayList<Hurricane> hurricanes = new ArrayList<>();
+
+        try {
+            FileReader reader = new FileReader(HURRICANE_FILE_NAME);
+            JSONArray hurricanesJSON = (JSONArray) new JSONParser().parse(reader);
+            reader.close();
+
+            for (int i = 0; i < hurricanesJSON.size(); i++) {
+                JSONObject hurricaneJSON = (JSONObject) hurricanesJSON.get(i);
+
+                UUID id = UUID.fromString((String) hurricaneJSON.get(HURRICANE_ID_KEY));
+                String name = (String) hurricaneJSON.get(HURRICANE_NAME);
+                ArrayList<String> zipCodes = new ArrayList<>();
+                JSONArray zipCodesJSON = (JSONArray) hurricaneJSON.get(HURRICANE_ZIP_CODES);
+                if (zipCodesJSON != null) {
+                    for (int j = 0; j < zipCodesJSON.size(); j++) {
+                        zipCodes.add((String) zipCodesJSON.get(j));
+                    }
+                }
+                HurricaneStatus hurricaneStatus =
+                    HurricaneStatus.valueOf((String) hurricaneJSON.get(HURRICANE_STATUS));
+                ArrayList<String> evacuationSteps = new ArrayList<>();
+                JSONArray stepsJSON = (JSONArray) hurricaneJSON.get(HURRICANE_EVACUATION_STEPS);
+                if (stepsJSON != null) {
+                    for (int j = 0; j < stepsJSON.size(); j++) {
+                        evacuationSteps.add((String) stepsJSON.get(j));
+                    }
+                }
+                ArrayList<Resource> emergencySupplies = new ArrayList<>();
+                JSONArray suppliesJSON = (JSONArray) hurricaneJSON.get(HURRICANE_EMERGENCY_SUPPLIES);
+                if (suppliesJSON != null) {
+                    for (int j = 0; j < suppliesJSON.size(); j++) {
+                        JSONObject supplyJSON = (JSONObject) suppliesJSON.get(j);
+                        int resourceID = (int) (long) supplyJSON.get(RESOURCE_ID);
+                        String resourceName = (String) supplyJSON.get(RESOURCE_NAME);
+                        int resourceQuantity = (int) (long) supplyJSON.get(RESOURCE_QUANTITY);
+                        emergencySupplies.add(new Resource(resourceID, resourceName, resourceQuantity));
+                    }
+                }
+                hurricanes.add(new Hurricane(
+                    id, name, zipCodes, hurricaneStatus, evacuationSteps, emergencySupplies
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return hurricanes;
     }
 }
