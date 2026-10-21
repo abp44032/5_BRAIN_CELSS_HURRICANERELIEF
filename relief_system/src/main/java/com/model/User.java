@@ -3,7 +3,7 @@ package com.model;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public abstract class User {
+public class User {
     protected UUID id;
     protected String firstName;
     protected String lastName;
