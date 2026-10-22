@@ -3,6 +3,13 @@
   "configurations": [
     {
         "type": "java",
+        "name": "DataLoader",
+        "request": "launch",
+        "mainClass": "com.hurricane/com.model.DataLoader",
+        "projectName": "relief_system"
+    },
+    {
+        "type": "java",
         "name": "UI",
         "request": "launch",
         "mainClass": "com.hurricane/com.model.UI",

@@ -3,7 +3,7 @@ package com.model;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public abstract class User {
+public class User {
     protected UUID id;
     protected String firstName;
     protected String lastName;
@@ -76,10 +76,6 @@ public abstract class User {
         return this.password != null && this.password.equals(password);
     }
 
-    public Information viewHurricaneInfo() {
-        return new EmergencyInfoService().getEmergencyInfo();
-    }
-
     public ArrayList<Shelter> viewShelters() {
         return ShelterList.getInstance().getShelters();
     }
@@ -88,7 +84,6 @@ public abstract class User {
         ArrayList<Service> services = new ArrayList<>();
         return services;
     }
-
 
     public void commentOnRequest(ReliefRequest request, String comment) {
         request.addComment(username + ": " + comment);
