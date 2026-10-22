@@ -3,7 +3,7 @@ package com.model;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class User {
+public abstract class User {
     protected UUID id;
     protected String firstName;
     protected String lastName;
@@ -31,7 +31,7 @@ public class User {
         this.location = location;
         this.shareLocation = shareLocation;
     }
-
+    
     public UUID getId() {
     return this.id;
     }
