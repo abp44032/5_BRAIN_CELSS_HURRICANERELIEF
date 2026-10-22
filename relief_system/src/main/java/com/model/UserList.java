@@ -74,7 +74,7 @@ public class UserList {
         }
         
         users.add(new User(firstName, lastName, username, password,
-                email, location, shareLocation));
+            email, location, shareLocation) { });
 
         return save();
     }
@@ -85,9 +85,5 @@ public class UserList {
 
     public boolean save() {
         return DataWriter.saveUsers();
-    }
-
-    private static boolean isBlank(String s) {
-        return s == null || s.isBlank();
     }
 }
