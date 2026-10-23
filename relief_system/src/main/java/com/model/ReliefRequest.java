@@ -97,22 +97,22 @@ public class ReliefRequest {
     }
 
     public String getDetails() {
-        return "ReliefRequest{\n" +
-                "requestId=" + requestId + "\n" +
-                "Status=" + status + "\n" +
-                "Type=" + type + "\n" +
-                "Severity=" + severity + "\n" +
-                "Urgency=" + urgency + "\n" +
-                "Description='" + description + "\n" +
-                "TotalPeople=" + totalPeople + "\n" +
-                "Pets=" + pets + "\n" +
-                '}';
+        return "ReliefRequest\n" +
+                "requestId = " + requestId + "\n" +
+                "Status = " + status + "\n" +
+                "Type = " + type + "\n" +
+                "Severity = " + severity + "\n" +
+                "Urgency = " + urgency + "\n" +
+                "Description =' " + description + "\n" +
+                "TotalPeople = " + totalPeople + "\n" +
+                "Pets = " + pets + "\n";
     }
 
     public boolean isResolved() {
         return false;
     }
 
+    // -------- MAIN METHOD --------- 
     public static void main(String[] args) {
         ReliefRequest request = new ReliefRequest(
             UUID.randomUUID(),

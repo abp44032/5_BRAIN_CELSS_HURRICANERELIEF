@@ -53,6 +53,7 @@ public class ShelterFacade {
         return 0.0;
     }
 
+    // -------- MAIN METHOD --------- 
     public static void main(String[] args) {
         ShelterFacade facade = new ShelterFacade();
         UserList.getInstance().addUser(UUID.randomUUID(), "Alex", "Smith", "asmith", "pass456", "asmith@sc.edu", null, true);

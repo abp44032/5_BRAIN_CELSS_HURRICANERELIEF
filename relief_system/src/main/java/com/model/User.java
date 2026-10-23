@@ -96,6 +96,7 @@ public class User {
         }
     }
 
+    // -------- MAIN METHOD --------- 
     public static void main(String[] args) {
         UUID testId = UUID.randomUUID();
         Location testLocation = new Location();

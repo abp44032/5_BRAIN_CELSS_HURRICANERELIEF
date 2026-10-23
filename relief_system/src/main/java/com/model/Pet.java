@@ -17,6 +17,7 @@ public class Pet {
         return type;
     }
     
+    // -------- MAIN METHOD --------- 
     public static void main(String[] args) {
         Pet pet = new Pet("Buddy", "Dog");
         

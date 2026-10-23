@@ -75,4 +75,37 @@ public class UserList {
     public boolean save() {
         return new DataWriter().saveUsers();
     }
+
+    // -------- MAIN METHOD --------- 
+
+    public static void main(String[] args) {
+
+        UserList userList = UserList.getInstance();
+
+        // Add a user
+        boolean added = userList.addUser(
+            UUID.randomUUID(),
+            "John",
+            "Doe",
+            "johndoe",
+            "password123",
+            "john@example.com",
+            null,
+            false
+        );
+
+        System.out.println("User added: " + added);
+
+        // Test getting a user
+        User user = userList.getUser("johndoe", "password123");
+
+        if (user != null) {
+            System.out.println("User found: " + user.getUsername());
+        } else {
+            System.out.println("User not found.");
+        }
+
+        // Save users
+        System.out.println("Saved: " + userList.save());
+    }
 }
