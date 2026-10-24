@@ -251,7 +251,33 @@ public class EmergencyReliefUI {
             System.out.println("At least one person must be entered.");
             return;
         }
+        
+        // Location 
+        System.out.print("Enter street address: ");
+        String address = scanner.nextLine().trim();
 
+        System.out.print("Enter city: ");
+        String city = scanner.nextLine().trim();
+
+        System.out.print("Enter state: ");
+        String state = scanner.nextLine().trim();
+
+        System.out.print("Enter ZIP code: ");
+        String zip = scanner.nextLine().trim();
+
+        Location location = new Location(address, city, state, zip);
+
+        // Contact Information
+        System.out.print("Enter contact information (phone or email): ");
+        String contactInformation = scanner.nextLine().trim();
+
+        if (address.isEmpty() || city.isEmpty() || state.isEmpty()
+                || zip.isEmpty() || contactInformation.isEmpty()) {
+            System.out.println("Location and contact information are required.");
+            return;
+        }
+
+        // Pets
         ArrayList<Pet> pets = new ArrayList<>();
 
         System.out.print("How many pets need assistance? ");
@@ -293,8 +319,10 @@ public class EmergencyReliefUI {
             urgency,
             description,
             totalPeople,
-            pets
-    );
+            pets,
+            location,
+            contactInformation
+        );
 
     app.submitRequest(request);
 

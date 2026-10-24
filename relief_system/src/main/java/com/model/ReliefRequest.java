@@ -43,7 +43,10 @@ public class ReliefRequest {
             UrgencyLevel.CRITICAL,
             "",
             0,
-            new ArrayList<Pet>());
+            new ArrayList<Pet>(),
+            new Location(),
+            ""
+        );
     }
     return instance;
 }
@@ -151,10 +154,12 @@ public class ReliefRequest {
             RequestType.MEDICAL,      
             SeverityLevel.HIGH,        
             UrgencyLevel.CRITICAL,     
-            "Needs emergency bottled water and non-perishables",
+            "",
             4,
-            new ArrayList<Pet>()
-        );
+            new ArrayList<Pet>(),
+            new Location(),
+            ""
+            );
 
         System.out.println(request.getDetails());
     }
