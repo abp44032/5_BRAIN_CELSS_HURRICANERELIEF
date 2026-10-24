@@ -12,8 +12,7 @@ public class User {
     protected String email;
     protected Location location;
     protected boolean shareLocation;
-
-
+    
     public User(String firstName, String lastName, String username, String password,
                 String email, Location location, boolean shareLocation) {
         this(UUID.randomUUID(), firstName, lastName, username, password,
