@@ -52,13 +52,6 @@ public class DataLoader extends DataConstants {
         return users;
     }
 
-    public static void main(String[] args) {
-        ArrayList<User> users = DataLoader.getUsers();
-        for (User user : users) {
-            System.out.println(user);
-        }
-    }
-
     public static ArrayList<Shelter> getShelters() {
         ArrayList<Shelter> shelters = new ArrayList<>();
 
@@ -132,9 +125,53 @@ public class DataLoader extends DataConstants {
         }
         return shelters;
     }
+    
+    public static void main(String[] args) {
+        ArrayList<ReliefRequest> requests = DataLoader.getReliefRequests();
+        for (ReliefRequest request : requests) {
+            System.out.println(request);
+        }
+    }
 
-    public ArrayList<ReliefRequest> getReliefRequests() {
-        return null;
+    public static ArrayList<ReliefRequest> getReliefRequests() {
+        ArrayList<ReliefRequest> requests = new ArrayList<>();
+
+        try {
+            FileReader reader = new FileReader(REQUEST_FILE_NAME);
+            JSONArray requestsJSON = (JSONArray) new JSONParser().parse(reader);
+            reader.close();
+
+            for (int i = 0; i < requestsJSON.size(); i++) {
+                JSONObject requestJSON = (JSONObject) requestsJSON.get(i);
+
+                UUID id = UUID.fromString((String) requestJSON.get(REQUEST_ID_KEY));
+                RequestStatus status =
+                    RequestStatus.valueOf((String) requestJSON.get(REQUEST_STATUS));
+                RequestType type =
+                    RequestType.valueOf((String) requestJSON.get(REQUEST_TYPE));
+                SeverityLevel severity =
+                    SeverityLevel.valueOf((String) requestJSON.get(REQUEST_SEVERITY));
+                UrgencyLevel urgency =
+                    UrgencyLevel.valueOf((String) requestJSON.get(REQUEST_URGENCY));
+                String description = (String) requestJSON.get(REQUEST_DESCRIPTION);
+                int totalPeople = (int) (long) requestJSON.get(REQUEST_TOTAL_PEOPLE);
+
+                ArrayList<Pet> pets = new ArrayList<>();
+                JSONArray petsJSON = (JSONArray) requestJSON.get("pets");
+                if (petsJSON != null) {
+                    for (int j = 0; j < petsJSON.size(); j++) {
+                        JSONObject petJSON = (JSONObject) petsJSON.get(j);
+                        pets.add(new Pet((String) petJSON.get("name"), (String) petJSON.get("type")));
+                    }
+                }
+                requests.add(new ReliefRequest(
+                    id, status, type, severity, urgency, description, totalPeople, pets
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return requests;
     }
 
     public ArrayList<Hurricane> getHurricanes() {

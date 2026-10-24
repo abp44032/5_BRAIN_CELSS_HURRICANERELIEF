@@ -46,7 +46,7 @@ public class DataConstants {
     public static final String REQUEST_ID_KEY = "requestID";
     public static final String REQUEST_DESCRIPTION = "description";
     public static final String REQUEST_STATUS = "status";
-    public static final String REQUEST_TYPE = "type";
+    public static final String REQUEST_TYPE = "requestType";
     public static final String REQUEST_SEVERITY = "severity";
     public static final String REQUEST_URGENCY = "urgency";
     public static final String REQUEST_TOTAL_PEOPLE = "totalPeople";

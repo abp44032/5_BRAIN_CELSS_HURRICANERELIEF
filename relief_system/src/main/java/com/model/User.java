@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class User {
+public abstract class User {
     protected UUID id;
     protected String firstName;
     protected String lastName;
@@ -14,9 +14,13 @@ public class User {
     protected Location location;
     protected boolean shareLocation;
 
-    private static User instance;
-    private ArrayList<User> users = new ArrayList<>();
 
+    public User(String firstName, String lastName, String username, String password,
+                String email, Location location, boolean shareLocation) {
+        this(UUID.randomUUID(), firstName, lastName, username, password,
+                email, location, shareLocation);
+ 
+    }
     public User(UUID id, String firstName, String lastName, String username, String password, String email, Location location, boolean shareLocation) {
         this.id = id;
         this.firstName = firstName;
@@ -26,25 +30,6 @@ public class User {
         this.email = email;
         this.location = location;
         this.shareLocation = shareLocation;
-    }
-
-    public static User getInstance() {
-        if (instance == null) {
-            instance = new User(UUID.randomUUID(),
-                "",
-                "",
-                "",
-                "",
-                "",
-                null,
-                false
-            );
-        }
-        return instance;
-    }
-
-    public ArrayList<User> getUsers() {
-        return users;
     }
 
     public UUID getId() {
@@ -75,6 +60,10 @@ public class User {
         return this.location;
     }
 
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     public boolean isShareLocation() {
         return this.shareLocation;
     }
@@ -83,17 +72,35 @@ public class User {
         return new ArrayList<>();
     }
 
-    public  List<Service> viewServices() {
-        return new ArrayList<>();
+    public boolean checkPassword(String password) {
+        return this.password != null && this.password.equals(password);
     }
+
+    public Information viewHurricaneInfo() {
+        return new EmergencyInfoService().getEmergencyInfo();
+    }
+
+    public  ArrayList<Service> viewServices() {
+        ArrayList<Service> services = new ArrayList<>();
+       services.add(new ShelterService());
+        services.add(new RequestService());
+        services.add(new EmergencyInfoService());
+        services.add(new DamageReportService());
+        return services;
+    }
+
 
     public void commentOnRequest(ReliefRequest request, String comment) {
+        request.addComment(username + ": " + comment);
     }
 
-    private static class ConcreteUser extends User {
-        public ConcreteUser(UUID id, String firstName, String lastName, String username, String password, String email, Location location, boolean shareLocation) {
-            super(id, firstName, lastName, username, password, email, location, shareLocation);
-        }
+    @Override
+    public String toString() {
+        return firstName + " " + lastName + " (" + username + ")";
+    }
+
+        public void setShareLocation(boolean shareLocation) {
+        this.shareLocation = shareLocation;
     }
 
     // -------- MAIN METHOD --------- 
