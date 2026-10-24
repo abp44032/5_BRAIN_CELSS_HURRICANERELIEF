@@ -168,18 +168,14 @@ public class EmergencyReliefApplication {
             return;
         }
 
-        boolean added = ReliefRequest.getInstance().addRequest(request);
+        ReliefRequest.getInstance().addRequest(request);
 
-        if (added) {
-            boolean saved = DataWriter.saveReliefRequests();
+        boolean saved = DataWriter.saveReliefRequests();
 
-            if (saved) {
-                System.out.println("Relief request submitted successfully.");
-            } else {
-                System.out.println("Failed to save relief request.");
-            }
+        if (saved) {
+            System.out.println("Relief request submitted successfully.");
         } else {
-            System.out.println("Failed to submit relief request.");
+            System.out.println("Failed to save relief request.");
         }
     }
 
