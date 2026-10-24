@@ -81,7 +81,6 @@ public class EmergencyReliefApplication {
         );
 
         boolean added = userList.addUser(
-            newUser.getId(),
             newUser.getFirstName(),
             newUser.getLastName(),
             newUser.getUsername(),

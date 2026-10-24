@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.security.cert.X509CRL;
 import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,25 +19,61 @@ public class DataWriter extends DataConstants {
      * @return true if user is successfully saved
      */
 	public static boolean saveUsers() {
-		ArrayList<User> users = UserList.getInstance().getUsers();
 
-		JSONArray jsonUser = new JSONArray();
-		
-		//creating all the json objects
-		for(int i=0; i< users.size(); i++) {
-			jsonUser.add(getUserJSON(users.get(i)));
-		}
-		
-		//writing JSON file
+		JSONArray jsonUsers = new JSONArray();
+
+        // Read existing users first.
+        try (FileReader reader = new FileReader(USER_FILE_NAME)) {
+            JSONParser parser = new JSONParser();
+            Object data = parser.parse(reader);
+
+            if (data instanceof JSONArray) {
+                jsonUsers = (JSONArray) data;
+            }
+        } catch (FileNotFoundException e) {
+            // File does not exist yet.
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        // Add users that are not already saved.
+        ArrayList<User> users = UserList.getInstance().getUsers();
+
+        for (User user : users) {
+            if (user == null) {
+                continue;
+            }
+
+            boolean alreadyExists = false;
+
+            for (Object item : jsonUsers) {
+                if (item instanceof JSONObject) {
+                    JSONObject existing = (JSONObject) item;
+                    Object existingId = existing.get(USER_ID_KEY);
+
+                    if (existingId != null
+                            && existingId.toString().equals(user.getId().toString())) {
+                        alreadyExists = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!alreadyExists) {
+                jsonUsers.add(getUserJSON(user));
+            }
+        }
+
+        // Write the updated JSON array.
         try (FileWriter file = new FileWriter(USER_FILE_NAME)) {
- 
-            file.write(jsonUser.toJSONString());
+            file.write(jsonUsers.toJSONString());
             return true;
- 
         } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
+
 	}
 	
     //data constants
@@ -110,8 +147,8 @@ public class DataWriter extends DataConstants {
             }
  
         } catch (FileNotFoundException e) {
-            // Not found yet
-        } catch (IOException e) {
+            // File Does not exist yet
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
             return false;
         }
@@ -149,9 +186,10 @@ public class DataWriter extends DataConstants {
     try (FileWriter file = new FileWriter(REQUEST_FILE_NAME)) {
         file.write(jsonRequest.toJSONString());
         return true;
-    } catch (IOException | ParseException e) {
+    } catch (IOException e) {
         e.printStackTrace();
         return false;
+        }
     }
 
     //data constants
