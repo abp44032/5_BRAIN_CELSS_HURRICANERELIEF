@@ -76,7 +76,8 @@ public class EmergencyReliefUI {
             System.out.println();
             System.out.println("===== User Menu =====");
             System.out.println("1. View Available Shelters");
-            System.out.println("2. Log Out");
+            System.out.println("2. Create Relief Request");
+            System.out.println("3. Log Out");
             System.out.print("Choose an option: ");
 
             String choice = scanner.nextLine();

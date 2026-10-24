@@ -108,8 +108,16 @@ public class EmergencyReliefApplication {
     }
 
     public boolean acceptRequest(ReliefRequest request, Volunteer volunteer) {
-        // TODO
-        return false;
+        if (request == null || volunteer == null) {
+            return false;
+        }
+         if (request.getStatus() != RequestStatus.RECEIVED) {
+            return false;
+        }
+        
+        request.updateStatus(RequestStatus.ACCEPTED);
+
+        return DataWriter.saveReliefRequests();
     }
 
     public void updateVolunteerStatus(String status) {
@@ -155,7 +163,24 @@ public class EmergencyReliefApplication {
     }
 
     public void submitRequest(ReliefRequest request) {
-        // TODO
+        if (request == null) { 
+            System.out.println("Cannot submit an empty relief request.");
+            return;
+        }
+
+        boolean added = ReliefRequest.getInstance().addRequest(request);
+
+        if (added) {
+            boolean saved = DataWriter.saveReliefRequests();
+
+            if (saved) {
+                System.out.println("Relief request submitted successfully.");
+            } else {
+                System.out.println("Failed to save relief request.");
+            }
+        } else {
+            System.out.println("Failed to submit relief request.");
+        }
     }
 
     public void deleteRequest(ReliefRequest request) {
