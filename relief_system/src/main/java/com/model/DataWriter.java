@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class DataWriter extends DataConstants {
 	
@@ -17,14 +18,13 @@ public class DataWriter extends DataConstants {
      * @return true if user is successfully saved
      */
 	public static boolean saveUsers() {
-		User user = User.getInstance();
-		ArrayList<User> userList = user.getUsers();
+		ArrayList<User> users = UserList.getInstance().getUsers();
 
 		JSONArray jsonUser = new JSONArray();
 		
 		//creating all the json objects
-		for(int i=0; i< userList.size(); i++) {
-			jsonUser.add(getUserJSON(userList.get(i)));
+		for(int i=0; i< users.size(); i++) {
+			jsonUser.add(getUserJSON(users.get(i)));
 		}
 		
 		//writing JSON file
@@ -149,7 +149,7 @@ public class DataWriter extends DataConstants {
     try (FileWriter file = new FileWriter(REQUEST_FILE_NAME)) {
         file.write(jsonRequest.toJSONString());
         return true;
-    } catch (IOException e) {
+    } catch (IOException | ParseException e) {
         e.printStackTrace();
         return false;
     }
