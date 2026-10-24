@@ -38,6 +38,7 @@ public class EmergencyReliefUI {
                     break;
 
                 case "3":
+                    app.logout();
                     System.out.println("Thank you for using the Hurricane Relief System.");
                     running = false;
                     break;
