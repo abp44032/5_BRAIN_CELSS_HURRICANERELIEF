@@ -152,7 +152,7 @@ public class EmergencyReliefUI {
 
     // implement relief request scenario
     private void implementReliefRequest() {
-        // TODO
+        
     }
 
     public static void main(String[] args) {
