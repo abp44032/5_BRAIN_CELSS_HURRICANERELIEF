@@ -38,6 +38,10 @@ public class EmergencyReliefApplication {
         return currentUser;
     }
 
+    public void logout(){
+        currentUser = null;
+    }
+
     /**
      * ---------CREATING ACCOUNT--------------
      * @param firstName
