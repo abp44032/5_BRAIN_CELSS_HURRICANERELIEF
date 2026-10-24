@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+        "type": "java",
+        "name": "EmergencyReliefUI",
+        "request": "launch",
+        "mainClass": "com.hurricane/com.model.EmergencyReliefUI",
+        "projectName": "relief_system"
+    },
+    {
+        "type": "java",
+        "name": "DataLoader",
+        "request": "launch",
+        "mainClass": "com.hurricane/com.model.DataLoader",
+        "projectName": "relief_system"
+    },
+    {
+        "type": "java",
+        "name": "UI",
+        "request": "launch",
+        "mainClass": "com.hurricane/com.model.UI",
+        "projectName": "relief_system"
+    },
+    {
+        "type": "java",
+        "name": "Run Map App",
+        "request": "launch",
+        "mainClass": "com.movement/com.movement.App",
+        "projectName": "distance",
+        "envFile": "${workspaceFolder}/.env"
+    }
+]
+}

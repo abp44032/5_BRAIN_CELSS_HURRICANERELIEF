@@ -74,7 +74,7 @@ public class UserList {
         }
         
         users.add(new User(firstName, lastName, username, password,
-                email, location, shareLocation));
+            email, location, shareLocation) { });
 
         return save();
     }

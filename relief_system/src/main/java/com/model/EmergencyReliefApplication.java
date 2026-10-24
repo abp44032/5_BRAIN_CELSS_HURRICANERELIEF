@@ -38,6 +38,10 @@ public class EmergencyReliefApplication {
         return currentUser;
     }
 
+    public void logout(){
+        currentUser = null;
+    }
+
     /**
      * ---------CREATING ACCOUNT--------------
      * @param firstName
@@ -77,7 +81,6 @@ public class EmergencyReliefApplication {
         );
 
         boolean added = userList.addUser(
-            newUser.getId(),
             newUser.getFirstName(),
             newUser.getLastName(),
             newUser.getUsername(),
@@ -108,8 +111,16 @@ public class EmergencyReliefApplication {
     }
 
     public boolean acceptRequest(ReliefRequest request, Volunteer volunteer) {
-        // TODO
-        return false;
+        if (request == null || volunteer == null) {
+            return false;
+        }
+         if (request.getStatus() != RequestStatus.RECEIVED) {
+            return false;
+        }
+        
+        request.updateStatus(RequestStatus.ACCEPTED);
+
+        return DataWriter.saveReliefRequests();
     }
 
     public void updateVolunteerStatus(String status) {
@@ -155,7 +166,20 @@ public class EmergencyReliefApplication {
     }
 
     public void submitRequest(ReliefRequest request) {
-        // TODO
+        if (request == null) { 
+            System.out.println("Cannot submit an empty relief request.");
+            return;
+        }
+
+        ReliefRequest.getInstance().addRequest(request);
+
+        boolean saved = DataWriter.saveReliefRequests();
+
+        if (saved) {
+            System.out.println("Relief request submitted successfully.");
+        } else {
+            System.out.println("Failed to save relief request.");
+        }
     }
 
     public void deleteRequest(ReliefRequest request) {

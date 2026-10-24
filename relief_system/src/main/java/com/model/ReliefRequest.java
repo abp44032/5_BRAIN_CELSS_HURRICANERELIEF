@@ -15,10 +15,13 @@ public class ReliefRequest {
     private ArrayList<Pet> pets;
     private ArrayList<String> comments;
 
+    private Location location;
+    private String contactInformation;
+
     private static ReliefRequest instance;
     private ArrayList<ReliefRequest> requests = new ArrayList<>();
 
-    public ReliefRequest(UUID requestId, RequestStatus status, RequestType type, SeverityLevel severity, UrgencyLevel urgency, String description, int totalPeople, ArrayList<Pet> pets) {
+    public ReliefRequest(UUID requestId, RequestStatus status, RequestType type, SeverityLevel severity, UrgencyLevel urgency, String description, int totalPeople, ArrayList<Pet> pets, Location location, String contactInformation) {
         this.requestId = requestId;
         this.status = status;
         this.type = type;
@@ -27,6 +30,8 @@ public class ReliefRequest {
         this.description = description;
         this.totalPeople = totalPeople;
         this.pets = pets;
+        this.location = location;
+        this.contactInformation = contactInformation;
     }
 
     public static ReliefRequest getInstance() {
@@ -38,7 +43,10 @@ public class ReliefRequest {
             UrgencyLevel.CRITICAL,
             "",
             0,
-            new ArrayList<Pet>());
+            new ArrayList<Pet>(),
+            new Location(),
+            ""
+        );
     }
     return instance;
 }
@@ -65,6 +73,22 @@ public class ReliefRequest {
 
     public String getDescription() {
         return description;
+    }
+
+    public Location getLocation() {
+    return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public String getContactInformation() {
+        return contactInformation;
+    }
+
+    public void setContactInformation(String contactInformation) {
+        this.contactInformation = contactInformation;
     }
 
     public int getTotalPeople() {
@@ -130,10 +154,12 @@ public class ReliefRequest {
             RequestType.MEDICAL,      
             SeverityLevel.HIGH,        
             UrgencyLevel.CRITICAL,     
-            "Needs emergency bottled water and non-perishables",
+            "",
             4,
-            new ArrayList<Pet>()
-        );
+            new ArrayList<Pet>(),
+            new Location(),
+            ""
+            );
 
         System.out.println(request.getDetails());
     }

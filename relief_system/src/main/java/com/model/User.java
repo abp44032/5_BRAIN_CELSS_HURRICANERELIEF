@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public abstract class User {
+public class User {
     protected UUID id;
     protected String firstName;
     protected String lastName;
@@ -13,15 +13,15 @@ public abstract class User {
     protected String email;
     protected Location location;
     protected boolean shareLocation;
-
-
+    
     public User(String firstName, String lastName, String username, String password,
                 String email, Location location, boolean shareLocation) {
         this(UUID.randomUUID(), firstName, lastName, username, password,
                 email, location, shareLocation);
  
     }
-    public User(UUID id, String firstName, String lastName, String username, String password, String email, Location location, boolean shareLocation) {
+    public User(UUID id, String firstName, String lastName, String username, String password, 
+        String email, Location location, boolean shareLocation) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,7 +31,7 @@ public abstract class User {
         this.location = location;
         this.shareLocation = shareLocation;
     }
-
+    
     public UUID getId() {
     return this.id;
     }
@@ -82,13 +82,8 @@ public abstract class User {
 
     public  ArrayList<Service> viewServices() {
         ArrayList<Service> services = new ArrayList<>();
-       services.add(new ShelterService());
-        services.add(new RequestService());
-        services.add(new EmergencyInfoService());
-        services.add(new DamageReportService());
         return services;
     }
-
 
     public void commentOnRequest(ReliefRequest request, String comment) {
         request.addComment(username + ": " + comment);

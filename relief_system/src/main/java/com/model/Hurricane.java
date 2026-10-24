@@ -14,7 +14,7 @@ public class Hurricane {
     private HurricaneStatus hurricaneStatus;
     private ArrayList<String> evacuationSteps;
     private ArrayList<Resource> emergencySupplies;
-
+    
     private static Hurricane instance;
     private ArrayList<Hurricane> hurricanes = new ArrayList<>();
 
