@@ -76,10 +76,6 @@ public class User {
         return this.password != null && this.password.equals(password);
     }
 
-    public Information viewHurricaneInfo() {
-        return new EmergencyInfoService().getEmergencyInfo();
-    }
-
     public  ArrayList<Service> viewServices() {
         ArrayList<Service> services = new ArrayList<>();
         return services;
