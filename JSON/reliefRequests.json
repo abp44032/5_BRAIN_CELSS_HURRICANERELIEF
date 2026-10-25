@@ -13,7 +13,8 @@
             "zip": "78701"
         },
         "description" : "Resident needs immediate medical attention",
-        "totalPeople": 10,
+        "contactInformation" : "512-555-0142",
+        "totalPeople" : 2,
         "totalPets" : 1,
         "pets" : [
             {"name" : "Buddy", "type" : "Dog"}
@@ -33,7 +34,8 @@
             "zip": "29401"
         },
         "description" : "Resident needs food supplies",
-        "totalPeople": 10,
+        "contactInformation" : "843-555-0178",
+        "totalPeople" : 1,
         "totalPets" : 0,
         "pets" : []
     }

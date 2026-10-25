@@ -33,22 +33,9 @@ public class DataLoader extends DataConstants {
                 Location location = toLocation((JSONObject) userJSON.get("location"));
                 boolean shareLocation = Boolean.TRUE.equals(userJSON.get(USER_SHARE_LOCATION));
 
+                String role = (String) userJSON.get("role");
 
-                String type = (String) userJSON.get("type");
-                if (type == null) {
-                    type = "Victim";
-                }
- 
-                switch (type.toLowerCase()) {
-                    case "volunteer":
-                        users.add(new Volunteer(id, firstName, lastName, userName, password, email, location, shareLocation));
-                        break;
-                    case "admin":
-                        users.add(new Admin(id, firstName, lastName, userName, password, email, location, shareLocation));
-                        break;
-                    default:
-                        users.add(new Victim(id, firstName, lastName, userName, password, email, location, shareLocation));
-                }
+                users.add(new User(id, firstName, lastName, userName, password, email, location, shareLocation, role));
             }
  
             reader.close();
@@ -159,6 +146,23 @@ public class DataLoader extends DataConstants {
                 String description = (String) requestJSON.get(REQUEST_DESCRIPTION);
                 int totalPeople = (int) (long) requestJSON.get(REQUEST_TOTAL_PEOPLE);
 
+                JSONObject locationJSON = (JSONObject) requestJSON.get(REQUEST_LOCATION);
+                Location location = null;
+                if (locationJSON != null) {
+                    location = new Location(
+                        (String) locationJSON.get("address"),
+                        (String) locationJSON.get("city"),
+                        (String) locationJSON.get("state"),
+                        (String) locationJSON.get("zip")
+                    );
+                }
+
+                String contactInformation =
+                    (String) requestJSON.get(REQUEST_CONTACT_INFORMATION);
+                if (contactInformation == null) {
+                    contactInformation = "";
+                }
+
                 ArrayList<Pet> pets = new ArrayList<>();
                 JSONArray petsJSON = (JSONArray) requestJSON.get("pets");
                 if (petsJSON != null) {
@@ -168,7 +172,7 @@ public class DataLoader extends DataConstants {
                     }
                 }
                 requests.add(new ReliefRequest(
-                    id, status, type, severity, urgency, description, totalPeople, pets
+                    id, status, type, severity, urgency, description, totalPeople, pets, location, contactInformation
                 ));
             }
         } catch (Exception e) {

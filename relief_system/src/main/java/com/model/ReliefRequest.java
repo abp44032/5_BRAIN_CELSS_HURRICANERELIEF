@@ -16,12 +16,13 @@ public class ReliefRequest {
     private ArrayList<Pet> pets;
     private ArrayList<String> comments;
 
-    public ReliefRequest(UUID requestId, RequestStatus status,
-            RequestType type, SeverityLevel severity,
-            UrgencyLevel urgency, Location location,
-            String description, int totalPeople,
-            ArrayList<Pet> pets) {
+    private Location location;
+    private String contactInformation;
 
+    private static ReliefRequest instance;
+    private ArrayList<ReliefRequest> requests = new ArrayList<>();
+
+    public ReliefRequest(UUID requestId, RequestStatus status, RequestType type, SeverityLevel severity, UrgencyLevel urgency, String description, int totalPeople, ArrayList<Pet> pets, Location location, String contactInformation) {
         this.requestId = requestId;
         this.status = status;
         this.type = type;
@@ -31,8 +32,26 @@ public class ReliefRequest {
         this.description = description;
         this.totalPeople = totalPeople;
         this.pets = pets;
-        this.comments = new ArrayList<>();
+        this.location = location;
+        this.contactInformation = contactInformation;
     }
+
+    public static ReliefRequest getInstance() {
+    if (instance == null) {
+        instance = new ReliefRequest(UUID.randomUUID(),
+            RequestStatus.ACCEPTED,
+            RequestType.MEDICAL,
+            SeverityLevel.HIGH,
+            UrgencyLevel.CRITICAL,
+            "",
+            0,
+            new ArrayList<Pet>(),
+            new Location(),
+            ""
+        );
+    }
+    return instance;
+}
 
     public UUID getId() {
         return requestId;
@@ -62,12 +81,78 @@ public class ReliefRequest {
         return description;
     }
 
+    public Location getLocation() {
+    return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public String getContactInformation() {
+        return contactInformation;
+    }
+
+    public void setContactInformation(String contactInformation) {
+        this.contactInformation = contactInformation;
+    }
+
     public int getTotalPeople() {
         return totalPeople;
     }
 
     public ArrayList<Pet> getPets() {
         return pets;
+    }
+
+    public ArrayList<ReliefRequest> getRequests() {
+        return requests;
+    }
+
+    public void addRequest(ReliefRequest request) {
+        if (request != null && !requests.contains(request)) {
+            requests.add(request);
+        }
+    }
+
+    public boolean delete() {
+        return false;
+    }
+
+    public void updateStatus(RequestStatus newStatus) {
+        this.status = newStatus;
+    }
+
+    public void notifyUser(String message) {
+        System.out.println("Notification to user: " + message);
+    }
+
+    public String getDetails() {
+        return "ReliefRequest\n" +
+                "requestId = " + requestId + "\n" +
+                "Status = " + status + "\n" +
+                "Type = " + type + "\n" +
+                "Severity = " + severity + "\n" +
+                "Urgency = " + urgency + "\n" +
+                "Description = " + description + "\n" +
+                "TotalPeople = " + totalPeople + "\n" +
+                "Pets: " + getPetsDetails();
+                
+    }
+
+    private String getPetsDetails() {
+        String petDetails = "";
+
+        if (pets == null || pets.isEmpty()) {
+            return "None\n";
+        }
+
+        for (Pet pet : pets) {
+            petDetails += "- " + pet.getName()
+                + " (" + pet.getType() + ")\n";
+        }
+
+        return petDetails;
     }
 
     public ArrayList<String> getComments() {
@@ -92,9 +177,20 @@ public class ReliefRequest {
                 || status == RequestStatus.CANCELLED;
     }
 
-    public void notifyUser(String message) {
-        System.out.println("Notification to user: " + message);
-    }
+    // -------- MAIN METHOD --------- 
+    public static void main(String[] args) {
+        ReliefRequest request = new ReliefRequest(
+            UUID.randomUUID(),
+            RequestStatus.ACCEPTED,   
+            RequestType.MEDICAL,      
+            SeverityLevel.HIGH,        
+            UrgencyLevel.CRITICAL,     
+            "",
+            4,
+            new ArrayList<Pet>(),
+            new Location(),
+            ""
+            );
 
     public String getDetails() {
         return "Relief Request\n"

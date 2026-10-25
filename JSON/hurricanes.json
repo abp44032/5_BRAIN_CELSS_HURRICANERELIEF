@@ -1,6 +1,5 @@
 [
     {
-        "uuid" : "3f8a2c1e-7b4d-4e9a-9c56-1d2f8b6a0e47",
         "name" : "Tracy",
         "hurricaneZipCodes" : ["73301", "75201"],
         "hurricaneStatus" : "ACTIVE",
@@ -11,7 +10,6 @@
         ] 
     },
     {
-        "uuid" : "a91d5e73-2c8f-4b06-8e1a-6f3b7c2d9e15",
         "name" : "Andrew",
         "hurricaneZipCodes" : ["73301", "75201"],
         "hurricaneStatus" : "WEAKENING",
