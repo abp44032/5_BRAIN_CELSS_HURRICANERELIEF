@@ -406,22 +406,6 @@ public class EmergencyReliefUI {
 
     }
 
-    // CREATING VOLUNTEER ACCOUNT
-    private void createVolunteerAccount() {
-        boolean added = UserList.getInstance().addUser(
-            "John",
-            "Smith",
-            "johnsmith_volunteer",
-            "password123", 
-            "johnsmith@example.com", 
-            new Location("123 Main Street", "Charleston", "SC", "29401"),
-            true);
-
-        if (added) {
-            System.out.println("Volunteer account created successfully");
-        }
-    }
-
     public static void main(String[] args) {
         EmergencyReliefUI emergencyReliefUI =
             new EmergencyReliefUI();
