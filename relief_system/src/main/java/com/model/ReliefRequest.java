@@ -142,7 +142,7 @@ public class ReliefRequest {
         }
 
         for (Pet pet : pets) {
-            petDetails += "- " + pet.getName()
+            petDetails += " " + pet.getName()
                 + " (" + pet.getType() + ")\n";
         }
 
