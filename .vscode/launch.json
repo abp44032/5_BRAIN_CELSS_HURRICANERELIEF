@@ -6,6 +6,20 @@
         "name": "EmergencyReliefUI",
         "request": "launch",
         "mainClass": "com.hurricane/com.model.EmergencyReliefUI",
+        "projectName": "demo"
+    },
+    {
+        "type": "java",
+        "name": "ReliefRequest",
+        "request": "launch",
+        "mainClass": "com.hurricane/com.model.ReliefRequest",
+        "projectName": "demo"
+    },
+    {
+        "type": "java",
+        "name": "EmergencyReliefUI",
+        "request": "launch",
+        "mainClass": "com.hurricane/com.model.EmergencyReliefUI",
         "projectName": "relief_system"
     },
     {
