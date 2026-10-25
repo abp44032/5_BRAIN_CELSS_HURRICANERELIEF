@@ -1,7 +1,6 @@
 package com.model;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class EmergencyReliefApplication {
 
@@ -139,21 +138,19 @@ public class EmergencyReliefApplication {
     }
 
     public void submitRequest(ReliefRequest request) {
-        if (request == null) { 
-            System.out.println("Cannot submit an empty relief request.");
-            return;
-        }
-
-        ReliefRequest.getInstance().addRequest(request);
-
-        boolean saved = DataWriter.saveReliefRequests();
-
-        if (saved) {
-            System.out.println("Relief request submitted successfully.");
-        } else {
-            System.out.println("Failed to save relief request.");
-        }
+    if (request == null) {
+        System.out.println("Cannot submit an empty relief request.");
+        return;
     }
+
+    boolean added = ReliefRequestList.getInstance().addRequest(request);
+
+    if (added) {
+        System.out.println("Relief request submitted successfully.");
+    } else {
+        System.out.println("Request was not added. It may already exist.");
+    }
+}
 
     public void deleteRequest(ReliefRequest request) {
         // TODO
