@@ -128,9 +128,25 @@ public class ReliefRequest {
                 "Type = " + type + "\n" +
                 "Severity = " + severity + "\n" +
                 "Urgency = " + urgency + "\n" +
-                "Description =' " + description + "\n" +
+                "Description = " + description + "\n" +
                 "TotalPeople = " + totalPeople + "\n" +
-                "Pets = " + pets + "\n";
+                "Pets: " + getPetsDetails();
+                
+    }
+
+    private String getPetsDetails() {
+        String petDetails = "";
+
+        if (pets == null || pets.isEmpty()) {
+            return "None\n";
+        }
+
+        for (Pet pet : pets) {
+            petDetails += "- " + pet.getName()
+                + " (" + pet.getType() + ")\n";
+        }
+
+        return petDetails;
     }
 
     public ArrayList<String> getComments() {

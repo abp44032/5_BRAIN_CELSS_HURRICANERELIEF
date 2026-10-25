@@ -3,6 +3,13 @@
   "configurations": [
     {
         "type": "java",
+        "name": "ReliefRequest",
+        "request": "launch",
+        "mainClass": "com.hurricane/com.model.ReliefRequest",
+        "projectName": "relief_system"
+    },
+    {
+        "type": "java",
         "name": "EmergencyReliefUI",
         "request": "launch",
         "mainClass": "com.hurricane/com.model.EmergencyReliefUI",
