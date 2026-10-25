@@ -191,9 +191,26 @@ public class EmergencyReliefUI {
         }
 
         // Display all availble releif requests
-        for (int i = 0; i < requests.size(); i ++) {
-            System.out.println((i + 1) + ". " + requests.get(i).getDetails());
-        }
+        User currentUser = app.getCurrentUser();
+
+        for (int i = 0; i < requests.size(); i++) {
+            ReliefRequest request = requests.get(i);
+
+            System.out.println("\nRequest " + (i + 1));
+
+            if (currentUser != null
+                    && User.VOLUNTEER.equals(currentUser.getRole())
+                    && currentUser.getSpecialty() != null
+                    && request.getType() != null
+                    && request.getType().name().equalsIgnoreCase(
+                            currentUser.getSpecialty())) {
+
+                System.out.println("*** RECOMMENDED FOR YOU ***");
+                System.out.println("Reason: This request matches your " + currentUser.getSpecialty() + " specialty.");
+    }
+
+    System.out.println(request.getDetails());
+}
 
         System.out.println("Enter the request number you want to accept: ");
         int choice;
