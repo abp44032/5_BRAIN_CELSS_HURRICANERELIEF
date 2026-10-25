@@ -34,7 +34,6 @@ public class DataLoader extends DataConstants {
                 boolean shareLocation = Boolean.TRUE.equals(userJSON.get(USER_SHARE_LOCATION));
 
                 String role = (String) userJSON.get("role");
-                System.out.println(userName + " role = " + role);
 
                 String specialty = (String) userJSON.get("specialty");
                 String vehicle = (String) userJSON.get("vehicle");
@@ -44,7 +43,6 @@ public class DataLoader extends DataConstants {
                 user.setSpecialty(specialty);
                 user.setVehicle(vehicle);
                 users.add(user);
-                System.out.println(user.getUsername() + " | " + user.getRole());
             }
  
 

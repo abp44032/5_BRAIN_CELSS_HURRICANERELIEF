@@ -52,14 +52,35 @@ public class EmergencyReliefApplication {
             email, User.RESIDENT);
     }
 
+    
     public User createAccount(String firstName, String lastName,
-        String username, String password, String email, String role) {
+            String username, String password, String email, String role) {
+
+        return createAccount(firstName, lastName, username, password,
+                email, role, null);
+    }
+
+    public User createAccount(String firstName, String lastName,
+            String username, String password, String email, String role,
+            String specialty) {
 
         boolean added = userList.addUser(firstName, lastName, username,
-            password, email, null, false, role);
+                password, email, null, false, role);
 
-        return added ? userList.getUser(username) : null;
+        if (!added) {
+            return null;
+        }
+
+        User user = userList.getUser(username);
+
+        if (user != null && specialty != null) {
+            user.setSpecialty(specialty);
+            DataWriter.saveUsers();
+        }
+
+        return user;
     }
+
 
     public ArrayList<Shelter> getShelters() {
         return DataLoader.getShelters();
@@ -153,15 +174,6 @@ public class EmergencyReliefApplication {
             System.out.println("Failed to save relief request.");
         }
     }
-
-    boolean added = ReliefRequestList.getInstance().addRequest(request);
-
-    if (added) {
-        System.out.println("Relief request submitted successfully.");
-    } else {
-        System.out.println("Request was not added. It may already exist.");
-    }
-}
 
     public void deleteRequest(ReliefRequest request) {
         // TODO

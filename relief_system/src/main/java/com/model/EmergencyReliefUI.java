@@ -120,18 +120,62 @@ public class EmergencyReliefUI {
     private void viewReliefRequests() {
         ArrayList<ReliefRequest> requests = DataLoader.getReliefRequests();
 
+        requests.removeIf(request ->
+            request.getStatus() == RequestStatus.COMPLETED ||
+            request.getStatus() == RequestStatus.CANCELLED
+        );
+
         if (requests.isEmpty()) {
             System.out.println("There are no relief requests available.");
             return;
         }
 
-        for (int i = 0; i < requests.size(); i++) {
+        User currentUser = app.getCurrentUser();
+
+        if (currentUser != null
+            && User.VOLUNTEER.equals(currentUser.getRole())
+            && currentUser.getSpecialty() != null) {
+
+            String specialty = currentUser.getSpecialty();
+
+            for (int i = 0; i < requests.size(); i++) {
             ReliefRequest request = requests.get(i);
 
-            System.out.println("\nRequest " + (i + 1));
-            System.out.println(request.getDetails());
+                if (request.getType() != null
+                        && request.getType().name().equalsIgnoreCase(specialty)) {
+
+                    // Move this matching request to the front.
+                    requests.remove(i);
+                    requests.add(0, request);
+                    break;
+                }
+            }
         }
-    }
+
+        System.out.println("\n===== Open Relief Requests =====");
+
+            for (int i = 0; i < requests.size(); i++) {
+                ReliefRequest request = requests.get(i);
+
+                System.out.println("\nRequest " + (i + 1));
+
+                if (currentUser != null
+                        && User.VOLUNTEER.equals(currentUser.getRole())
+                        && currentUser.getSpecialty() != null
+                        && request.getType() != null
+                        && request.getType().name().equalsIgnoreCase(
+                            currentUser.getSpecialty())) {
+
+                    System.out.println("*** RECOMMENDED FOR YOU ***");
+                    System.out.println(
+                        "Reason: This request matches your "
+                        + currentUser.getSpecialty() + " specialty."
+                    );
+                }
+
+                System.out.println(request.getDetails());
+            }
+        }
 
     // Resident menu
     private void residentMenu() {
@@ -223,18 +267,41 @@ public class EmergencyReliefUI {
 
     String roleChoice = scanner.nextLine();
     String role;
+    String specialty = null;
 
     if (roleChoice.equals("1")) {
         role = User.RESIDENT;
     } else if (roleChoice.equals("2")) {
         role = User.VOLUNTEER;
+    
+        System.out.println("\nChoose your volunteer specialty:");
+        System.out.println("1. Medical");
+        System.out.println("2. Fire Protection");
+        System.out.println("3. EMS");
+        System.out.println("4. Transportation");
+        System.out.print("Choose an option: ");
+
+        String specialtyChoice = scanner.nextLine();
+
+        if (specialtyChoice.equals("1")) {
+            specialty = "MEDICAL";
+        } else if (specialtyChoice.equals("2")) {
+            specialty = "FIRE_PROTECTION";
+        } else if (specialtyChoice.equals("3")) {
+            specialty = "EMS";
+        } else if (specialtyChoice.equals("4")) {
+            specialty = "TRANSPORTATION";
+        } else {
+            System.out.println("Invalid specialty. Account not created.");
+            return;
+        }
     } else {
         System.out.println("Invalid choice. Account not created.");
         return;
     }
 
         User user = app.createAccount(
-            firstName, lastName, username, password, email, role
+            firstName, lastName, username, password, email, role, specialty
         );
 
         if (user == null) {
@@ -244,6 +311,11 @@ public class EmergencyReliefUI {
 
         System.out.println("Account created successfully!");
         System.out.println("Welcome, " + user.getFirstName() + "!"); 
+
+        if (User.VOLUNTEER.equals(role)) {
+            System.out.println("Your specialty is: " + specialty);
+        }
+
         System.out.println("You can now log in using your new account.");
     }
 
