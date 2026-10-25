@@ -4,24 +4,24 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class ReliefRequest {
-
     private UUID requestId;
     private RequestStatus status;
     private RequestType type;
     private SeverityLevel severity;
     private UrgencyLevel urgency;
     private String description;
+    private Location location;
     private int totalPeople;
     private ArrayList<Pet> pets;
     private ArrayList<String> comments;
-
-    private Location location;
     private String contactInformation;
 
-    private static ReliefRequest instance;
-    private ArrayList<ReliefRequest> requests = new ArrayList<>();
+    public ReliefRequest(UUID requestId, RequestStatus status,
+            RequestType type, SeverityLevel severity,
+            UrgencyLevel urgency, String description,
+            int totalPeople, ArrayList<Pet> pets,
+            Location location, String contactInformation) {
 
-    public ReliefRequest(UUID requestId, RequestStatus status, RequestType type, SeverityLevel severity, UrgencyLevel urgency, String description, int totalPeople, ArrayList<Pet> pets, Location location, String contactInformation) {
         this.requestId = requestId;
         this.status = status;
         this.type = type;
@@ -29,27 +29,15 @@ public class ReliefRequest {
         this.urgency = urgency;
         this.description = description;
         this.totalPeople = totalPeople;
-        this.pets = pets;
+        this.pets = pets == null ? new ArrayList<>() : pets;
         this.location = location;
         this.contactInformation = contactInformation;
+        this.comments = new ArrayList<>();
     }
 
-    public static ReliefRequest getInstance() {
-    if (instance == null) {
-        instance = new ReliefRequest(UUID.randomUUID(),
-            RequestStatus.ACCEPTED,
-            RequestType.MEDICAL,
-            SeverityLevel.HIGH,
-            UrgencyLevel.CRITICAL,
-            "",
-            0,
-            new ArrayList<Pet>(),
-            new Location(),
-            ""
-        );
+    public UUID getRequestId() {
+        return requestId;
     }
-    return instance;
-}
 
     public UUID getId() {
         return requestId;
@@ -76,19 +64,11 @@ public class ReliefRequest {
     }
 
     public Location getLocation() {
-    return location;
+        return location;
     }
 
     public void setLocation(Location location) {
         this.location = location;
-    }
-
-    public String getContactInformation() {
-        return contactInformation;
-    }
-
-    public void setContactInformation(String contactInformation) {
-        this.contactInformation = contactInformation;
     }
 
     public int getTotalPeople() {
@@ -99,8 +79,8 @@ public class ReliefRequest {
         return pets;
     }
 
-    public ArrayList<ReliefRequest> getRequests() {
-        return requests;
+    public String getContactInformation() {
+        return contactInformation;
     }
 
     public void addRequest(ReliefRequest request) {
@@ -130,7 +110,7 @@ public class ReliefRequest {
                 "Urgency = " + urgency + "\n" +
                 "Description = " + description + "\n" +
                 "TotalPeople = " + totalPeople + "\n" +
-                "Pets: " + getPetsDetails();
+                "Pets: " + getPetsDetails() + "\n";
                 
     }
 
@@ -147,6 +127,11 @@ public class ReliefRequest {
         }
 
         return petDetails;
+
+    }
+
+    public void setContactInformation(String contactInformation) {
+        this.contactInformation = contactInformation;
     }
 
     public ArrayList<String> getComments() {
@@ -154,29 +139,43 @@ public class ReliefRequest {
     }
 
     public void addComment(String comment) {
-        comments.add(comment);
+        if (comment != null && !comment.isBlank()) {
+            comments.add(comment);
+        }
     }
 
+    public void updateStatus(RequestStatus newStatus) {
+        if (newStatus != null) {
+            status = newStatus;
+        }
+    }
+
+    public boolean delete() {
+        status = RequestStatus.CANCELLED;
+        return true;
+    }
 
     public boolean isResolved() {
-        return false;
+        return status == RequestStatus.COMPLETED
+                || status == RequestStatus.CANCELLED;
     }
 
-    // -------- MAIN METHOD --------- 
-    public static void main(String[] args) {
-        ReliefRequest request = new ReliefRequest(
-            UUID.randomUUID(),
-            RequestStatus.ACCEPTED,   
-            RequestType.MEDICAL,      
-            SeverityLevel.HIGH,        
-            UrgencyLevel.CRITICAL,     
-            "",
-            4,
-            new ArrayList<Pet>(),
-            new Location(),
-            ""
-            );
+    public int priority() {
+        return severity.ordinal() + urgency.ordinal();
+    }
 
-        System.out.println(request.getDetails());
+    public String getDetails() {
+        return "Relief Request\n"
+                + "ID: " + requestId + "\n"
+                + "Status: " + status + "\n"
+                + "Type: " + type + "\n"
+                + "Severity: " + severity + "\n"
+                + "Urgency: " + urgency + "\n"
+                + "Location: " + location + "\n"
+                + "Description: " + description + "\n"
+                + "People: " + totalPeople + "\n"
+                + "Pets: " + pets + "\n"
+                + "Contact Information: " + contactInformation + "\n"
+                + "Comments: " + comments + "\n";
     }
 }

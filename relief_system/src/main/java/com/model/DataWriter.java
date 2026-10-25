@@ -18,6 +18,7 @@ public class DataWriter extends DataConstants {
      * Saves users to the user's JSON file
      * @return true if user is successfully saved
      */
+    
 	public static boolean saveUsers() {
 
 		JSONArray jsonUsers = new JSONArray();
@@ -191,7 +192,7 @@ public class DataWriter extends DataConstants {
 
         // Add new requests that are not already in the JSON file.
     ArrayList<ReliefRequest> newRequests =
-            ReliefRequest.getInstance().getRequests();
+            ReliefRequestList.getInstance().getRequests();
 
     for (ReliefRequest request : newRequests) {
         if (request == null) {
