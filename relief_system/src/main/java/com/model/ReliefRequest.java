@@ -28,11 +28,11 @@ public class ReliefRequest {
         this.type = type;
         this.severity = severity;
         this.urgency = urgency;
-        this.location = location;
+        this.location1 = location;
         this.description = description;
         this.totalPeople = totalPeople;
         this.pets = pets;
-        this.location = location;
+        this.location1 = location;
         this.contactInformation = contactInformation;
     }
 
@@ -74,7 +74,7 @@ public class ReliefRequest {
     }
 
     public Location getLocation() {
-        return location;
+        return location1;
     }
 
     public String getDescription() {
@@ -82,11 +82,11 @@ public class ReliefRequest {
     }
 
     public Location getLocation() {
-    return location;
+    return location1;
     }
 
     public void setLocation(Location location) {
-        this.location = location;
+        this.location1 = location;
     }
 
     public String getContactInformation() {
@@ -199,7 +199,7 @@ public class ReliefRequest {
                 + "Type: " + type + "\n"
                 + "Severity: " + severity + "\n"
                 + "Urgency: " + urgency + "\n"
-                + "Location: " + location + "\n"
+                + "Location: " + location1 + "\n"
                 + "Description: " + description + "\n"
                 + "People: " + totalPeople + "\n"
                 + "Pets: " + pets + "\n"
