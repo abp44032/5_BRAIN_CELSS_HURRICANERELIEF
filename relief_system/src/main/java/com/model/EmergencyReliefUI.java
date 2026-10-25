@@ -93,8 +93,9 @@ public class EmergencyReliefUI {
         do {
             System.out.println("\n===== Volunteer Menu =====");
             System.out.println("1. View Available Relief Requests");
-            System.out.println("2. View Available Shelters");
-            System.out.println("3. Log Out");
+            System.out.println("2. Accept Releif Request");
+            System.out.println("3. View Available Shelters");
+            System.out.println("4. Log Out");
             System.out.print("Choose an option: ");
 
             choice = scanner.nextLine();
@@ -104,16 +105,19 @@ public class EmergencyReliefUI {
                     viewReliefRequests();
                     break;
                 case "2":
-                    viewShelters();
+                    acceptReliefRequest();
                     break;
                 case "3":
+                    viewShelters();
+                    break;
+                case "4":
                     app.logout();
                     System.out.println("Logged out successfully.");
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
             }
-        } while (!choice.equals("3"));
+        } while (!choice.equals("4"));
     }
 
     // View available relief requests
@@ -176,6 +180,54 @@ public class EmergencyReliefUI {
                 System.out.println(request.getDetails());
             }
         }
+
+    // Allows volunteers to accept available releif requests
+    private void acceptReliefRequest(){
+        ArrayList<ReliefRequest> requests = DataLoader.getReliefRequests();
+        
+        if (requests == null || requests.isEmpty()) {
+            System.out.println("There are no relief requests available.");
+            return;
+        }
+
+        // Display all availble releif requests
+        for (int i = 0; i < requests.size(); i ++) {
+            System.out.println((i + 1) + ". " + requests.get(i).getDetails());
+        }
+
+        System.out.println("Enter the request number you want to accept: ");
+        int choice;
+
+        
+        try {
+            choice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid request number.");
+            return;
+        }
+        if ( choice < 1 || choice > requests.size()) {
+            System.out.println("invalid request number.");
+            return;
+        }
+        ReliefRequest request = requests.get(choice - 1);
+
+        ArrayList<ReliefRequest> savedRequests =
+        ReliefRequestList.getInstance().getRequests();
+
+        savedRequests.removeIf(existing ->
+                existing.getRequestId().equals(request.getRequestId()));
+
+        savedRequests.add(request);
+
+        // Accept the request through the facade
+        boolean accepted = app.acceptRequest(request, app.getCurrentUser());
+
+        if (accepted) {
+            System.out.println("Request accepted successfully!");
+        } else {
+            System.out.println("Unable to accept this request.");
+        }
+    }
 
     // Resident menu
     private void residentMenu() {
