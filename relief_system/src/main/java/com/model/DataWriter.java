@@ -209,6 +209,9 @@ public class DataWriter extends DataConstants {
                         && existingId.toString().equals(
                                 request.getId().toString())) {
                     alreadyExists = true;
+
+                    jsonRequest.set(jsonRequest.indexOf(item), getReliefRequestJSON(request));
+                    
                     break;
                 }
             }

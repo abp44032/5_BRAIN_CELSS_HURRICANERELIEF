@@ -84,6 +84,7 @@ public class EmergencyReliefUI {
         }
     }
 
+    // Volunteer menu
     private void volunteerMenu() {
         String choice;
 
@@ -98,7 +99,7 @@ public class EmergencyReliefUI {
 
             switch (choice) {
                 case "1":
-                    System.out.println("Relief request viewing will be implemented next.");
+                    viewReliefRequests();
                     break;
                 case "2":
                     viewShelters();
@@ -113,6 +114,24 @@ public class EmergencyReliefUI {
         } while (!choice.equals("3"));
     }
 
+    // View available relief requests
+    private void viewReliefRequests() {
+        ArrayList<ReliefRequest> requests = DataLoader.getReliefRequests();
+
+        if (requests.isEmpty()) {
+            System.out.println("There are no relief requests available.");
+            return;
+        }
+
+        for (int i = 0; i < requests.size(); i++) {
+            ReliefRequest request = requests.get(i);
+
+            System.out.println("\nRequest " + (i + 1));
+            System.out.println(request.getDetails());
+        }
+    }
+
+    // Resident menu
     private void residentMenu() {
         String choice;
 
