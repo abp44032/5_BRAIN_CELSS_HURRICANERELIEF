@@ -14,6 +14,9 @@ public class User {
     protected Location location;
     protected boolean shareLocation;
     protected String role;
+    protected String specialty;
+    protected String vehicle;
+
 
     public static final String VOLUNTEER = "VOLUNTEER";
     public static final String RESIDENT = "RESIDENT";
@@ -116,6 +119,23 @@ public class User {
 
     public void commentOnRequest(ReliefRequest request, String comment) {
         request.addComment(username + ": " + comment);
+    }
+
+    // fulfilling rosas request
+    public String getSpecialty() {
+    return specialty;
+    }
+
+    public void setSpecialty(String specialty) {
+        this.specialty = specialty;
+    }
+
+    public String getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(String vehicle) {
+        this.vehicle = vehicle;
     }
 
     @Override

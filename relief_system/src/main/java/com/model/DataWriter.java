@@ -57,10 +57,8 @@ public class DataWriter extends DataConstants {
                             && existingId.toString().equals(user.getId().toString())) {
                         alreadyExists = true;
                         
-                        if (user.getRole() != null) {
-                            existing.put("role", user.getRole());
-                        }
-
+                        JSONObject updatedUser = getUserJSON(user);
+                        jsonUsers.set(jsonUsers.indexOf(item), updatedUser);
                         break;
                     }
                 }
@@ -100,6 +98,15 @@ public class DataWriter extends DataConstants {
         if (user.getLocation() != null) {
             userDetails.put("location", getLocationJSON(user.getLocation()));
         }
+
+        if (user.getSpecialty() != null) {
+            userDetails.put("specialty", user.getSpecialty());
+        }
+
+        if (user.getVehicle() != null) {
+            userDetails.put("vehicle", user.getVehicle());
+        }
+
         return userDetails;
 	}
     /**

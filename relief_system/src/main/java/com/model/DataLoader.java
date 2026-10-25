@@ -34,10 +34,20 @@ public class DataLoader extends DataConstants {
                 boolean shareLocation = Boolean.TRUE.equals(userJSON.get(USER_SHARE_LOCATION));
 
                 String role = (String) userJSON.get("role");
+                System.out.println(userName + " role = " + role);
 
-                users.add(new User(id, firstName, lastName, userName, password, email, location, shareLocation, role));
+                String specialty = (String) userJSON.get("specialty");
+                String vehicle = (String) userJSON.get("vehicle");
+
+                User user = new User(id, firstName, lastName, userName, password, email, location, shareLocation, role);
+
+                user.setSpecialty(specialty);
+                user.setVehicle(vehicle);
+                users.add(user);
+                System.out.println(user.getUsername() + " | " + user.getRole());
             }
  
+
             reader.close();
  
         } catch (Exception e) {
@@ -220,6 +230,9 @@ public class DataLoader extends DataConstants {
 
             for (int i = 0; i < hurricanesJSON.size(); i++) {
                 JSONObject hurricaneJSON = (JSONObject) hurricanesJSON.get(i);
+
+                System.out.println("ID key expected: " + HURRICANE_ID_KEY);
+                System.out.println("Hurricane JSON: " + hurricaneJSON);
 
                 UUID id = UUID.fromString((String) hurricaneJSON.get(HURRICANE_ID_KEY));
                 String name = (String) hurricaneJSON.get(HURRICANE_NAME);

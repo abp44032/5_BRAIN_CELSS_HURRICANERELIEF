@@ -144,7 +144,7 @@ public class EmergencyReliefApplication {
             return;
         }
 
-        ReliefRequest.getInstance().addRequest(request);
+        ReliefRequestList.getInstance().addRequest(request);
 
         boolean saved = DataWriter.saveReliefRequests();
 
