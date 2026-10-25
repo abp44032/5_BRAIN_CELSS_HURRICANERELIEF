@@ -30,31 +30,36 @@ public class DataLoader extends DataConstants {
                 String email = (String)userJSON.get(USER_EMAIL);
                 String password = (String)userJSON.get(USER_PASSWORD_KEY);
                 
-                JSONObject locationJSON = (JSONObject) userJSON.get("location");
-                Location location = null;
-
-                if (locationJSON != null) {
-                    location = new Location(
-                        (String) locationJSON.get("address"),
-                        (String) locationJSON.get("city"),
-                        (String) locationJSON.get("state"),
-                        (String) locationJSON.get("zip")
-                    );
-                }
-                
+                Location location = toLocation((JSONObject) userJSON.get("location"));
                 boolean shareLocation = Boolean.TRUE.equals(userJSON.get(USER_SHARE_LOCATION));
 
-                users.add(new User(id, firstName, lastName, userName, password, email, location, shareLocation));
+
+                String type = (String) userJSON.get("type");
+                if (type == null) {
+                    type = "Victim";
+                }
+ 
+                switch (type.toLowerCase()) {
+                    case "volunteer":
+                        users.add(new Volunteer(id, firstName, lastName, userName, password, email, location, shareLocation));
+                        break;
+                    case "admin":
+                        users.add(new Admin(id, firstName, lastName, userName, password, email, location, shareLocation));
+                        break;
+                    default:
+                        users.add(new Victim(id, firstName, lastName, userName, password, email, location, shareLocation));
+                }
             }
-
+ 
             reader.close();
-
+ 
         } catch (Exception e) {
             e.printStackTrace();
         } 
-
+ 
         return users;
     }
+
 
     /**
      * Loads shelters from the JSON file and returns them as an ArrayList of Shelter objects
@@ -105,22 +110,15 @@ public class DataLoader extends DataConstants {
                     );
                 }
 
-                JSONObject locationJSON =
-                    (JSONObject) shelter.get("location");
-                Location location = null;
-                if (locationJSON != null) {
-                    location = new Location(
-                        (String) locationJSON.get("address"),
-                        (String) locationJSON.get("city"),
-                        (String) locationJSON.get("state"),
-                        (String) locationJSON.get("zip")
-                    );
-                }
-
-                JSONObject hoursJSON = (JSONObject) shelter.get(SHELTER_HOURS_OF_OPERATION);
+                Location location = toLocation((JSONObject) shelter.get("location"));
+ 
+                Object hoursValue = shelter.get(SHELTER_HOURS_OF_OPERATION);
                 String hoursOfOperation = null;
-                if (hoursJSON != null) {
+                if (hoursValue instanceof JSONObject) {
+                    JSONObject hoursJSON = (JSONObject) hoursValue;
                     hoursOfOperation = hoursJSON.get("open") + " - " + hoursJSON.get("close");
+                } else if (hoursValue != null) {
+                    hoursOfOperation = hoursValue.toString();
                 }
 
                 shelters.add(new Shelter(
@@ -178,6 +176,20 @@ public class DataLoader extends DataConstants {
         }
         return requests;
     }
+
+    //builds a location object from a JSON object containing address, city, state, and zip code.
+    private static Location toLocation(JSONObject locationJSON) {
+        if (locationJSON == null) {
+            return null;
+        }
+        return new Location(
+            (String) locationJSON.get("address"),
+            (String) locationJSON.get("city"),
+            (String) locationJSON.get("state"),
+            (String) locationJSON.get("zip")
+        );
+    }
+
 
     /**
      * Main method for testing getHurricanes() 

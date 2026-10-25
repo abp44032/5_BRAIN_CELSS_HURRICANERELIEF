@@ -9,7 +9,8 @@
         "location": {
             "address" : "29 Main Street",
             "city" : "Austin",
-            "state" : "TX"
+            "state" : "TX",
+            "zip": "78701"
         },
         "description" : "Resident needs immediate medical attention",
         "totalPeople": 10,
@@ -28,7 +29,8 @@
         "location": {
             "address" : "45 Elm Street",
             "city" : "North Charleston",
-            "state" : "SC"
+            "state" : "SC",
+            "zip": "29401"
         },
         "description" : "Resident needs food supplies",
         "totalPeople": 10,

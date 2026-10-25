@@ -13,6 +13,7 @@ public class DataWriter extends DataConstants {
      * Saves users to the user's JSON file
      * @return true if user is successfully saved
      */
+    
 	public static boolean saveUsers() {
 		User user = User.getInstance();
 		ArrayList<User> userList = user.getUsers();

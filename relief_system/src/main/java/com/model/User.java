@@ -72,18 +72,14 @@ public abstract class User {
         this.shareLocation = shareLocation;
     }
 
-    public boolean checkPassword(String password) {
-        return this.password != null && this.password.equals(password);
-    }
-
     public ArrayList<Shelter> viewShelters() {
-        return ShelterList.getInstance().getShelters();
+        return shelters.getShelters();
     }
 
-    public  ArrayList<Service> viewServices() {
-        ArrayList<Service> services = new ArrayList<>();
-        return services;
-    }
+    public ArrayList<ReliefRequest> viewRequests(ReliefRequestList requests) {
+         return requests.getRequests(); 
+        }
+
 
     public void commentOnRequest(ReliefRequest request, String comment) {
         request.addComment(username + ": " + comment);
