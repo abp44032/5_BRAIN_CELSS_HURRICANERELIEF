@@ -101,6 +101,32 @@ public class UserList {
         return save();
     }
 
+
+    public boolean addUser(String firstName, String lastName,
+            String username, String password, String email,
+            Location location, boolean shareLocation, String role) {
+
+        if (isBlank(firstName) || isBlank(lastName)
+                || isBlank(username) || isBlank(password)
+                || isBlank(email) || isBlank(role)) {
+            return false;
+        }
+
+        if (!role.equals(User.VOLUNTEER) && !role.equals(User.RESIDENT)) {
+            return false;
+        }
+
+        if (getUser(username) != null) {
+            return false;
+        }
+
+        users.add(new User(firstName, lastName, username, password,
+                email, location, shareLocation, role));
+
+        return save();
+    }
+
+
     /**
      * Removes a user from the user list
      * @param user

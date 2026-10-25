@@ -49,8 +49,15 @@ public class EmergencyReliefApplication {
     public User createAccount(String firstName, String lastName,
             String username, String password, String email) {
 
+        return createAccount(firstName, lastName, username, password,
+            email, User.RESIDENT);
+    }
+
+    public User createAccount(String firstName, String lastName,
+        String username, String password, String email, String role) {
+
         boolean added = userList.addUser(firstName, lastName, username,
-            password, email, null, false);
+            password, email, null, false, role);
 
         return added ? userList.getUser(username) : null;
     }
@@ -75,7 +82,12 @@ public class EmergencyReliefApplication {
         if (request == null || volunteer == null) {
             return false;
         }
-         if (request.getStatus() != RequestStatus.RECEIVED) {
+
+        if (!User.VOLUNTEER.equals(volunteer.getRole())) {
+            return false;
+        }
+        
+        if (request.getStatus() != RequestStatus.RECEIVED) {
             return false;
         }
         
