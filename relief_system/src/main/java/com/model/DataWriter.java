@@ -55,6 +55,11 @@ public class DataWriter extends DataConstants {
                     if (existingId != null
                             && existingId.toString().equals(user.getId().toString())) {
                         alreadyExists = true;
+                        
+                        if (user.getRole() != null) {
+                            existing.put("role", user.getRole());
+                        }
+
                         break;
                     }
                 }
@@ -87,6 +92,10 @@ public class DataWriter extends DataConstants {
         userDetails.put(USER_EMAIL, user.getEmail());
         userDetails.put(USER_PASSWORD_KEY, user.getPassword());
         userDetails.put(USER_SHARE_LOCATION, user.isShareLocation());
+
+        if (user.getRole() != null) {
+            userDetails.put("role", user.getRole());
+        }
         if (user.getLocation() != null) {
             userDetails.put("location", getLocationJSON(user.getLocation()));
         }

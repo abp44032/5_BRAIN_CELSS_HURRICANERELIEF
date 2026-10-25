@@ -44,7 +44,9 @@ public class DataLoader extends DataConstants {
                 
                 boolean shareLocation = Boolean.TRUE.equals(userJSON.get(USER_SHARE_LOCATION));
 
-                users.add(new User(id, firstName, lastName, userName, password, email, location, shareLocation));
+                String role = (String) userJSON.get("role");
+
+                users.add(new User(id, firstName, lastName, userName, password, email, location, shareLocation, role));
             }
 
             reader.close();

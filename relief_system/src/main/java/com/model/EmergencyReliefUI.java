@@ -138,8 +138,28 @@ public class EmergencyReliefUI {
         System.out.print("Enter your email: ");
         String email = scanner.nextLine();
 
+
+        System.out.println("Choose your account type:");
+        System.out.println("1. Resident (request assistance)");
+        System.out.println("2. Volunteer (help others)");
+        System.out.print("Choose an option: ");
+
+        String roleChoice = scanner.nextLine();
+
+        String role;
+
+        if (roleChoice.equals("1")) {
+            role = User.RESIDENT;
+        } else if (roleChoice.equals("2")) {
+            role = User.VOLUNTEER;
+        } else {
+            System.out.println("Invalid account type.");
+            return;
+        }
+
+
         User user = app.createAccount(
-            firstName, lastName, username, password, email
+            firstName, lastName, username, password, email, role
         );
 
         if (user == null) {
