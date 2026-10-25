@@ -1,7 +1,6 @@
 package com.model;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class EmergencyReliefApplication {
 
@@ -154,6 +153,15 @@ public class EmergencyReliefApplication {
             System.out.println("Failed to save relief request.");
         }
     }
+
+    boolean added = ReliefRequestList.getInstance().addRequest(request);
+
+    if (added) {
+        System.out.println("Relief request submitted successfully.");
+    } else {
+        System.out.println("Request was not added. It may already exist.");
+    }
+}
 
     public void deleteRequest(ReliefRequest request) {
         // TODO

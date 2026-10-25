@@ -83,6 +83,53 @@ public class ReliefRequest {
         return contactInformation;
     }
 
+    public void addRequest(ReliefRequest request) {
+        if (request != null && !requests.contains(request)) {
+            requests.add(request);
+        }
+    }
+
+    public boolean delete() {
+        return false;
+    }
+
+    public void updateStatus(RequestStatus newStatus) {
+        this.status = newStatus;
+    }
+
+    public void notifyUser(String message) {
+        System.out.println("Notification to user: " + message);
+    }
+
+    public String getDetails() {
+        return "ReliefRequest\n" +
+                "requestId = " + requestId + "\n" +
+                "Status = " + status + "\n" +
+                "Type = " + type + "\n" +
+                "Severity = " + severity + "\n" +
+                "Urgency = " + urgency + "\n" +
+                "Description = " + description + "\n" +
+                "TotalPeople = " + totalPeople + "\n" +
+                "Pets: " + getPetsDetails() + "\n";
+                
+    }
+
+    private String getPetsDetails() {
+        String petDetails = "";
+
+        if (pets == null || pets.isEmpty()) {
+            return "None\n";
+        }
+
+        for (Pet pet : pets) {
+            petDetails += " " + pet.getName()
+                + " (" + pet.getType() + ")\n";
+        }
+
+        return petDetails;
+
+    }
+
     public void setContactInformation(String contactInformation) {
         this.contactInformation = contactInformation;
     }
