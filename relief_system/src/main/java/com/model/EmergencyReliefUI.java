@@ -216,8 +216,25 @@ public class EmergencyReliefUI {
             return;
         }
 
+    System.out.println("\nWhat best describes you?");
+    System.out.println("1. Resident (I need help)");
+    System.out.println("2. Volunteer (I want to help others)");
+    System.out.print("Choose an option: ");
+
+    String roleChoice = scanner.nextLine();
+    String role;
+
+    if (roleChoice.equals("1")) {
+        role = User.RESIDENT;
+    } else if (roleChoice.equals("2")) {
+        role = User.VOLUNTEER;
+    } else {
+        System.out.println("Invalid choice. Account not created.");
+        return;
+    }
+
         User user = app.createAccount(
-            firstName, lastName, username, password, email
+            firstName, lastName, username, password, email, role
         );
 
         if (user == null) {
