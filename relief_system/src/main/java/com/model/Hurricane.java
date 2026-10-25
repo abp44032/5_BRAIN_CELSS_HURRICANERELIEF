@@ -36,11 +36,13 @@ public class Hurricane {
         if (instance == null) {
             instance = new Hurricane(
                 UUID.randomUUID(),
+                "",
                 new ArrayList<String>(),
                 null,
                 new ArrayList<String>(),
                 new ArrayList<Resource>()
             );
+            instance.hurricanes.addAll(DataLoader.getHurricanes());
         }
         return instance;
     }
@@ -50,6 +52,10 @@ public class Hurricane {
      */
     public ArrayList<Hurricane> getHurricane() {
         return hurricanes;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public UUID getId() {
@@ -76,7 +82,7 @@ public class Hurricane {
         //TODO
     }
 
-     public String viewHurricaneInfo() {
+    public String viewHurricaneInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("Hurricane ").append(name).append(" (").append(hurricaneStatus).append(")\n");
         sb.append("Affected zip codes: ").append(String.join(", ", hurricaneZipCodes)).append("\n");
@@ -88,7 +94,8 @@ public class Hurricane {
         sb.append("Emergency supplies:\n");
         for (Resource supply : emergencySupplies) {
             sb.append("  - ").append(supply.getName()).append("\n");
-
+        }
+        return sb.toString();
     }
 
 

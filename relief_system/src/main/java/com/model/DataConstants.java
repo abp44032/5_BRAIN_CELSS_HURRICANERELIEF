@@ -29,7 +29,7 @@ public class DataConstants {
     public static final String SHELTER_RESOURCES = "resources";
     public static final String SHELTER_ACCOMMODATIONS = "accommodations";
     public static final String SHELTER_LOCATION = "location";
-    public static final String SHELTER_HOURS_OF_OPERATION = "hours of operation";
+    public static final String SHELTER_HOURS_OF_OPERATION = "hours";
 
     
     /**
