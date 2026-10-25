@@ -12,6 +12,8 @@
             "state" : "TX"
         },
         "description" : "Resident needs immediate medical attention",
+        "contactInformation" : "512-555-0142",
+        "totalPeople" : 2,
         "totalPets" : 1,
         "pets" : [
             {"name" : "Buddy", "type" : "Dog"}
@@ -30,6 +32,8 @@
             "state" : "SC"
         },
         "description" : "Resident needs food supplies",
+        "contactInformation" : "843-555-0178",
+        "totalPeople" : 1,
         "totalPets" : 0,
         "pets" : []
     }

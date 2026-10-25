@@ -50,6 +50,8 @@ public class DataConstants {
     public static final String REQUEST_SEVERITY = "severity";
     public static final String REQUEST_URGENCY = "urgency";
     public static final String REQUEST_TOTAL_PEOPLE = "totalPeople";
+    public static final String REQUEST_LOCATION = "location";
+    public static final String REQUEST_CONTACT_INFORMATION = "contactInformation";
 
     /**
      * Hurricane constants
