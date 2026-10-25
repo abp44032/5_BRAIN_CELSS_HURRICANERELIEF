@@ -24,6 +24,8 @@ public class EmergencyReliefUI {
             System.out.println("1. Login");
             System.out.println("2. Create Account");
             System.out.println("3. Exit");
+
+
             System.out.print("Choose an option: ");
 
             String choice = scanner.nextLine();
@@ -173,9 +175,19 @@ public class EmergencyReliefUI {
             return;
         }
 
-        for (Shelter shelter : shelters) {
-            System.out.println(shelter);
-            System.out.println("------------------------------");
+       for (int i = 0; i < shelters.size(); i++) {
+        Shelter shelter = shelters.get(i);
+            if (i > 0) {
+                System.out.println();
+                System.out.println("--------------------------------");
+                System.out.println();
+            }
+            System.out.println("Shelter: " + shelter.getName());
+            System.out.println("Capacity: " + shelter.getCapacity());
+            System.out.println("Hours: " + shelter.getHoursOfOperation());
+            System.out.println("Available: " + shelter.getAvailability());
+            System.out.println("Accommodations: " + shelter.getAccommodations());
+            System.out.println("Resources: " + shelter.getResources());
         }
     }
 
@@ -199,28 +211,13 @@ public class EmergencyReliefUI {
         System.out.print("Enter your email: ");
         String email = scanner.nextLine();
 
-
-        System.out.println("Choose your account type:");
-        System.out.println("1. Resident (request assistance)");
-        System.out.println("2. Volunteer (help others)");
-        System.out.print("Choose an option: ");
-
-        String roleChoice = scanner.nextLine();
-
-        String role;
-
-        if (roleChoice.equals("1")) {
-            role = User.RESIDENT;
-        } else if (roleChoice.equals("2")) {
-            role = User.VOLUNTEER;
-        } else {
-            System.out.println("Invalid account type.");
+        if (firstName.isBlank() || lastName.isBlank()|| username.isBlank() || password.isBlank()|| email.isBlank()) {
+            System.out.println("All fields are required.");
             return;
         }
 
-
         User user = app.createAccount(
-            firstName, lastName, username, password, email, role
+            firstName, lastName, username, password, email
         );
 
         if (user == null) {
@@ -407,6 +404,22 @@ public class EmergencyReliefUI {
 
     app.submitRequest(request);
 
+    }
+
+    // CREATING VOLUNTEER ACCOUNT
+    private void createVolunteerAccount() {
+        boolean added = UserList.getInstance().addUser(
+            "John",
+            "Smith",
+            "johnsmith_volunteer",
+            "password123", 
+            "johnsmith@example.com", 
+            new Location("123 Main Street", "Charleston", "SC", "29401"),
+            true);
+
+        if (added) {
+            System.out.println("Volunteer account created successfully");
+        }
     }
 
     public static void main(String[] args) {
