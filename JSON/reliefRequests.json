@@ -9,9 +9,12 @@
         "location": {
             "address" : "29 Main Street",
             "city" : "Austin",
-            "state" : "TX"
+            "state" : "TX",
+            "zip": "78701"
         },
         "description" : "Resident needs immediate medical attention",
+        "contactInformation" : "512-555-0142",
+        "totalPeople" : 2,
         "totalPets" : 1,
         "pets" : [
             {"name" : "Buddy", "type" : "Dog"}
@@ -21,15 +24,18 @@
         "requestID" : "d4684f52-9afb-4bc8-a179-b42dc30b9cd8",
         "timeStamp" : "2026-09-27 12:30:00",
         "status" : "ACCEPTED",
-        "requestType": "FIREPROTECTION",
+        "requestType": "FIRE_PROTECTION",
         "severity": "CRITICAL",
         "urgency": "HIGH",
         "location": {
             "address" : "45 Elm Street",
             "city" : "North Charleston",
-            "state" : "SC"
+            "state" : "SC",
+            "zip": "29401"
         },
         "description" : "Resident needs food supplies",
+        "contactInformation" : "843-555-0178",
+        "totalPeople" : 1,
         "totalPets" : 0,
         "pets" : []
     }

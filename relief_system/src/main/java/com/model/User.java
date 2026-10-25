@@ -13,6 +13,10 @@ public class User {
     protected String email;
     protected Location location;
     protected boolean shareLocation;
+    protected String role;
+
+    public static final String VOLUNTEER = "VOLUNTEER";
+    public static final String RESIDENT = "RESIDENT";
     
     public User(String firstName, String lastName, String username, String password,
                 String email, Location location, boolean shareLocation) {
@@ -31,6 +35,27 @@ public class User {
         this.location = location;
         this.shareLocation = shareLocation;
     }
+
+    public User(String firstName, String lastName, String username,
+        String password, String email, Location location,
+        boolean shareLocation, String role) {
+    this(UUID.randomUUID(), firstName, lastName, username,
+            password, email, location, shareLocation, role);
+    }
+
+    public User(UUID id, String firstName, String lastName, String username,
+            String password, String email, Location location,
+            boolean shareLocation, String role) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.location = location;
+        this.shareLocation = shareLocation;
+        this.role = role;
+    }
     
     public UUID getId() {
     return this.id;
@@ -42,6 +67,14 @@ public class User {
 
     public String getLastName() {
         return this.lastName;
+    }
+
+    public String getRole() {
+    return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getUsername() {
@@ -76,10 +109,6 @@ public class User {
         return this.password != null && this.password.equals(password);
     }
 
-    public Information viewHurricaneInfo() {
-        return new EmergencyInfoService().getEmergencyInfo();
-    }
-
     public  ArrayList<Service> viewServices() {
         ArrayList<Service> services = new ArrayList<>();
         return services;
@@ -103,7 +132,7 @@ public class User {
         UUID testId = UUID.randomUUID();
         Location testLocation = new Location();
 
-        User testUser = new ConcreteUser(
+        User testUser = new User(
         testId,
         "John",
         "Doe",
@@ -114,7 +143,7 @@ public class User {
         false
         );
 
-        User.getInstance().getUsers().add(testUser); 
+        UserList.getInstance().getUsers().add(testUser);
 
         System.out.println("User ID: " + testUser.getId());
         System.out.println("First Name: " + testUser.getFirstName());
@@ -125,13 +154,13 @@ public class User {
         System.out.println("Location: " + testUser.getLocation());
         System.out.println("Share Location: " + testUser.isShareLocation());
 
-        System.out.println("Total users: " + User.getInstance().getUsers().size());
+        System.out.println("Total users: " + UserList.getInstance().getUsers().size());
     }
 
     public static User create(UUID id2, String firstName2, String lastName2, String username2, String password2,
             String email2, Location location2, boolean shareLocation2) {
                 System.out.println("Creating user with ID: " + id2);
-        return new ConcreteUser(id2, firstName2, lastName2, username2, password2, email2, location2, shareLocation2);
+        return new User(id2, firstName2, lastName2, username2, password2, email2, location2, shareLocation2);
     }
 
 }

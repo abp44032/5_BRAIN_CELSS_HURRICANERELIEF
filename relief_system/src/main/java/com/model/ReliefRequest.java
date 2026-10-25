@@ -11,6 +11,7 @@ public class ReliefRequest {
     private SeverityLevel severity;
     private UrgencyLevel urgency;
     private String description;
+    private Location location;
     private int totalPeople;
     private ArrayList<Pet> pets;
     private ArrayList<String> comments;
@@ -27,10 +28,11 @@ public class ReliefRequest {
         this.type = type;
         this.severity = severity;
         this.urgency = urgency;
+        this.location1 = location;
         this.description = description;
         this.totalPeople = totalPeople;
         this.pets = pets;
-        this.location = location;
+        this.location1 = location;
         this.contactInformation = contactInformation;
     }
 
@@ -71,16 +73,20 @@ public class ReliefRequest {
         return urgency;
     }
 
+    public Location getLocation() {
+        return location1;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public Location getLocation() {
-    return location;
+    return location1;
     }
 
     public void setLocation(Location location) {
-        this.location = location;
+        this.location1 = location;
     }
 
     public String getContactInformation() {
@@ -128,9 +134,25 @@ public class ReliefRequest {
                 "Type = " + type + "\n" +
                 "Severity = " + severity + "\n" +
                 "Urgency = " + urgency + "\n" +
-                "Description =' " + description + "\n" +
+                "Description = " + description + "\n" +
                 "TotalPeople = " + totalPeople + "\n" +
-                "Pets = " + pets + "\n";
+                "Pets: " + getPetsDetails();
+                
+    }
+
+    private String getPetsDetails() {
+        String petDetails = "";
+
+        if (pets == null || pets.isEmpty()) {
+            return "None\n";
+        }
+
+        for (Pet pet : pets) {
+            petDetails += "- " + pet.getName()
+                + " (" + pet.getType() + ")\n";
+        }
+
+        return petDetails;
     }
 
     public ArrayList<String> getComments() {
@@ -141,9 +163,18 @@ public class ReliefRequest {
         comments.add(comment);
     }
 
+    public void updateStatus(RequestStatus newStatus) {
+        status = newStatus;
+    }
+
+    public boolean delete() {
+        status = RequestStatus.CANCELLED;
+        return true;
+    }
 
     public boolean isResolved() {
-        return false;
+        return status == RequestStatus.COMPLETED
+                || status == RequestStatus.CANCELLED;
     }
 
     // -------- MAIN METHOD --------- 
@@ -161,6 +192,17 @@ public class ReliefRequest {
             ""
             );
 
-        System.out.println(request.getDetails());
+    public String getDetails() {
+        return "Relief Request\n"
+                + "ID: " + requestId + "\n"
+                + "Status: " + status + "\n"
+                + "Type: " + type + "\n"
+                + "Severity: " + severity + "\n"
+                + "Urgency: " + urgency + "\n"
+                + "Location: " + location1 + "\n"
+                + "Description: " + description + "\n"
+                + "People: " + totalPeople + "\n"
+                + "Pets: " + pets + "\n"
+                + "Comments: " + comments;
     }
 }

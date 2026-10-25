@@ -19,11 +19,6 @@ public class EmergencyReliefApplication {
      * @return
      */
     public boolean login(String username, String password) {
-        if (username == null || password == null
-                || username.isBlank() || password.isBlank()) {
-            return false;
-        }
-
         User user = userList.getUser(username, password);
 
         if (user == null) {
@@ -54,48 +49,21 @@ public class EmergencyReliefApplication {
     public User createAccount(String firstName, String lastName,
             String username, String password, String email) {
 
-        if (firstName == null || lastName == null
-                || username == null || password == null || email == null
-                || firstName.isBlank() || lastName.isBlank()
-                || username.isBlank() || password.isBlank()
-                || email.isBlank()) {
-            return null;
-        }
+        return createAccount(firstName, lastName, username, password,
+            email, User.RESIDENT);
+    }
 
-        // Check whether the username already exists.
-        for (User user : userList.getUsers()) {
-            if (username.equals(user.getUsername())) {
-                return null;
-            }
-        }
+    public User createAccount(String firstName, String lastName,
+        String username, String password, String email, String role) {
 
-        User newUser = new User(
-            UUID.randomUUID(),
-            firstName,
-            lastName,
-            username,
-            password,
-            email,
-            null,
-            false
-        );
+        boolean added = userList.addUser(firstName, lastName, username,
+            password, email, null, false, role);
 
-        boolean added = userList.addUser(
-            newUser.getFirstName(),
-            newUser.getLastName(),
-            newUser.getUsername(),
-            newUser.getPassword(),
-            newUser.getEmail(),
-            newUser.getLocation(),
-            newUser.isShareLocation()
-        );
-
-        return added ? newUser : null;
+        return added ? userList.getUser(username) : null;
     }
 
     public ArrayList<Shelter> getShelters() {
-        DataLoader dataLoader = new DataLoader();
-        return dataLoader.getShelters();
+        return DataLoader.getShelters();
     }
 
     public void sendMessage(User recipient, String message) {
@@ -110,11 +78,16 @@ public class EmergencyReliefApplication {
         // TODO
     }
 
-    public boolean acceptRequest(ReliefRequest request, Volunteer volunteer) {
+    public boolean acceptRequest(ReliefRequest request, User volunteer) {
         if (request == null || volunteer == null) {
             return false;
         }
-         if (request.getStatus() != RequestStatus.RECEIVED) {
+
+        if (!User.VOLUNTEER.equals(volunteer.getRole())) {
+            return false;
+        }
+        
+        if (request.getStatus() != RequestStatus.RECEIVED) {
             return false;
         }
         
@@ -183,14 +156,6 @@ public class EmergencyReliefApplication {
     }
 
     public void deleteRequest(ReliefRequest request) {
-        // TODO
-    }
-
-    public void verifyInfo(Information info) {
-        // TODO
-    }
-
-    public void updateInfo(Information info) {
         // TODO
     }
 

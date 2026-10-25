@@ -5,6 +5,7 @@ public class Resource {
     private String name;
     private int quantity;
 
+    public Resource() {}
     public Resource(int resourceID, String name, int quantity) {
         this.resourceID = resourceID;
         this.name = name;
@@ -41,9 +42,10 @@ public class Resource {
         }
     }
 
-    @Override 
-    public String toString() {
-        return name + " (id: " + resourceID + ", Quantity: " + quantity + ")";
+     @Override public String toString() { 
+        return name + " x" + quantity; 
     }
-
 }
+
+
+

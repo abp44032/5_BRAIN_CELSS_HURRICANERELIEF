@@ -73,33 +73,94 @@ public class EmergencyReliefUI {
 
     // Main menu shown after a successful login
     private void mainMenu() {
-        boolean loggedIn = true;
+        User user = app.getCurrentUser();
 
-        while (loggedIn) {
-            System.out.println();
-            System.out.println("===== User Menu =====");
+        if (user == null) {
+            return;
+        }
+
+        if (User.VOLUNTEER.equals(user.getRole())) {
+            volunteerMenu();
+        } else {
+            residentMenu();
+        }
+    }
+
+    // Volunteer menu
+    private void volunteerMenu() {
+        String choice;
+
+        do {
+            System.out.println("\n===== Volunteer Menu =====");
+            System.out.println("1. View Available Relief Requests");
+            System.out.println("2. View Available Shelters");
+            System.out.println("3. Log Out");
+            System.out.print("Choose an option: ");
+
+            choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    viewReliefRequests();
+                    break;
+                case "2":
+                    viewShelters();
+                    break;
+                case "3":
+                    app.logout();
+                    System.out.println("Logged out successfully.");
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        } while (!choice.equals("3"));
+    }
+
+    // View available relief requests
+    private void viewReliefRequests() {
+        ArrayList<ReliefRequest> requests = DataLoader.getReliefRequests();
+
+        if (requests.isEmpty()) {
+            System.out.println("There are no relief requests available.");
+            return;
+        }
+
+        for (int i = 0; i < requests.size(); i++) {
+            ReliefRequest request = requests.get(i);
+
+            System.out.println("\nRequest " + (i + 1));
+            System.out.println(request.getDetails());
+        }
+    }
+
+    // Resident menu
+    private void residentMenu() {
+        String choice;
+
+        do {
+            System.out.println("\n===== Resident Menu =====");
             System.out.println("1. View Available Shelters");
             System.out.println("2. Create Relief Request");
             System.out.println("3. Log Out");
             System.out.print("Choose an option: ");
 
-            String choice = scanner.nextLine();
+            choice = scanner.nextLine();
 
             switch (choice) {
                 case "1":
                     viewShelters();
                     break;
-
                 case "2":
                     implementReliefRequest();
                     break;
-
                 case "3":
-                    System.out.println("You have logged out.");
-                    loggedIn = false;
+                    app.logout();
+                    System.out.println("Logged out successfully.");
                     break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
             }
-        }
+        } while (!choice.equals("3"));
     }
 
     // Display available shelters

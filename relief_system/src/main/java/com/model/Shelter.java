@@ -37,6 +37,7 @@ public class Shelter {
                 new ArrayList<AccommodationType>(),
                 null, 
                 "");
+                instance.shelters.addAll(DataLoader.getShelters());
         }
         return instance;
     }

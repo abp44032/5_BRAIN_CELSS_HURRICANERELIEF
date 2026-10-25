@@ -29,7 +29,7 @@ public class DataConstants {
     public static final String SHELTER_RESOURCES = "resources";
     public static final String SHELTER_ACCOMMODATIONS = "accommodations";
     public static final String SHELTER_LOCATION = "location";
-    public static final String SHELTER_HOURS_OF_OPERATION = "hours of operation";
+    public static final String SHELTER_HOURS_OF_OPERATION = "hours";
 
     
     /**
@@ -50,6 +50,8 @@ public class DataConstants {
     public static final String REQUEST_SEVERITY = "severity";
     public static final String REQUEST_URGENCY = "urgency";
     public static final String REQUEST_TOTAL_PEOPLE = "totalPeople";
+    public static final String REQUEST_LOCATION = "location";
+    public static final String REQUEST_CONTACT_INFORMATION = "contactInformation";
 
     /**
      * Hurricane constants

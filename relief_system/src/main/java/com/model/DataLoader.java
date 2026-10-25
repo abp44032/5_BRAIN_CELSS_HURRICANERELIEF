@@ -30,31 +30,23 @@ public class DataLoader extends DataConstants {
                 String email = (String)userJSON.get(USER_EMAIL);
                 String password = (String)userJSON.get(USER_PASSWORD_KEY);
                 
-                JSONObject locationJSON = (JSONObject) userJSON.get("location");
-                Location location = null;
-
-                if (locationJSON != null) {
-                    location = new Location(
-                        (String) locationJSON.get("address"),
-                        (String) locationJSON.get("city"),
-                        (String) locationJSON.get("state"),
-                        (String) locationJSON.get("zip")
-                    );
-                }
-                
+                Location location = toLocation((JSONObject) userJSON.get("location"));
                 boolean shareLocation = Boolean.TRUE.equals(userJSON.get(USER_SHARE_LOCATION));
 
-                users.add(new User(id, firstName, lastName, userName, password, email, location, shareLocation));
+                String role = (String) userJSON.get("role");
+
+                users.add(new User(id, firstName, lastName, userName, password, email, location, shareLocation, role));
             }
-
+ 
             reader.close();
-
+ 
         } catch (Exception e) {
             e.printStackTrace();
         } 
-
+ 
         return users;
     }
+
 
     /**
      * Loads shelters from the JSON file and returns them as an ArrayList of Shelter objects
@@ -105,22 +97,15 @@ public class DataLoader extends DataConstants {
                     );
                 }
 
-                JSONObject locationJSON =
-                    (JSONObject) shelter.get("location");
-                Location location = null;
-                if (locationJSON != null) {
-                    location = new Location(
-                        (String) locationJSON.get("address"),
-                        (String) locationJSON.get("city"),
-                        (String) locationJSON.get("state"),
-                        (String) locationJSON.get("zip")
-                    );
-                }
-
-                JSONObject hoursJSON = (JSONObject) shelter.get(SHELTER_HOURS_OF_OPERATION);
+                Location location = toLocation((JSONObject) shelter.get("location"));
+ 
+                Object hoursValue = shelter.get(SHELTER_HOURS_OF_OPERATION);
                 String hoursOfOperation = null;
-                if (hoursJSON != null) {
+                if (hoursValue instanceof JSONObject) {
+                    JSONObject hoursJSON = (JSONObject) hoursValue;
                     hoursOfOperation = hoursJSON.get("open") + " - " + hoursJSON.get("close");
+                } else if (hoursValue != null) {
+                    hoursOfOperation = hoursValue.toString();
                 }
 
                 shelters.add(new Shelter(
@@ -161,6 +146,23 @@ public class DataLoader extends DataConstants {
                 String description = (String) requestJSON.get(REQUEST_DESCRIPTION);
                 int totalPeople = (int) (long) requestJSON.get(REQUEST_TOTAL_PEOPLE);
 
+                JSONObject locationJSON = (JSONObject) requestJSON.get(REQUEST_LOCATION);
+                Location location = null;
+                if (locationJSON != null) {
+                    location = new Location(
+                        (String) locationJSON.get("address"),
+                        (String) locationJSON.get("city"),
+                        (String) locationJSON.get("state"),
+                        (String) locationJSON.get("zip")
+                    );
+                }
+
+                String contactInformation =
+                    (String) requestJSON.get(REQUEST_CONTACT_INFORMATION);
+                if (contactInformation == null) {
+                    contactInformation = "";
+                }
+
                 ArrayList<Pet> pets = new ArrayList<>();
                 JSONArray petsJSON = (JSONArray) requestJSON.get("pets");
                 if (petsJSON != null) {
@@ -170,7 +172,7 @@ public class DataLoader extends DataConstants {
                     }
                 }
                 requests.add(new ReliefRequest(
-                    id, status, type, severity, urgency, description, totalPeople, pets
+                    id, status, type, severity, urgency, description, totalPeople, pets, location, contactInformation
                 ));
             }
         } catch (Exception e) {
@@ -178,6 +180,20 @@ public class DataLoader extends DataConstants {
         }
         return requests;
     }
+
+    //builds a location object from a JSON object containing address, city, state, and zip code.
+    private static Location toLocation(JSONObject locationJSON) {
+        if (locationJSON == null) {
+            return null;
+        }
+        return new Location(
+            (String) locationJSON.get("address"),
+            (String) locationJSON.get("city"),
+            (String) locationJSON.get("state"),
+            (String) locationJSON.get("zip")
+        );
+    }
+
 
     /**
      * Main method for testing getHurricanes() 

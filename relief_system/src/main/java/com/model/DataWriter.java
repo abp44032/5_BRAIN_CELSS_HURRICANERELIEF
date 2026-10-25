@@ -18,6 +18,7 @@ public class DataWriter extends DataConstants {
      * Saves users to the user's JSON file
      * @return true if user is successfully saved
      */
+    
 	public static boolean saveUsers() {
 
 		JSONArray jsonUsers = new JSONArray();
@@ -55,6 +56,11 @@ public class DataWriter extends DataConstants {
                     if (existingId != null
                             && existingId.toString().equals(user.getId().toString())) {
                         alreadyExists = true;
+                        
+                        if (user.getRole() != null) {
+                            existing.put("role", user.getRole());
+                        }
+
                         break;
                     }
                 }
@@ -88,7 +94,12 @@ public class DataWriter extends DataConstants {
         userDetails.put(USER_PASSWORD_KEY, user.getPassword());
         userDetails.put(USER_SHARE_LOCATION, user.isShareLocation());
 
-
+        if (user.getRole() != null) {
+            userDetails.put("role", user.getRole());
+        }
+        if (user.getLocation() != null) {
+            userDetails.put("location", getLocationJSON(user.getLocation()));
+        }
         return userDetails;
 	}
     /**
@@ -123,10 +134,36 @@ public class DataWriter extends DataConstants {
 
 		shelterDetails.put(SHELTER_ID_KEY, shelter.getId().toString());
 		shelterDetails.put(SHELTER_NAME, shelter.getName());
-		shelterDetails.put(SHELTER_RESOURCES, shelter.getResources());
 		shelterDetails.put(SHELTER_CAPACITY, shelter.getCapacity());
-		shelterDetails.put(SHELTER_ACCOMMODATIONS, shelter.getAccommodations());
 
+        JSONArray resourcesJSON = new JSONArray();
+        for (Resource resource : shelter.getResources()) {
+            JSONObject resourceJSON = new JSONObject();
+            resourceJSON.put(RESOURCE_ID, resource.getResourceID());
+            resourceJSON.put(RESOURCE_NAME, resource.getName());
+            resourceJSON.put(RESOURCE_QUANTITY, resource.getQuantity());
+            resourcesJSON.add(resourceJSON);
+        }
+        shelterDetails.put(SHELTER_RESOURCES, resourcesJSON);
+
+        JSONArray accommodationsJSON = new JSONArray();
+        for (AccommodationType type : shelter.getAccommodations()) {
+            accommodationsJSON.add(type.toString());
+        }
+		shelterDetails.put(SHELTER_ACCOMMODATIONS, accommodationsJSON);
+
+        if (shelter.getLocation() != null) {
+            shelterDetails.put(SHELTER_LOCATION, getLocationJSON(shelter.getLocation()));
+        }
+
+        String hours = shelter.getHoursOfOperation();
+        if (hours != null && hours.contains(" - ")) {
+            String[] parts = hours.split(" - ", 2);
+            JSONObject hoursJSON = new JSONObject();
+            hoursJSON.put("open", parts[0]);
+            hoursJSON.put("close", parts[1]);
+            shelterDetails.put(SHELTER_HOURS_OF_OPERATION, hoursJSON);
+        }
 		return shelterDetails;
 	}
     /**
@@ -173,6 +210,9 @@ public class DataWriter extends DataConstants {
                         && existingId.toString().equals(
                                 request.getId().toString())) {
                     alreadyExists = true;
+
+                    jsonRequest.set(jsonRequest.indexOf(item), getReliefRequestJSON(request));
+                    
                     break;
                 }
             }
@@ -199,10 +239,23 @@ public class DataWriter extends DataConstants {
 		requestDetails.put(REQUEST_DESCRIPTION, request.getDescription());
         requestDetails.put(REQUEST_TOTAL_PEOPLE, request.getTotalPeople());
         requestDetails.put(REQUEST_TYPE, request.getType().toString());
-        requestDetails.put(REQUEST_SEVERITY, request.getSeverity());
-        requestDetails.put(REQUEST_URGENCY, request.getUrgency());
-		requestDetails.put(REQUEST_STATUS, request.getStatus());
+        requestDetails.put(REQUEST_SEVERITY, request.getSeverity().toString());
+        requestDetails.put(REQUEST_URGENCY, request.getUrgency().toString());
+		requestDetails.put(REQUEST_STATUS, request.getStatus().toString());
+        requestDetails.put(REQUEST_CONTACT_INFORMATION, request.getContactInformation());
+        
+        if (request.getLocation() != null) {
+            requestDetails.put(REQUEST_LOCATION, getLocationJSON(request.getLocation()));
+        }
 
+        JSONArray petsJSON = new JSONArray();
+        for(Pet pet : request.getPets()) {
+            JSONObject petJSON = new JSONObject();
+            petJSON.put("name", pet.getName());
+            petJSON.put("type", pet.getType());
+            petsJSON.add(petJSON);
+        }
+        requestDetails.put("pets", petsJSON);
 		return requestDetails;
 	}
 
@@ -236,12 +289,37 @@ public class DataWriter extends DataConstants {
 	public static JSONObject getHurricaneJSON(Hurricane hurricane) {
 		JSONObject hurricaneDetails = new JSONObject();
 		hurricaneDetails.put(HURRICANE_ID_KEY, hurricane.getId().toString());
+        hurricaneDetails.put(HURRICANE_NAME, hurricane.getName());
 		hurricaneDetails.put(HURRICANE_ZIP_CODES, hurricane.getZipCodes());
-        hurricaneDetails.put(HURRICANE_STATUS, hurricane.getStatus());
+        hurricaneDetails.put(HURRICANE_STATUS, hurricane.getStatus().toString());
         hurricaneDetails.put(HURRICANE_EVACUATION_STEPS, hurricane.getEvacuationSteps());
-        hurricaneDetails.put(HURRICANE_EMERGENCY_SUPPLIES, hurricane.getEmergencySupplies());
+
+        JSONArray suppliesJSON = new JSONArray();
+        for (Resource supply : hurricane.getEmergencySupplies()) {
+            JSONObject supplyJSON = new JSONObject();
+            supplyJSON.put(RESOURCE_ID, supply.getResourceID());
+            supplyJSON.put(RESOURCE_NAME, supply.getName());
+            supplyJSON.put(RESOURCE_QUANTITY, supply.getQuantity());
+            suppliesJSON.add(supplyJSON);
+        }
+        hurricaneDetails.put(HURRICANE_EMERGENCY_SUPPLIES, suppliesJSON);
 		return hurricaneDetails;
 	}
+
+    /**
+     * Helper method to format location details into a JSON object
+     * @param location location to convert to JSON object
+     * @return JSON object with address, city, state, and zip
+     */
+    private static JSONObject getLocationJSON(Location location) {
+        JSONObject json = new JSONObject();
+        json.put("address", location.getAddress());
+        json.put("city", location.getCity());
+        json.put("state", location.getState());
+        json.put("zip", location.getZip());
+        return json;
+    }
+
     //main method that tests if the data writer saved all instances to JSON files
     public static void main(String[] args){
 		System.out.println("Saving users: " + saveUsers());
