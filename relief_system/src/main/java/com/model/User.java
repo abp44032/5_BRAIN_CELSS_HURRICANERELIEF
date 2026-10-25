@@ -13,6 +13,10 @@ public class User {
     protected String email;
     protected Location location;
     protected boolean shareLocation;
+    protected String role;
+
+    public static final String VOLUNTEER = "VOLUNTEER";
+    public static final String RESIDENT = "RESIDENT";
     
     public User(String firstName, String lastName, String username, String password,
                 String email, Location location, boolean shareLocation) {
@@ -31,6 +35,27 @@ public class User {
         this.location = location;
         this.shareLocation = shareLocation;
     }
+
+    public User(String firstName, String lastName, String username,
+        String password, String email, Location location,
+        boolean shareLocation, String role) {
+    this(UUID.randomUUID(), firstName, lastName, username,
+            password, email, location, shareLocation, role);
+    }
+
+    public User(UUID id, String firstName, String lastName, String username,
+            String password, String email, Location location,
+            boolean shareLocation, String role) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.location = location;
+        this.shareLocation = shareLocation;
+        this.role = role;
+    }
     
     public UUID getId() {
     return this.id;
@@ -42,6 +67,14 @@ public class User {
 
     public String getLastName() {
         return this.lastName;
+    }
+
+    public String getRole() {
+    return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getUsername() {
