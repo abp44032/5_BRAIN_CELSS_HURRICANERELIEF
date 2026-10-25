@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class ReliefRequest {
-
     private UUID requestId;
     private RequestStatus status;
     private RequestType type;
@@ -15,43 +14,30 @@ public class ReliefRequest {
     private int totalPeople;
     private ArrayList<Pet> pets;
     private ArrayList<String> comments;
-
-    private Location location;
     private String contactInformation;
 
-    private static ReliefRequest instance;
-    private ArrayList<ReliefRequest> requests = new ArrayList<>();
+    public ReliefRequest(UUID requestId, RequestStatus status,
+            RequestType type, SeverityLevel severity,
+            UrgencyLevel urgency, String description,
+            int totalPeople, ArrayList<Pet> pets,
+            Location location, String contactInformation) {
 
-    public ReliefRequest(UUID requestId, RequestStatus status, RequestType type, SeverityLevel severity, UrgencyLevel urgency, String description, int totalPeople, ArrayList<Pet> pets, Location location, String contactInformation) {
         this.requestId = requestId;
         this.status = status;
         this.type = type;
         this.severity = severity;
         this.urgency = urgency;
-        this.location1 = location;
         this.description = description;
         this.totalPeople = totalPeople;
-        this.pets = pets;
-        this.location1 = location;
+        this.pets = pets == null ? new ArrayList<>() : pets;
+        this.location = location;
         this.contactInformation = contactInformation;
+        this.comments = new ArrayList<>();
     }
 
-    public static ReliefRequest getInstance() {
-    if (instance == null) {
-        instance = new ReliefRequest(UUID.randomUUID(),
-            RequestStatus.ACCEPTED,
-            RequestType.MEDICAL,
-            SeverityLevel.HIGH,
-            UrgencyLevel.CRITICAL,
-            "",
-            0,
-            new ArrayList<Pet>(),
-            new Location(),
-            ""
-        );
+    public UUID getRequestId() {
+        return requestId;
     }
-    return instance;
-}
 
     public UUID getId() {
         return requestId;
@@ -73,28 +59,16 @@ public class ReliefRequest {
         return urgency;
     }
 
-    public Location getLocation() {
-        return location1;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public Location getLocation() {
-    return location1;
+        return location;
     }
 
     public void setLocation(Location location) {
-        this.location1 = location;
-    }
-
-    public String getContactInformation() {
-        return contactInformation;
-    }
-
-    public void setContactInformation(String contactInformation) {
-        this.contactInformation = contactInformation;
+        this.location = location;
     }
 
     public int getTotalPeople() {
@@ -105,54 +79,12 @@ public class ReliefRequest {
         return pets;
     }
 
-    public ArrayList<ReliefRequest> getRequests() {
-        return requests;
+    public String getContactInformation() {
+        return contactInformation;
     }
 
-    public void addRequest(ReliefRequest request) {
-        if (request != null && !requests.contains(request)) {
-            requests.add(request);
-        }
-    }
-
-    public boolean delete() {
-        return false;
-    }
-
-    public void updateStatus(RequestStatus newStatus) {
-        this.status = newStatus;
-    }
-
-    public void notifyUser(String message) {
-        System.out.println("Notification to user: " + message);
-    }
-
-    public String getDetails() {
-        return "ReliefRequest\n" +
-                "requestId = " + requestId + "\n" +
-                "Status = " + status + "\n" +
-                "Type = " + type + "\n" +
-                "Severity = " + severity + "\n" +
-                "Urgency = " + urgency + "\n" +
-                "Description = " + description + "\n" +
-                "TotalPeople = " + totalPeople + "\n" +
-                "Pets: " + getPetsDetails();
-                
-    }
-
-    private String getPetsDetails() {
-        String petDetails = "";
-
-        if (pets == null || pets.isEmpty()) {
-            return "None\n";
-        }
-
-        for (Pet pet : pets) {
-            petDetails += "- " + pet.getName()
-                + " (" + pet.getType() + ")\n";
-        }
-
-        return petDetails;
+    public void setContactInformation(String contactInformation) {
+        this.contactInformation = contactInformation;
     }
 
     public ArrayList<String> getComments() {
@@ -160,11 +92,15 @@ public class ReliefRequest {
     }
 
     public void addComment(String comment) {
-        comments.add(comment);
+        if (comment != null && !comment.isBlank()) {
+            comments.add(comment);
+        }
     }
 
     public void updateStatus(RequestStatus newStatus) {
-        status = newStatus;
+        if (newStatus != null) {
+            status = newStatus;
+        }
     }
 
     public boolean delete() {
@@ -177,20 +113,9 @@ public class ReliefRequest {
                 || status == RequestStatus.CANCELLED;
     }
 
-    // -------- MAIN METHOD --------- 
-    public static void main(String[] args) {
-        ReliefRequest request = new ReliefRequest(
-            UUID.randomUUID(),
-            RequestStatus.ACCEPTED,   
-            RequestType.MEDICAL,      
-            SeverityLevel.HIGH,        
-            UrgencyLevel.CRITICAL,     
-            "",
-            4,
-            new ArrayList<Pet>(),
-            new Location(),
-            ""
-            );
+    public int priority() {
+        return severity.ordinal() + urgency.ordinal();
+    }
 
     public String getDetails() {
         return "Relief Request\n"
@@ -199,10 +124,11 @@ public class ReliefRequest {
                 + "Type: " + type + "\n"
                 + "Severity: " + severity + "\n"
                 + "Urgency: " + urgency + "\n"
-                + "Location: " + location1 + "\n"
+                + "Location: " + location + "\n"
                 + "Description: " + description + "\n"
                 + "People: " + totalPeople + "\n"
                 + "Pets: " + pets + "\n"
-                + "Comments: " + comments;
+                + "Contact Information: " + contactInformation + "\n"
+                + "Comments: " + comments + "\n";
     }
 }

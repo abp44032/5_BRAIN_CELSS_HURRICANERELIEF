@@ -5,41 +5,66 @@ import java.util.Comparator;
 import java.util.UUID;
 
 public class ReliefRequestList {
-    private ArrayList<ReliefRequest> requests = new ArrayList<>();
-    public ReliefRequestList() { }
-    public ReliefRequestList(ArrayList<ReliefRequest> requests) { 
-        this.requests = requests == null ? new ArrayList<>() : new ArrayList<>(requests); 
+    private static ReliefRequestList instance;
+    private ArrayList<ReliefRequest> requests;
+
+    public ReliefRequestList() {
+        requests = new ArrayList<>();
     }
 
-    public ArrayList<ReliefRequest> getRequests() { 
-        return new ArrayList<>(requests);
-     }
+    public static ReliefRequestList getInstance() {
+        if (instance == null) {
+            instance = new ReliefRequestList();
+        }
 
-    public void setRequests(ArrayList<ReliefRequest> requests) { 
-        this.requests = requests == null ? new ArrayList<>() : new ArrayList<>(requests);
-     }
+        return instance;
+    }
 
-    public ReliefRequest getRequest(UUID requestID) { 
-        return requests.stream().filter(r -> r.getRequestID().equals(requestID)).findFirst().orElse(null);
-     }
+    public ArrayList<ReliefRequest> getRequests() {
+        return requests;
+    }
+
+    public ReliefRequest getRequest(UUID requestId) {
+        if (requestId == null) {
+            return null;
+        }
+
+        for (ReliefRequest request : requests) {
+            if (request.getRequestId().equals(requestId)) {
+                return request;
+            }
+        }
+
+        return null;
+    }
 
     public ArrayList<ReliefRequest> getRequestsSortedByPriority() {
-         ArrayList<ReliefRequest> sorted = getRequests(); 
-         sorted.sort(Comparator.comparingInt(ReliefRequest::priority).reversed()); 
-         return sorted; 
+        ArrayList<ReliefRequest> sortedRequests = new ArrayList<>(requests);
+
+        sortedRequests.sort(
+                Comparator.comparingInt(ReliefRequest::priority).reversed());
+
+        return sortedRequests;
     }
 
     public boolean addRequest(ReliefRequest request) {
-         if (request == null || getRequest(request.getRequestID()) != null)
-             return false; 
-         requests.add(request); 
-         return true; 
+        if (request == null || getRequest(request.getRequestId()) != null) {
+            return false;
+        }
+
+        requests.add(request);
+        return save();
     }
-    public boolean removeRequest(ReliefRequest request) { 
-        return requests.remove(request); 
+
+    public boolean removeRequest(ReliefRequest request) {
+        if (requests.remove(request)) {
+            return save();
+        }
+
+        return false;
     }
-    
-    public boolean save() { 
-        return DataWriter.saveReliefRequests(requests);
-     }
+
+    public boolean save() {
+        return DataWriter.saveReliefRequests();
+    }
 }
