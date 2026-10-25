@@ -87,8 +87,9 @@ public class DataWriter extends DataConstants {
         userDetails.put(USER_EMAIL, user.getEmail());
         userDetails.put(USER_PASSWORD_KEY, user.getPassword());
         userDetails.put(USER_SHARE_LOCATION, user.isShareLocation());
-
-
+        if (user.getLocation() != null) {
+            userDetails.put("location", getLocationJSON(user.getLocation()));
+        }
         return userDetails;
 	}
     /**
@@ -199,10 +200,23 @@ public class DataWriter extends DataConstants {
 		requestDetails.put(REQUEST_DESCRIPTION, request.getDescription());
         requestDetails.put(REQUEST_TOTAL_PEOPLE, request.getTotalPeople());
         requestDetails.put(REQUEST_TYPE, request.getType().toString());
-        requestDetails.put(REQUEST_SEVERITY, request.getSeverity());
-        requestDetails.put(REQUEST_URGENCY, request.getUrgency());
-		requestDetails.put(REQUEST_STATUS, request.getStatus());
+        requestDetails.put(REQUEST_SEVERITY, request.getSeverity().toString());
+        requestDetails.put(REQUEST_URGENCY, request.getUrgency().toString());
+		requestDetails.put(REQUEST_STATUS, request.getStatus().toString());
+        requestDetails.put(REQUEST_CONTACT_INFORMATION, request.getContactInformation());
+        
+        if (request.getLocation() != null) {
+            requestDetails.put(REQUEST_LOCATION, getLocationJSON(request.getLocation()));
+        }
 
+        JSONArray petsJSON = new JSONArray();
+        for(Pet pet : request.getPets()) {
+            JSONObject petJSON = new JSONObject();
+            petJSON.put("name", pet.getName());
+            petJSON.put("type", pet.getType());
+            petsJSON.add(petJSON);
+        }
+        requestDetails.put("pets", petsJSON);
 		return requestDetails;
 	}
 
@@ -242,6 +256,21 @@ public class DataWriter extends DataConstants {
         hurricaneDetails.put(HURRICANE_EMERGENCY_SUPPLIES, hurricane.getEmergencySupplies());
 		return hurricaneDetails;
 	}
+
+    /**
+     * Helper method to format location details into a JSON object
+     * @param location location to convert to JSON object
+     * @return JSON object with address, city, state, and zip
+     */
+    private static JSONObject getLocationJSON(Location location) {
+        JSONObject json = new JSONObject();
+        json.put("address", location.getAddress());
+        json.put("city", location.getCity());
+        json.put("state", location.getState());
+        json.put("zip", location.getZip());
+        return json;
+    }
+
     //main method that tests if the data writer saved all instances to JSON files
     public static void main(String[] args){
 		System.out.println("Saving users: " + saveUsers());
