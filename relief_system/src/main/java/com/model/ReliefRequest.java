@@ -3,6 +3,9 @@ package com.model;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * Represents a relief request in the system.
+ */
 public class ReliefRequest {
     private UUID requestId;
     private RequestStatus status;
@@ -16,6 +19,19 @@ public class ReliefRequest {
     private ArrayList<String> comments;
     private String contactInformation;
 
+    /**
+     * Constructs a new ReliefRequest with the specified details.
+     * @param requestId the unique ID of the request
+     * @param status the status of the request
+     * @param type the type of the request
+     * @param severity the severity level of the request
+     * @param urgency the urgency level of the request
+     * @param description the description of the request
+     * @param totalPeople the total number of people involved
+     * @param pets the list of pets involved
+     * @param location the location of the request
+     * @param contactInformation the contact information for the request
+     */
     public ReliefRequest(UUID requestId, RequestStatus status,
             RequestType type, SeverityLevel severity,
             UrgencyLevel urgency, String description,
@@ -35,10 +51,18 @@ public class ReliefRequest {
         this.comments = new ArrayList<>();
     }
 
+    /**
+     * Returns the unique ID of the relief request.
+     * @return the unique ID of the relief request
+     */
     public UUID getRequestId() {
         return requestId;
     }
 
+    /**
+     * Returns the unique ID of the relief request.
+     * @return the unique ID of the relief request
+     */
     public UUID getId() {
         return requestId;
     }
@@ -83,24 +107,44 @@ public class ReliefRequest {
         return contactInformation;
     }
 
+    /**
+     * Adds a new relief request to the list of requests.
+     * @param request the relief request to add
+     */
     public void addRequest(ReliefRequest request) {
         if (request != null && !requests.contains(request)) {
             requests.add(request);
         }
     }
 
+    /**
+     * Deletes the relief request.
+     * @return true if the deletion was successful, false otherwise
+     */
     public boolean delete() {
         return false;
     }
 
+    /**
+     * Updates the status of the relief request.
+     * @param newStatus the new status to set
+     */
     public void updateStatus(RequestStatus newStatus) {
         this.status = newStatus;
     }
 
+    /**
+     * Notifies the user with a message.
+     * @param message the message to send to the user
+     */
     public void notifyUser(String message) {
         System.out.println("Notification to user: " + message);
     }
 
+    /**
+     * Returns the detailed information of the relief request.
+     * @return the detailed information of the relief request
+     */
     public String getDetails() {
         return "ReliefRequest\n" +
                 "requestId = " + requestId + "\n" +
@@ -114,6 +158,10 @@ public class ReliefRequest {
                 
     }
 
+    /**
+     * Returns the details of the pets associated with the relief request.
+     * @return the details of the pets
+     */
     private String getPetsDetails() {
         String petDetails = "";
 
@@ -130,40 +178,73 @@ public class ReliefRequest {
 
     }
 
+    /**
+     * Sets the contact information for the relief request.
+     * @param contactInformation the contact information to set
+     */
     public void setContactInformation(String contactInformation) {
         this.contactInformation = contactInformation;
     }
 
+    /**
+     * Returns the list of comments associated with the relief request.
+     * @return the list of comments
+     */
     public ArrayList<String> getComments() {
         return comments;
     }
 
+    /**
+     * Adds a comment to the relief request.
+     * @param comment the comment to add
+     */
     public void addComment(String comment) {
         if (comment != null && !comment.isBlank()) {
             comments.add(comment);
         }
     }
 
+    /**
+     * Updates the status of the relief request.
+     * @param newStatus the new status to set
+     */
     public void updateStatus(RequestStatus newStatus) {
         if (newStatus != null) {
             status = newStatus;
         }
     }
 
+    /**
+     * Deletes the relief request by setting its status to CANCELLED.
+     * @return true if the request was successfully deleted
+     */
     public boolean delete() {
         status = RequestStatus.CANCELLED;
         return true;
     }
 
+    /**
+     * Checks if the relief request is resolved.
+     * A request is considered resolved if its status is COMPLETED or CANCELLED.
+     * @return true if the request is resolved, false otherwise
+     */
     public boolean isResolved() {
         return status == RequestStatus.COMPLETED
                 || status == RequestStatus.CANCELLED;
     }
 
+    /**
+     * Calculates the priority of the relief request based on its severity and urgency.
+     * @return the priority value
+     */
     public int priority() {
         return severity.ordinal() + urgency.ordinal();
     }
 
+    /**
+     * Returns the detailed information of the relief request as a string.
+     * @return the detailed information of the relief request
+     */
     public String getDetails() {
         return "Relief Request\n"
                 + "ID: " + requestId + "\n"
