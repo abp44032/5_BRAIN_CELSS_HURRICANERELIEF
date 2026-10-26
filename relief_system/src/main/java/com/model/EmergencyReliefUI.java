@@ -105,11 +105,15 @@ public class EmergencyReliefUI {
                     viewReliefRequests();
                     break;
                 case "2":
-                    viewShelters();
+                    acceptReliefRequest();
                     break;
 
                 case "3":
+<<<<<<< HEAD
                     viewVolunteerProfile();
+=======
+                    viewShelters();
+>>>>>>> 34a372a3f6f67ca9d7c3b796215ed626cf9c5c17
                     break;
                 case "4":
                     app.logout();
@@ -118,7 +122,7 @@ public class EmergencyReliefUI {
                 default:
                     System.out.println("Invalid option. Please try again.");
             }
-        } while (!choice.equals("3"));
+        } while (!choice.equals("4"));
     }
 
     // view volunteer profile
@@ -142,16 +146,166 @@ public class EmergencyReliefUI {
     private void viewReliefRequests() {
         ArrayList<ReliefRequest> requests = DataLoader.getReliefRequests();
 
+        requests.removeIf(request ->
+            request.getStatus() == RequestStatus.COMPLETED ||
+            request.getStatus() == RequestStatus.CANCELLED
+        );
+
         if (requests.isEmpty()) {
             System.out.println("There are no relief requests available.");
             return;
         }
 
+        User currentUser = app.getCurrentUser();
+
+        if (currentUser != null
+            && User.VOLUNTEER.equals(currentUser.getRole())
+            && currentUser.getSpecialty() != null) {
+
+            String specialty = currentUser.getSpecialty();
+
+            for (int i = 0; i < requests.size(); i++) {
+            ReliefRequest request = requests.get(i);
+
+                if (request.getType() != null
+                        && request.getType().name().equalsIgnoreCase(specialty)) {
+
+                    // Move this matching request to the front.
+                    requests.remove(i);
+                    requests.add(0, request);
+                    break;
+                }
+            }
+        }
+
+        System.out.println("\n===== Open Relief Requests =====");
+
+            for (int i = 0; i < requests.size(); i++) {
+                ReliefRequest request = requests.get(i);
+
+                System.out.println("\nRequest " + (i + 1));
+
+                if (currentUser != null
+                        && User.VOLUNTEER.equals(currentUser.getRole())
+                        && currentUser.getSpecialty() != null
+                        && request.getType() != null
+                        && request.getType().name().equalsIgnoreCase(
+                            currentUser.getSpecialty())) {
+
+                    System.out.println("*** RECOMMENDED FOR YOU ***");
+                    System.out.println(
+                        "Reason: This request matches your "
+                        + currentUser.getSpecialty() + " specialty."
+                    );
+                }
+
+                System.out.println(request.getDetails());
+            }
+        }
+
+
+        private boolean isNearby(ReliefRequest request, User volunteer) {
+            if (volunteer == null
+                    || !volunteer.isShareLocation()
+                    || volunteer.getLocation() == null
+                    || request.getLocation() == null) {
+                return false;
+            }
+
+            String volunteerCity = volunteer.getLocation().getCity();
+            String volunteerState = volunteer.getLocation().getState();
+            String requestCity = request.getLocation().getCity();
+            String requestState = request.getLocation().getState();
+
+            return volunteerCity != null
+                    && volunteerState != null
+                    && requestCity != null
+                    && requestState != null
+                    && volunteerCity.trim().equalsIgnoreCase(requestCity.trim())
+                    && volunteerState.trim().equalsIgnoreCase(requestState.trim());
+        }
+
+    // Allows volunteers to accept available releif requests
+    private void acceptReliefRequest(){
+        ArrayList<ReliefRequest> requests = DataLoader.getReliefRequests();
+        
+        if (requests == null || requests.isEmpty()) {
+            System.out.println("There are no relief requests available.");
+            return;
+        }
+
+        // Display all availble releif requests
+        User currentUser = app.getCurrentUser();
+
         for (int i = 0; i < requests.size(); i++) {
             ReliefRequest request = requests.get(i);
 
             System.out.println("\nRequest " + (i + 1));
-            System.out.println(request.getDetails());
+
+            
+        if (currentUser != null
+                && User.VOLUNTEER.equals(currentUser.getRole())) {
+
+            boolean specialtyMatch =
+                    currentUser.getSpecialty() != null
+                    && request.getType() != null
+                    && request.getType().name().equalsIgnoreCase(
+                            currentUser.getSpecialty());
+
+            boolean locationMatch = isNearby(request, currentUser);
+
+            if (specialtyMatch || locationMatch) {
+                System.out.println("*** RECOMMENDED FOR YOU ***");
+
+                if (locationMatch) {
+                    System.out.println(
+                        "Reason: This request is in your city and state."
+                    );
+                }
+
+                if (specialtyMatch) {
+                    System.out.println(
+                        "Reason: This request matches your "
+                        + currentUser.getSpecialty() + " specialty."
+                    );
+                }
+            }
+        }
+
+    System.out.println(request.getDetails());
+}
+
+        System.out.println("Enter the request number you want to accept: ");
+        int choice;
+
+        
+        try {
+            choice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid request number.");
+            return;
+        }
+        if ( choice < 1 || choice > requests.size()) {
+            System.out.println("invalid request number.");
+            return;
+        }
+        ReliefRequest request = requests.get(choice - 1);
+
+        ArrayList<ReliefRequest> savedRequests =
+        ReliefRequestList.getInstance().getRequests();
+
+        savedRequests.removeIf(existing ->
+                existing.getRequestId().equals(request.getRequestId()));
+
+        savedRequests.add(request);
+
+        // Accept the request through the facade
+        boolean accepted = app.acceptRequest(request, app.getCurrentUser());
+
+        if (accepted) {
+            System.out.println("Request accepted successfully!");
+        } else {
+            System.out.println("Unable to accept this request.");
         }
     }
 
@@ -245,18 +399,82 @@ public class EmergencyReliefUI {
 
     String roleChoice = scanner.nextLine();
     String role;
+    String specialty = null;
 
     if (roleChoice.equals("1")) {
         role = User.RESIDENT;
     } else if (roleChoice.equals("2")) {
         role = User.VOLUNTEER;
+    
+        System.out.println("\nChoose your volunteer specialty:");
+        System.out.println("1. Medical");
+        System.out.println("2. Fire Protection");
+        System.out.println("3. EMS");
+        System.out.println("4. Transportation");
+        System.out.print("Choose an option: ");
+
+        String specialtyChoice = scanner.nextLine();
+
+        if (specialtyChoice.equals("1")) {
+            specialty = "MEDICAL";
+        } else if (specialtyChoice.equals("2")) {
+            specialty = "FIRE_PROTECTION";
+        } else if (specialtyChoice.equals("3")) {
+            specialty = "EMS";
+        } else if (specialtyChoice.equals("4")) {
+            specialty = "TRANSPORTATION";
+        } else {
+            System.out.println("Invalid specialty. Account not created.");
+            return;
+        }
     } else {
         System.out.println("Invalid choice. Account not created.");
         return;
     }
 
+        System.out.println("\nEnter your location:");
+
+        System.out.print("Street address: ");
+        String address = scanner.nextLine().trim();
+
+        System.out.print("City: ");
+        String city = scanner.nextLine().trim();
+
+        System.out.print("State: ");
+        String state = scanner.nextLine().trim();
+
+        System.out.print("ZIP code: ");
+        String zip = scanner.nextLine().trim();
+
+        if (address.isEmpty() || city.isEmpty()
+                || state.isEmpty() || zip.isEmpty()) {
+            System.out.println("All location fields are required.");
+            return;
+        }
+
+        Location location = new Location(address, city, state, zip);
+
+        boolean shareLocation = false;
+
+        if (User.VOLUNTEER.equals(role)) {
+            System.out.print(
+                "Share your location for nearby recommendations? (yes/no): "
+            );
+
+            String shareChoice = scanner.nextLine().trim();
+
+            if (!shareChoice.equalsIgnoreCase("yes")
+                    && !shareChoice.equalsIgnoreCase("no")) {
+                System.out.println("Please enter yes or no. Account not created.");
+                return;
+            }
+
+            shareLocation = shareChoice.equalsIgnoreCase("yes");
+        }
+
         User user = app.createAccount(
-            firstName, lastName, username, password, email, role
+            firstName, lastName, username, password, email,
+            role, specialty, location, shareLocation
         );
 
         if (user == null) {
@@ -265,9 +483,17 @@ public class EmergencyReliefUI {
         }
 
         System.out.println("Account created successfully!");
-        System.out.println("Welcome, " + user.getFirstName() + "!"); 
+        System.out.println("Welcome, " + user.getFirstName() + "!");
+
+        if (User.VOLUNTEER.equals(role)) {
+            System.out.println("Your specialty is: " + specialty);
+            System.out.println("Location sharing: "
+                    + (shareLocation ? "Enabled" : "Disabled"));
+        }
+
         System.out.println("You can now log in using your new account.");
     }
+
 
     // implement relief request scenario
     private void implementReliefRequest() {
