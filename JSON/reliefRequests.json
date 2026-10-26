@@ -1,5 +1,230 @@
-<<<<<<< HEAD
-[{"timeStamp":"2026-09-27 12:00:00","severity":"HIGH","pets":[{"name":"Buddy","type":"Dog"}],"contactInformation":"512-555-0142","requestType":"MEDICAL","urgency":"CRITICAL","requestID":"44e2a4eb-ff42-40a5-b918-e197efa1d0ab","totalPeople":2,"description":"Resident needs immediate medical attention","location":{"zip":"78701","address":"29 Main Street","city":"Austin","state":"TX"},"totalPets":1,"status":"RECEIVED"},{"timeStamp":"2026-09-27 12:30:00","severity":"CRITICAL","pets":[],"contactInformation":"843-555-0178","requestType":"FIRE_PROTECTION","urgency":"HIGH","requestID":"d4684f52-9afb-4bc8-a179-b42dc30b9cd8","totalPeople":1,"description":"Resident needs food supplies","location":{"zip":"29401","address":"45 Elm Street","city":"North Charleston","state":"SC"},"totalPets":0,"status":"ACCEPTED"},{"severity":"LOW","pets":[{"name":"buddy","type":"dog"}],"contactInformation":"huzztowel@email.com","requestType":"TRANSPORTATION","urgency":"LOW","requestID":"5c41b7e0-edb4-47ee-98b5-f208b040a885","totalPeople":3,"description":"need transportation","location":{"zip":"29204","address":"123 main street","city":"charleston","state":"sc"},"status":"RECEIVED"},{"severity":"HIGH","pets":[],"contactInformation":"803-555-0123","requestType":"MEDICAL","urgency":"HIGH","requestID":"0e16e7b0-184b-4db3-bb11-372afe2240a8","totalPeople":3,"description":"A family needs medical supplies and first aid assistance after the hurricane.","location":{"zip":"29201","address":"456 Main Street","city":"Columbia","state":"SC"},"acceptedBy":"Ethan Carter","status":"ACCEPTED"},{"severity":"HIGH","pets":[],"contactInformation":"706-555-0142","requestType":"MEDICAL","urgency":"HIGH","requestID":"3f0ff41b-165c-49d8-97ed-a7f4bf5f97c0","totalPeople":4,"description":"A family needs food, water, and emergency supplies.","location":{"zip":"29801","address":"350 York Street NE","city":"Aiken","state":"SC"},"acceptedBy":"Maya Bennett","status":"ACCEPTED"}]
-=======
-[{"severity":"HIGH","pets":[{"name":"Buddy","type":"Dog"}],"contactInformation":"512-555-0142","requestType":"MEDICAL","urgency":"CRITICAL","requestID":"44e2a4eb-ff42-40a5-b918-e197efa1d0ab","totalPeople":2,"description":"Resident needs immediate medical attention","location":{"zip":"78701","address":"29 Main Street","city":"Austin","state":"TX"},"status":"ACCEPTED"},{"timeStamp":"2026-09-27 12:30:00","severity":"CRITICAL","pets":[],"contactInformation":"843-555-0178","requestType":"FIRE_PROTECTION","urgency":"HIGH","requestID":"d4684f52-9afb-4bc8-a179-b42dc30b9cd8","totalPeople":1,"description":"Resident needs food supplies","location":{"zip":"29401","address":"45 Elm Street","city":"North Charleston","state":"SC"},"totalPets":0,"status":"ACCEPTED"},{"severity":"LOW","pets":[{"name":"buddy","type":"dog"}],"assignedVolunteerId":"52ae951f-6d1f-4afe-a896-2f68821fe7cb","contactInformation":"huzztowel@email.com","requestType":"TRANSPORTATION","urgency":"LOW","requestID":"5c41b7e0-edb4-47ee-98b5-f208b040a885","totalPeople":3,"description":"need transportation","location":{"zip":"29204","address":"123 main street","city":"charleston","state":"sc"},"status":"ACCEPTED"},{"severity":"HIGH","pets":[],"contactInformation":"803-555-0123","requestType":"MEDICAL","urgency":"HIGH","requestID":"0e16e7b0-184b-4db3-bb11-372afe2240a8","totalPeople":3,"description":"A family needs medical supplies and first aid assistance after the hurricane.","location":{"zip":"29201","address":"456 Main Street","city":"Columbia","state":"SC"},"status":"RECEIVED"},{"severity":"HIGH","pets":[{"name":"Buddy","type":"dog"}],"contactInformation":"803-522-2622","requestType":"TRANSPORTATION","urgency":"HIGH","requestID":"f90504c9-f03f-4b6e-ac1e-cb4d7bc45844","totalPeople":3,"description":"need transportation because of flood water","location":{"zip":"29201","address":"123 anywhere street","city":"charleston","state":"south carolina"},"status":"RECEIVED"}]
->>>>>>> 28c3e427989aa2baa8251867e9dbaa924f0023dd
+
+[
+  {
+    "timeStamp": "2026-09-27 12:00:00",
+    "severity": "HIGH",
+    "pets": [{"name": "Buddy", "type": "Dog"}],
+    "contactInformation": "512-555-0142",
+    "requestType": "MEDICAL",
+    "urgency": "CRITICAL",
+    "requestID": "44e2a4eb-ff42-40a5-b918-e197efa1d0ab",
+    "totalPeople": 2,
+    "description": "Resident needs immediate medical attention",
+    "location": {"zip": "78701", "address": "29 Main Street", "city": "Austin", "state": "TX"},
+    "totalPets": 1,
+    "status": "RECEIVED"
+  },
+  {
+    "timeStamp": "2026-09-27 12:30:00",
+    "severity": "CRITICAL",
+    "pets": [],
+    "contactInformation": "843-555-0178",
+    "requestType": "FIRE_PROTECTION",
+    "urgency": "HIGH",
+    "requestID": "d4684f52-9afb-4bc8-a179-b42dc30b9cd8",
+    "totalPeople": 1,
+    "description": "Resident needs food supplies",
+    "location": {"zip": "29401", "address": "45 Elm Street", "city": "North Charleston", "state": "SC"},
+    "totalPets": 0,
+    "status": "ACCEPTED"
+  },
+  {
+    "severity": "LOW",
+    "pets": [{"name": "buddy", "type": "dog"}],
+    "contactInformation": "huzztowel@email.com",
+    "requestType": "TRANSPORTATION",
+    "urgency": "LOW",
+    "requestID": "5c41b7e0-edb4-47ee-98b5-f208b040a885",
+    "totalPeople": 3,
+    "description": "need transportation",
+    "location": {"zip": "29204", "address": "123 main street", "city": "charleston", "state": "sc"},
+    "status": "RECEIVED"
+  },
+  {
+    "severity": "HIGH",
+    "pets": [],
+    "contactInformation": "803-555-0123",
+    "requestType": "MEDICAL",
+    "urgency": "HIGH",
+    "requestID": "0e16e7b0-184b-4db3-bb11-372afe2240a8",
+    "totalPeople": 3,
+    "description": "A family needs medical supplies and first aid assistance after the hurricane.",
+    "location": {"zip": "29201", "address": "456 Main Street", "city": "Columbia", "state": "SC"},
+    "acceptedBy": "Ethan Carter",
+    "status": "ACCEPTED"
+  },
+  {
+    "severity": "HIGH",
+    "pets": [],
+    "contactInformation": "706-555-0142",
+    "requestType": "MEDICAL",
+    "urgency": "HIGH",
+    "requestID": "3f0ff41b-165c-49d8-97ed-a7f4bf5f97c0",
+    "totalPeople": 4,
+    "description": "A family needs food, water, and emergency supplies.",
+    "location": {"zip": "29801", "address": "350 York Street NE", "city": "Aiken", "state": "SC"},
+    "acceptedBy": "Maya Bennett",
+    "status": "ACCEPTED"
+  },
+  {
+    "severity": "HIGH",
+    "pets": [{"name": "Buddy", "type": "Dog"}],
+    "contactInformation": "803-522-2622",
+    "requestType": "TRANSPORTATION",
+    "urgency": "HIGH",
+    "requestID": "f90504c9-f03f-4b6e-ac1e-cb4d7bc45844",
+    "totalPeople": 3,
+    "description": "need transportation because of flood water",
+    "location": {"zip": "29201", "address": "123 anywhere street", "city": "charleston", "state": "south carolina"},
+    "status": "RECEIVED"
+  },
+  {
+  "severity": "HIGH",
+  "pets": [],
+  "contactInformation": "803-555-0201",
+  "requestType": "MEDICAL",
+  "urgency": "CRITICAL",
+  "requestID": "a1111111-1111-4111-8111-111111111111",
+  "totalPeople": 2,
+  "description": "An elderly couple needs medication and basic medical supplies.",
+  "location": {
+    "zip": "29801",
+    "address": "120 Example Street",
+    "city": "Aiken",
+    "state": "SC"
+  },
+  "status": "RECEIVED"
+},
+{
+  "severity": "CRITICAL",
+  "pets": [],
+  "contactInformation": "803-555-0202",
+  "requestType": "EMS",
+  "urgency": "CRITICAL",
+  "requestID": "a2222222-2222-4222-8222-222222222222",
+  "totalPeople": 1,
+  "description": "A resident is injured and needs emergency medical transportation.",
+  "location": {
+    "zip": "29803",
+    "address": "220 Example Road",
+    "city": "Aiken",
+    "state": "SC"
+  },
+  "status": "RECEIVED"
+},
+{
+  "severity": "HIGH",
+  "pets": [
+    {
+      "name": "Bella",
+      "type": "Dog"
+    }
+  ],
+  "contactInformation": "803-555-0203",
+  "requestType": "TRANSPORTATION",
+  "urgency": "HIGH",
+  "requestID": "a3333333-3333-4333-8333-333333333333",
+  "totalPeople": 3,
+  "description": "A family needs transportation because floodwater is blocking their road.",
+  "location": {
+    "zip": "29803",
+    "address": "320 Example Avenue",
+    "city": "Aiken",
+    "state": "SC"
+  },
+  "totalPets": 1,
+  "status": "RECEIVED"
+},
+{
+  "severity": "CRITICAL",
+  "pets": [],
+  "contactInformation": "803-555-0204",
+  "requestType": "FIRE_PROTECTION",
+  "urgency": "CRITICAL",
+  "requestID": "a4444444-4444-4444-8444-444444444444",
+  "totalPeople": 5,
+  "description": "A fallen power line and smoke near a home require fire protection assistance.",
+  "location": {
+    "zip": "29801",
+    "address": "420 Example Lane",
+    "city": "Aiken",
+    "state": "SC"
+  },
+  "status": "RECEIVED"
+},
+{
+  "severity": "MEDIUM",
+  "pets": [],
+  "contactInformation": "803-555-0205",
+  "requestType": "MEDICAL",
+  "urgency": "MEDIUM",
+  "requestID": "a5555555-5555-4555-8555-555555555555",
+  "totalPeople": 2,
+  "description": "A household needs first-aid supplies and assistance checking an injured resident.",
+  "location": {
+    "zip": "29803",
+    "address": "520 Example Drive",
+    "city": "Aiken",
+    "state": "SC"
+  },
+  "status": "RECEIVED"
+},
+{
+  "severity": "HIGH",
+  "pets": [
+    {
+      "name": "Max",
+      "type": "Dog"
+    }
+  ],
+  "contactInformation": "803-555-0206",
+  "requestType": "TRANSPORTATION",
+  "urgency": "HIGH",
+  "requestID": "a6666666-6666-4666-8666-666666666666",
+  "totalPeople": 4,
+  "description": "A family with a pet needs a ride to an emergency shelter.",
+  "location": {
+    "zip": "29841",
+    "address": "620 Example Street",
+    "city": "North Augusta",
+    "state": "SC"
+  },
+  "totalPets": 1,
+  "status": "RECEIVED"
+},
+{
+  "severity": "HIGH",
+  "pets": [],
+  "contactInformation": "803-555-0207",
+  "requestType": "EMS",
+  "urgency": "HIGH",
+  "requestID": "a7777777-7777-4777-8777-777777777777",
+  "totalPeople": 1,
+  "description": "A resident with limited mobility needs help reaching a safe location.",
+  "location": {
+    "zip": "29801",
+    "address": "720 Example Boulevard",
+    "city": "Aiken",
+    "state": "SC"
+  },
+  "status": "RECEIVED"
+},
+{
+  "severity": "MEDIUM",
+  "pets": [],
+  "contactInformation": "803-555-0208",
+  "requestType": "MEDICAL",
+  "urgency": "MEDIUM",
+  "requestID": "a8888888-8888-4888-8888-888888888888",
+  "totalPeople": 3,
+  "description": "A family needs replacement medical supplies after losing power during the storm.",
+  "location": {
+    "zip": "29841",
+    "address": "820 Example Road",
+    "city": "North Augusta",
+    "state": "SC"
+  },
+  "status": "RECEIVED"
+}
+]
+
