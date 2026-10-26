@@ -138,7 +138,6 @@ public class EmergencyReliefUI {
             + " " + user.getLastName());
         System.out.println("Username: " + user.getUsername());
         System.out.println("Specialty: " + user.getSpecialty());
-        System.out.println("Vehicle: " + user.getVehicle());
     }
 
     // View available relief requests
