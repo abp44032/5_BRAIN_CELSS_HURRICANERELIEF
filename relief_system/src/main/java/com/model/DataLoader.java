@@ -187,6 +187,12 @@ public class DataLoader extends DataConstants {
                 );
 
                 request.setAcceptedBy(acceptedBy);
+                String assignedShelterId = (String) requestJSON.get("assignedShelterId");
+
+                if (assignedShelterId != null) {
+                    request.setAssignedShelterId(UUID.fromString(assignedShelterId));
+                }
+                
                 requests.add(request);
             }
         } catch (Exception e) {

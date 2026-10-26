@@ -96,7 +96,8 @@ public class EmergencyReliefUI {
             System.out.println("2. Accept Relief Request");
             System.out.println("3. View Volunteer Profile");
             System.out.println("4. View Available Shelters");
-            System.out.println("5. Log Out");
+            System.out.println("5. Export Trip Information");
+            System.out.println("6. Log Out");
             System.out.print("Choose an option: ");
 
             choice = scanner.nextLine();
@@ -114,14 +115,19 @@ public class EmergencyReliefUI {
                 case "4":
                     viewShelters();
                     break;
+                
                 case "5":
+                    exportTripInformation();
+                    break;
+
+                case "6":
                     app.logout();
                     System.out.println("Logged out successfully.");
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
             }
-        } while (!choice.equals("5"));
+        } while (!choice.equals("6"));
     }
 
     // view volunteer profile

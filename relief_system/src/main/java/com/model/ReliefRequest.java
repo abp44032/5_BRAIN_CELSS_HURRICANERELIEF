@@ -16,6 +16,7 @@ public class ReliefRequest {
     private ArrayList<String> comments;
     private String contactInformation;
     private String acceptedBy;
+    private UUID assignedShelterId;
 
     public ReliefRequest(UUID requestId, RequestStatus status,
             RequestType type, SeverityLevel severity,
@@ -122,10 +123,19 @@ public class ReliefRequest {
 
     }
 
+
     public void setContactInformation(String contactInformation) {
         this.contactInformation = contactInformation;
     }
 
+    public UUID getAssignedShelterId() {
+    return assignedShelterId;
+    }
+
+    public void setAssignedShelterId(UUID assignedShelterId) {
+        this.assignedShelterId = assignedShelterId;
+    }
+    
     public ArrayList<String> getComments() {
         return comments;
     }

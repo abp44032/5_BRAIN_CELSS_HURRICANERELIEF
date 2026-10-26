@@ -263,6 +263,12 @@ public class DataWriter extends DataConstants {
         }
         requestDetails.put("pets", petsJSON);
         requestDetails.put("acceptedBy", request.getAcceptedBy());
+        
+        if (request.getAssignedShelterId() != null) {
+            requestDetails.put("assignedShelterId",
+            request.getAssignedShelterId().toString());
+        }
+        
 		return requestDetails;
 	}
 
