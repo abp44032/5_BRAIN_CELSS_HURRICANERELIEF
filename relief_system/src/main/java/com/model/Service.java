@@ -1,7 +1,7 @@
 package com.model;
 
 /**
- * Service
+ * Represents the types of services available.
  */
 public enum Service {
     //Service??
