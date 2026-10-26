@@ -45,27 +45,28 @@ public class EmergencyReliefApplication {
      * @param email
      * @return
      */
+    
     public User createAccount(String firstName, String lastName,
             String username, String password, String email) {
 
         return createAccount(firstName, lastName, username, password,
-            email, User.RESIDENT);
+                email, User.RESIDENT, null, null, false);
     }
 
-    
     public User createAccount(String firstName, String lastName,
             String username, String password, String email, String role) {
 
         return createAccount(firstName, lastName, username, password,
-                email, role, null);
+                email, role, null, null, false);
     }
 
     public User createAccount(String firstName, String lastName,
             String username, String password, String email, String role,
-            String specialty) {
+            String specialty, Location location, boolean shareLocation) {
 
-        boolean added = userList.addUser(firstName, lastName, username,
-                password, email, null, false, role);
+        boolean added = userList.addUser(
+                firstName, lastName, username, password, email,
+                location, shareLocation, role);
 
         if (!added) {
             return null;
@@ -80,6 +81,7 @@ public class EmergencyReliefApplication {
 
         return user;
     }
+
 
 
     public ArrayList<Shelter> getShelters() {
