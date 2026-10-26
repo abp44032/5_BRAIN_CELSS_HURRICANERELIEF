@@ -83,23 +83,6 @@ public class ReliefRequest {
         return contactInformation;
     }
 
-    public void addRequest(ReliefRequest request) {
-        if (request != null && !requests.contains(request)) {
-            requests.add(request);
-        }
-    }
-
-    public boolean delete() {
-        return false;
-    }
-
-    public void updateStatus(RequestStatus newStatus) {
-        this.status = newStatus;
-    }
-
-    public void notifyUser(String message) {
-        System.out.println("Notification to user: " + message);
-    }
 
     public String getDetails() {
         return "ReliefRequest\n" +
@@ -162,20 +145,5 @@ public class ReliefRequest {
 
     public int priority() {
         return severity.ordinal() + urgency.ordinal();
-    }
-
-    public String getDetails() {
-        return "Relief Request\n"
-                + "ID: " + requestId + "\n"
-                + "Status: " + status + "\n"
-                + "Type: " + type + "\n"
-                + "Severity: " + severity + "\n"
-                + "Urgency: " + urgency + "\n"
-                + "Location: " + location + "\n"
-                + "Description: " + description + "\n"
-                + "People: " + totalPeople + "\n"
-                + "Pets: " + pets + "\n"
-                + "Contact Information: " + contactInformation + "\n"
-                + "Comments: " + comments + "\n";
     }
 }
