@@ -151,6 +151,10 @@ public class ReliefRequest {
 
     }
 
+    /**
+     * Setters for getting shelter ID and contact info to fulfuill the scenario requests
+     * @param contactInformation
+     */
     public void setContactInformation(String contactInformation) {
         this.contactInformation = contactInformation;
     }
