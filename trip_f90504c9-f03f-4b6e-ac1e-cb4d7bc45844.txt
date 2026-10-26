@@ -1,0 +1,45 @@
+==================================================
+           HURRICANE RELIEF - TRIP PLAN
+==================================================
+
+FAMILY MEMBERS
+--------------------------------------------------
+John Carter (42), Mary Carter (39), Sophie Carter (10)
+
+PET
+--------------------------------------------------
+com.model.Pet@45ff54e6
+
+FAMILY CONTACT INFORMATION
+--------------------------------------------------
+803-522-2622
+
+PICKUP ADDRESS
+--------------------------------------------------
+123 anywhere street, charleston, south carolina 29201 | Coordinates: null
+
+MEDICAL INFORMATION
+--------------------------------------------------
+Sophie has asthma and needs medical assistance.
+
+ASSIGNED VOLUNTEER
+--------------------------------------------------
+Rosa Delgado
+Vehicle: Ford F-350
+
+DIRECTIONS: VOLUNTEER TO FAMILY
+--------------------------------------------------
+Drive to 123 anywhere street, Charleston, SC 29201
+
+SELECTED SHELTER
+--------------------------------------------------
+Shelter Name: Charleston Family Relief Shelter
+Shelter Address: 100 Harbor View Dr, Charleston, SC 29401 | Coordinates: null
+
+DIRECTIONS: FAMILY TO SHELTER
+--------------------------------------------------
+Drive from 123 anywhere street, Charleston, SC 29201 to the assigned shelter
+
+==================================================
+                END OF TRIP PLAN
+==================================================

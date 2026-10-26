@@ -161,75 +161,20 @@ public class EmergencyReliefApplication {
         return DataWriter.saveReliefRequests();
     }
 
-    public boolean completeRequest(ReliefRequest request) {
-    if (request == null || currentUser == null) {
-        return false;
-    }
-
-        // Only the shelter manager can complete a request.
-        if (!"SHELTER_MANAGER".equals(currentUser.getRole())) {
-            System.out.println(
-                "Permission denied: Volunteers cannot complete relief requests."
-            );
+    public boolean assignShelter(ReliefRequest request, Shelter shelter) {
+        if (request == null || shelter == null) {
             return false;
         }
 
         if (request.getStatus() != RequestStatus.ACCEPTED) {
-            System.out.println(
-                "The request must be accepted before it can be completed."
-            );
             return false;
         }
 
-        request.updateStatus(RequestStatus.COMPLETED);
+        request.setAssignedShelterId(shelter.getId());
+        request.updateStatus(RequestStatus.ASSIGNED);
 
-        if (!DataWriter.saveReliefRequests()) {
-            System.out.println("Failed to save the completed request.");
-            return false;
-        }
-
-        System.out.println("Relief request marked as completed.");
-        return true;
-    }
-
-    public boolean checkInFamily(
-        Shelter shelter,
-        ArrayList<String> familyMembers,
-        ArrayList<String> pets) {
-
-        if (currentUser == null || shelter == null) {
-            return false;
-        }
-
-        if (!"SHELTER_MANAGER".equals(currentUser.getRole())) {
-            System.out.println(
-                "Permission denied: Only a shelter manager can check in a family."
-            );
-            return false;
-        }
-
-        if (familyMembers == null || pets == null) {
-            return false;
-        }
-
-        if (familyMembers.size() > shelter.getAvailableSpaces()) {
-            System.out.println("Not enough available spaces at this shelter.");
-            return false;
-        }
-
-        if (!shelter.checkInFamily(familyMembers, pets)) {
-            System.out.println("Family check-in failed.");
-            return false;
-        }
-
-        if (!DataWriter.saveShelters()) {
-            System.out.println("Failed to save shelter information.");
-            return false;
-        }
-
-        System.out.println("Family and pets checked in successfully.");
-        return true;
-    }
+        return DataWriter.saveReliefRequests();
+    }   
 
     public void updateVolunteerStatus(String status) {
         // TODO

@@ -100,7 +100,8 @@ public class EmergencyReliefUI {
             System.out.println("2. Accept Relief Request");
             System.out.println("3. View Volunteer Profile");
             System.out.println("4. View Available Shelters");
-            System.out.println("5. Log Out");
+            System.out.println("5. Export Trip Information");
+            System.out.println("6. Log Out");
             System.out.print("Choose an option: ");
 
             choice = scanner.nextLine();
@@ -118,14 +119,19 @@ public class EmergencyReliefUI {
                 case "4":
                     viewShelters();
                     break;
+                
                 case "5":
+                    exportTripInformation();
+                    break;
+
+                case "6":
                     app.logout();
                     System.out.println("Logged out successfully.");
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
             }
-        } while (!choice.equals("5"));
+        } while (!choice.equals("6"));
     }
 
     // Manager menu
@@ -345,6 +351,8 @@ public class EmergencyReliefUI {
 
         if (accepted) {
             System.out.println("Request accepted successfully!");
+            assignShelterToRequest(request);
+
         } else {
             System.out.println("Unable to accept this request.");
         }
@@ -724,118 +732,137 @@ public class EmergencyReliefUI {
             contactInformation
         );
 
-    app.submitRequest(request);
+        app.submitRequest(request);
 
     }
 
+    private void assignShelterToRequest(ReliefRequest request) {
+    ArrayList<Shelter> shelters = app.getShelters();
 
-        private void checkInFamilyMenu() {
-            ArrayList<Shelter> shelters = app.getShelters();
+        if (shelters == null || shelters.isEmpty()) {
+            System.out.println("No shelters are available.");
+            return;
+        }
 
-            if (shelters == null || shelters.isEmpty()) {
-                System.out.println("No shelters are available.");
-                return;
-            }
+        System.out.println("\n===== Choose a Shelter =====");
 
-            System.out.println("\n===== Check In Family =====");
+        for (int i = 0; i < shelters.size(); i++) {
+            Shelter shelter = shelters.get(i);
+            System.out.println((i + 1) + ". " + shelter.getName()
+                    + " | Capacity: " + shelter.getCapacity()
+                    + " | Accommodations: " + shelter.getAccommodations());
+        }
 
-            for (int i = 0; i < shelters.size(); i++) {
-                Shelter shelter = shelters.get(i);
-                System.out.println((i + 1) + ". " + shelter.getName()
-                    + " (Available spaces: " + shelter.getAvailableSpaces() + ")");
-            }
+        System.out.print("Choose a shelter number: ");
 
-            System.out.print("Choose a shelter number: ");
-            int choice;
+        int choice;
+        try {
+            choice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid choice.");
+            return;
+        }
 
-            try {
-                choice = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid choice.");
-                return;
-            }
+        if (choice < 1 || choice > shelters.size()) {
+            System.out.println("Invalid choice.");
+            return;
+        }
 
-            if (choice < 1 || choice > shelters.size()) {
-                System.out.println("Invalid shelter number.");
-                return;
-            }
+        Shelter selectedShelter = shelters.get(choice - 1);
 
-            Shelter shelter = shelters.get(choice - 1);
-            ArrayList<String> familyMembers = new ArrayList<>();
+        if (app.assignShelter(request, selectedShelter)) {
+            System.out.println("Shelter assigned successfully!");
+        } else {
+            System.out.println("Could not assign shelter.");
+        }
+    }
+    // EXPORT TRIP SCENARIO
+    private void exportTripInformation() {
+    User volunteer = app.getCurrentUser();
 
-            System.out.println("Enter the names of the three family members.");
+        if (volunteer == null) {
+            System.out.println("Please log in first.");
+            return;
+        }
 
-            for (int i = 0; i < 3; i++) {
-                System.out.print("Family member " + (i + 1) + ": ");
-                String name = scanner.nextLine().trim();
+        ArrayList<ReliefRequest> requests = DataLoader.getReliefRequests();
+        ArrayList<ReliefRequest> assignedRequests = new ArrayList<>();
 
-                if (name.isEmpty()) {
-                    System.out.println("Name cannot be empty. Check-in cancelled.");
-                    return;
-                }
-
-                familyMembers.add(name);
-            }
-
-            ArrayList<String> pets = new ArrayList<>();
-            System.out.print("Enter the accompanying pet's name (or press Enter for none): ");
-            String petName = scanner.nextLine().trim();
-
-            if (!petName.isEmpty()) {
-                pets.add(petName);
-            }
-
-            boolean checkedIn = app.checkInFamily(shelter, familyMembers, pets);
-
-            if (checkedIn) {
-                System.out.println("Shelter: " + shelter.getName());
-                System.out.println("Current occupancy: " + shelter.getCurrentOccupancy());
-                System.out.println("Available spaces: " + shelter.getAvailableSpaces());
-                System.out.println("Occupants: " + shelter.getOccupants());
-                System.out.println("Accompanying pets: " + shelter.getAccompanyingPets());
+        for (ReliefRequest request : requests) {
+            if (request.getStatus() == RequestStatus.ASSIGNED
+                    && request.getAssignedShelterId() != null) {
+                assignedRequests.add(request);
             }
         }
 
-        private void completeReliefRequestMenu() {
-            ArrayList<ReliefRequest> requests =
-                ReliefRequestList.getInstance().getRequests();
+        if (assignedRequests.isEmpty()) {
+            System.out.println("No assigned trips are available to export.");
+            return;
+        }
 
-            if (requests == null || requests.isEmpty()) {
-                System.out.println("There are no relief requests to complete.");
-                return;
-            }
+        for (int i = 0; i < assignedRequests.size(); i++) {
+            System.out.println("\n" + (i + 1) + ". "
+                    + assignedRequests.get(i).getDetails());
+        }
 
-            System.out.println("\n===== Complete Relief Request =====");
+        System.out.print("Choose a trip to export: ");
 
-            for (int i = 0; i < requests.size(); i++) {
-                ReliefRequest request = requests.get(i);
-                System.out.println("\n" + (i + 1) + ". " + request.getDetails());
-                System.out.println("Status: " + request.getStatus());
-                System.out.println("Accepted by: " + request.getAcceptedBy());
-            }
+        int choice;
+        try {
+            choice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid choice.");
+            return;
+        }
 
-            System.out.print("\nEnter the request number to complete: ");
-            int choice;
+        if (choice < 1 || choice > assignedRequests.size()) {
+            System.out.println("Invalid choice.");
+            return;
+        }
 
-            try {
-                choice = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid request number.");
-                return;
-            }
+        ReliefRequest request = assignedRequests.get(choice - 1);
+        Shelter selectedShelter = null;
 
-            if (choice < 1 || choice > requests.size()) {
-                System.out.println("Invalid request number.");
-                return;
-            }
-
-            ReliefRequest request = requests.get(choice - 1);
-
-            if (app.completeRequest(request)) {
-                System.out.println("Request status is now: " + request.getStatus());
+        for (Shelter shelter : app.getShelters()) {
+            if (shelter.getId().equals(request.getAssignedShelterId())) {
+                selectedShelter = shelter;
+                break;
             }
         }
 
+        if (selectedShelter == null) {
+            System.out.println("The assigned shelter could not be found.");
+            return;
+        }
+
+        System.out.print("Family members' names and ages: ");
+        String familyMembers = scanner.nextLine();
+
+        System.out.print("Medical information: ");
+        String medicalNote = scanner.nextLine();
+
+        System.out.print("Directions from your location to the family: ");
+        String directionsToFamily = scanner.nextLine();
+
+        System.out.print("Directions from the family to the shelter: ");
+        String directionsToShelter = scanner.nextLine();
+
+        boolean exported = TripExporter.exportTrip(
+                request,
+                volunteer,
+                selectedShelter,
+                familyMembers,
+                medicalNote,
+                directionsToFamily,
+                directionsToShelter
+        );
+
+        if (exported) {
+            System.out.println("Trip exported successfully.");
+        } else {
+            System.out.println("Trip export failed.");
+        }
+    }
     public static void main(String[] args) {
         EmergencyReliefUI emergencyReliefUI =
             new EmergencyReliefUI();

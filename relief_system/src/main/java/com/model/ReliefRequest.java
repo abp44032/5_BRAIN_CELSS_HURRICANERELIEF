@@ -19,6 +19,7 @@ public class ReliefRequest {
     private ArrayList<String> comments;
     private String contactInformation;
     private String acceptedBy;
+    private UUID assignedShelterId;
 
     /**
      * Constructs a new ReliefRequest with the specified details.
@@ -150,18 +151,18 @@ public class ReliefRequest {
 
     }
 
-    /**
-     * Sets the contact information for the relief request.
-     * @param contactInformation the contact information to set
-     */
     public void setContactInformation(String contactInformation) {
         this.contactInformation = contactInformation;
     }
 
-    /**
-     * Returns the list of comments associated with the relief request.
-     * @return the list of comments
-     */
+    public UUID getAssignedShelterId() {
+    return assignedShelterId;
+    }
+
+    public void setAssignedShelterId(UUID assignedShelterId) {
+        this.assignedShelterId = assignedShelterId;
+    }
+    
     public ArrayList<String> getComments() {
         return comments;
     }
