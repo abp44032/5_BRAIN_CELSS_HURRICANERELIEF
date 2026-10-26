@@ -94,7 +94,8 @@ public class EmergencyReliefUI {
             System.out.println("\n===== Volunteer Menu =====");
             System.out.println("1. View Available Relief Requests");
             System.out.println("2. View Available Shelters");
-            System.out.println("3. Log Out");
+            System.out.println("3. View Volunteer Profile");
+            System.out.println("4. Log Out");
             System.out.print("Choose an option: ");
 
             choice = scanner.nextLine();
@@ -106,7 +107,11 @@ public class EmergencyReliefUI {
                 case "2":
                     viewShelters();
                     break;
+
                 case "3":
+                    viewVolunteerProfile();
+                    break;
+                case "4":
                     app.logout();
                     System.out.println("Logged out successfully.");
                     break;
@@ -114,6 +119,23 @@ public class EmergencyReliefUI {
                     System.out.println("Invalid option. Please try again.");
             }
         } while (!choice.equals("3"));
+    }
+
+    // view volunteer profile
+    private void viewVolunteerProfile() {
+        User user = app.getCurrentUser();
+
+        if (user == null) {
+            System.out.println("No user is currently logged in.");
+            return;
+        }
+
+        System.out.println("\n===== Volunteer Profile =====");
+        System.out.println("Name: " + user.getFirstName()
+            + " " + user.getLastName());
+        System.out.println("Username: " + user.getUsername());
+        System.out.println("Specialty: " + user.getSpecialty());
+        System.out.println("Vehicle: " + user.getVehicle());
     }
 
     // View available relief requests
