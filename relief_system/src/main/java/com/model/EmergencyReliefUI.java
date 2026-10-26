@@ -735,6 +735,142 @@ public class EmergencyReliefUI {
         app.submitRequest(request);
 
     }
+    private void checkInFamilyMenu() {
+    ArrayList<ReliefRequest> requests = DataLoader.getReliefRequests();
+    ArrayList<ReliefRequest> assignedRequests = new ArrayList<>();
+
+        for (ReliefRequest request : requests) {
+            if (request.getStatus() == RequestStatus.ASSIGNED
+                    && request.getAssignedShelterId() != null) {
+                assignedRequests.add(request);
+            }
+        }
+
+        if (assignedRequests.isEmpty()) {
+            System.out.println("No assigned requests are available for check-in.");
+            return;
+        }
+
+        for (int i = 0; i < assignedRequests.size(); i++) {
+            System.out.println((i + 1) + ". "
+                    + assignedRequests.get(i).getDetails());
+        }
+
+        System.out.print("Choose the request to check in: ");
+
+        int choice;
+        try {
+            choice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid choice.");
+            return;
+        }
+
+        if (choice < 1 || choice > assignedRequests.size()) {
+            System.out.println("Invalid choice.");
+            return;
+        }
+
+        ReliefRequest request = assignedRequests.get(choice - 1);
+        Shelter selectedShelter = null;
+
+        for (Shelter shelter : app.getShelters()) {
+            if (shelter.getId().equals(request.getAssignedShelterId())) {
+                selectedShelter = shelter;
+                break;
+            }
+        }
+
+        if (selectedShelter == null) {
+            System.out.println("Assigned shelter not found.");
+            return;
+        }
+
+        ArrayList<String> familyMembers = new ArrayList<>();
+
+        System.out.print("Enter first family member's name: ");
+        familyMembers.add(scanner.nextLine());
+
+        System.out.print("Enter second family member's name: ");
+        familyMembers.add(scanner.nextLine());
+
+        System.out.print("Enter third family member's name: ");
+        familyMembers.add(scanner.nextLine());
+
+        ArrayList<String> pets = new ArrayList<>();
+
+        for (Pet pet : request.getPets()) {
+            pets.add(pet.getName() + " (" + pet.getType() + ")");
+        }
+
+        if (selectedShelter.checkInFamily(familyMembers, pets)) {
+            System.out.println("Family checked in successfully.");
+            System.out.println("Current occupancy: "
+                    + selectedShelter.getCurrentOccupancy());
+            System.out.println("Available spaces: "
+                    + selectedShelter.getAvailableSpaces());
+
+            System.out.println("Note: Shelter occupancy and check-in details "
+                    + "must also be saved by your data writer to persist "
+                    + "after restarting.");
+        } else {
+            System.out.println("Check-in failed. The shelter may not have "
+                    + "enough available spaces.");
+        }
+    }
+
+private void completeReliefRequestMenu() {
+    ArrayList<ReliefRequest> requests = DataLoader.getReliefRequests();
+    ArrayList<ReliefRequest> assignedRequests = new ArrayList<>();
+
+        for (ReliefRequest request : requests) {
+            if (request.getStatus() == RequestStatus.ASSIGNED) {
+                assignedRequests.add(request);
+            }
+        }
+
+        if (assignedRequests.isEmpty()) {
+            System.out.println("No assigned requests are available to complete.");
+            return;
+        }
+
+        for (int i = 0; i < assignedRequests.size(); i++) {
+            System.out.println((i + 1) + ". "
+                    + assignedRequests.get(i).getDetails());
+        }
+
+        System.out.print("Choose the request to complete: ");
+
+        int choice;
+        try {
+            choice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid choice.");
+            return;
+        }
+
+        if (choice < 1 || choice > assignedRequests.size()) {
+            System.out.println("Invalid choice.");
+            return;
+        }
+
+        ReliefRequest request = assignedRequests.get(choice - 1);
+        request.updateStatus(RequestStatus.COMPLETED);
+
+        ArrayList<ReliefRequest> savedRequests =
+                ReliefRequestList.getInstance().getRequests();
+
+        savedRequests.removeIf(existing ->
+                existing.getRequestId().equals(request.getRequestId()));
+
+        savedRequests.add(request);
+
+        if (DataWriter.saveReliefRequests()) {
+            System.out.println("Relief request completed successfully.");
+        } else {
+            System.out.println("Failed to save the completed request.");
+        }
+    }
 
     private void assignShelterToRequest(ReliefRequest request) {
     ArrayList<Shelter> shelters = app.getShelters();
