@@ -728,6 +728,114 @@ public class EmergencyReliefUI {
 
     }
 
+
+        private void checkInFamilyMenu() {
+            ArrayList<Shelter> shelters = app.getShelters();
+
+            if (shelters == null || shelters.isEmpty()) {
+                System.out.println("No shelters are available.");
+                return;
+            }
+
+            System.out.println("\n===== Check In Family =====");
+
+            for (int i = 0; i < shelters.size(); i++) {
+                Shelter shelter = shelters.get(i);
+                System.out.println((i + 1) + ". " + shelter.getName()
+                    + " (Available spaces: " + shelter.getAvailableSpaces() + ")");
+            }
+
+            System.out.print("Choose a shelter number: ");
+            int choice;
+
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid choice.");
+                return;
+            }
+
+            if (choice < 1 || choice > shelters.size()) {
+                System.out.println("Invalid shelter number.");
+                return;
+            }
+
+            Shelter shelter = shelters.get(choice - 1);
+            ArrayList<String> familyMembers = new ArrayList<>();
+
+            System.out.println("Enter the names of the three family members.");
+
+            for (int i = 0; i < 3; i++) {
+                System.out.print("Family member " + (i + 1) + ": ");
+                String name = scanner.nextLine().trim();
+
+                if (name.isEmpty()) {
+                    System.out.println("Name cannot be empty. Check-in cancelled.");
+                    return;
+                }
+
+                familyMembers.add(name);
+            }
+
+            ArrayList<String> pets = new ArrayList<>();
+            System.out.print("Enter the accompanying pet's name (or press Enter for none): ");
+            String petName = scanner.nextLine().trim();
+
+            if (!petName.isEmpty()) {
+                pets.add(petName);
+            }
+
+            boolean checkedIn = app.checkInFamily(shelter, familyMembers, pets);
+
+            if (checkedIn) {
+                System.out.println("Shelter: " + shelter.getName());
+                System.out.println("Current occupancy: " + shelter.getCurrentOccupancy());
+                System.out.println("Available spaces: " + shelter.getAvailableSpaces());
+                System.out.println("Occupants: " + shelter.getOccupants());
+                System.out.println("Accompanying pets: " + shelter.getAccompanyingPets());
+            }
+        }
+
+        private void completeReliefRequestMenu() {
+            ArrayList<ReliefRequest> requests =
+                ReliefRequestList.getInstance().getRequests();
+
+            if (requests == null || requests.isEmpty()) {
+                System.out.println("There are no relief requests to complete.");
+                return;
+            }
+
+            System.out.println("\n===== Complete Relief Request =====");
+
+            for (int i = 0; i < requests.size(); i++) {
+                ReliefRequest request = requests.get(i);
+                System.out.println("\n" + (i + 1) + ". " + request.getDetails());
+                System.out.println("Status: " + request.getStatus());
+                System.out.println("Accepted by: " + request.getAcceptedBy());
+            }
+
+            System.out.print("\nEnter the request number to complete: ");
+            int choice;
+
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid request number.");
+                return;
+            }
+
+            if (choice < 1 || choice > requests.size()) {
+                System.out.println("Invalid request number.");
+                return;
+            }
+
+            ReliefRequest request = requests.get(choice - 1);
+
+            if (app.completeRequest(request)) {
+                System.out.println("Request status is now: " + request.getStatus());
+            }
+        }
+
     public static void main(String[] args) {
         EmergencyReliefUI emergencyReliefUI =
             new EmergencyReliefUI();
