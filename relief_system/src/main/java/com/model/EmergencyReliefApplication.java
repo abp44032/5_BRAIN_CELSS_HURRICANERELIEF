@@ -12,10 +12,10 @@ public class EmergencyReliefApplication {
     }
 
     /**
-     * ---------LOGGING IN--------------
-     * @param username
-     * @param password
-     * @return
+     * Logs a user into the emergny releif system.
+     * @param username the username of the user
+     * @param password the password of the user
+     * @return true if successful login, otherwise false
      */
     public boolean login(String username, String password) {
         User user = userList.getUser(username, password);
@@ -28,24 +28,30 @@ public class EmergencyReliefApplication {
         return true;
     }
 
+    /**
+     * Returns currently logged in user.
+     * @return the current user
+     */
     public User getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * Logs out the current user.
+     */
     public void logout(){
         currentUser = null;
     }
 
     /**
-     * ---------CREATING ACCOUNT--------------
-     * @param firstName
-     * @param lastName
-     * @param username
-     * @param password
-     * @param email
-     * @return
+     * Creates a new user account for a resident.
+     * @param firstName the first name of the user
+     * @param lastName the last name of the user
+     * @param username the username of the user
+     * @param password the password of the user
+     * @param email the email of the user
+     * @return the created user, otherwise null if unsuccessful
      */
-    
     public User createAccount(String firstName, String lastName,
             String username, String password, String email) {
 
@@ -53,6 +59,16 @@ public class EmergencyReliefApplication {
                 email, User.RESIDENT, null, null, false);
     }
 
+    /**
+     * Creates a new user account for a specified role.
+     * @param firstName the first name of the user
+     * @param lastName the last name of the user
+     * @param username the username of the user
+     * @param password the password of the user
+     * @param email the email of the user
+     * @param role the role of the user
+     * @return the created user, otherwise null if unsiccessful
+     */
     public User createAccount(String firstName, String lastName,
             String username, String password, String email, String role) {
 
@@ -60,6 +76,19 @@ public class EmergencyReliefApplication {
                 email, role, null, null, false);
     }
 
+    /**
+     * Creates a new user account with more information.
+     * @param firstName the first name of the user
+     * @param lastName the last name of the user
+     * @param username the username of the user
+     * @param password the password of the user
+     * @param email the email of the user
+     * @param role the role of the user
+     * @param specialty the specialty of the user
+     * @param location the location of the user
+     * @param shareLocation whether the user shares their location
+     * @return the created user, otherwise null if unsuccessful
+     */
     public User createAccount(String firstName, String lastName,
             String username, String password, String email, String role,
             String specialty, Location location, boolean shareLocation) {
@@ -82,8 +111,10 @@ public class EmergencyReliefApplication {
         return user;
     }
 
-
-
+    /**
+     * Returns the available shelters in the system.
+     * @return a list of shelters
+     */
     public ArrayList<Shelter> getShelters() {
         return DataLoader.getShelters();
     }
@@ -100,6 +131,14 @@ public class EmergencyReliefApplication {
         // TODO
     }
 
+    /**
+     * Allows the volunteer to accept a relief request,
+     * Checks that the user is a volunteer and the request is available,
+     * Assigns the volunteer, updates the status, and saves the request.
+     * @param request the relief request being accepted
+     * @param volunteer the volunteer accepting the request
+     * @return true if the request is saved successfully, otherwise return false
+     */
     public boolean acceptRequest(ReliefRequest request, User volunteer) {
         if (request == null || volunteer == null) {
             return false;
@@ -164,6 +203,11 @@ public class EmergencyReliefApplication {
         return 0;
     }
 
+    /**
+     * Submits a new relief request to the system,
+     * Adds the request to the request list and saves it.
+     * @param request the relief request being submitted
+     */
     public void submitRequest(ReliefRequest request) {
         if (request == null) { 
             System.out.println("Cannot submit an empty relief request.");
