@@ -154,15 +154,6 @@ public class EmergencyReliefApplication {
         }
     }
 
-    boolean added = ReliefRequestList.getInstance().addRequest(request);
-
-    if (added) {
-        System.out.println("Relief request submitted successfully.");
-    } else {
-        System.out.println("Request was not added. It may already exist.");
-    }
-}
-
     public void deleteRequest(ReliefRequest request) {
         // TODO
     }
