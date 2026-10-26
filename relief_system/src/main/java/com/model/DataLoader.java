@@ -114,6 +114,7 @@ public class DataLoader extends DataConstants {
                     hoursOfOperation = hoursJSON.get("open") + " - " + hoursJSON.get("close");
                 } else if (hoursValue != null) {
                     hoursOfOperation = hoursValue.toString();
+                }
 
                 Shelter loadedShelter = new Shelter(
                     id, shelterName, capacity,
@@ -151,9 +152,7 @@ public class DataLoader extends DataConstants {
                 }
 
                 shelters.add(loadedShelter);
-
             }
-        }
         } catch (Exception e) {
             e.printStackTrace();
         }
