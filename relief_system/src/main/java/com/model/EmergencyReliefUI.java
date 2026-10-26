@@ -109,11 +109,8 @@ public class EmergencyReliefUI {
                     break;
 
                 case "3":
-<<<<<<< HEAD
                     viewVolunteerProfile();
-=======
                     viewShelters();
->>>>>>> 34a372a3f6f67ca9d7c3b796215ed626cf9c5c17
                     break;
                 case "4":
                     app.logout();
