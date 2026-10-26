@@ -18,6 +18,15 @@ public class Hurricane {
     private static Hurricane instance;
     private ArrayList<Hurricane> hurricanes = new ArrayList<>();
 
+    /**
+     * Constructs a new Hurricane instance with the specified details.
+     * @param id the unique identifier of the hurricane
+     * @param name the name of the hurricane
+     * @param hurricaneZipCodes the list of affected ZIP codes
+     * @param hurricaneStatus the status of the hurricane
+     * @param evacuationSteps the list of evacuation steps
+     * @param emergencySupplies the list of emergency supplies
+     */
     public Hurricane(UUID id, String name, ArrayList<String> hurricaneZipCodes, HurricaneStatus hurricaneStatus, ArrayList<String> evacuationSteps, ArrayList<Resource> emergencySupplies) {
         this.id = id;
         this.name = name;
@@ -82,6 +91,11 @@ public class Hurricane {
         //TODO
     }
 
+    /**
+     * Returns a string containing detailed information about the hurricane, including its name, status,
+     * affected ZIP codes, evacuation steps, and emergency supplies.
+     * @return a string representation of the hurricane's information
+     */
     public String viewHurricaneInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("Hurricane ").append(name).append(" (").append(hurricaneStatus).append(")\n");
@@ -103,10 +117,18 @@ public class Hurricane {
         //TODO
     }
 
+    /**
+     * Returns the list of emergency supplies for the hurricane.
+     * @return the list of emergency supplies
+     */
     public ArrayList<Resource> viewEmergencySupplies() {
-        return null;
+        return emergencySupplies;
     }
 
+    /**
+     * Adds a hurricane to the list of hurricanes if it is not already present.
+     * @param hurricane the hurricane to add
+     */
     public void addHurricane(Hurricane hurricane) {
         if (hurricane != null && !hurricanes.contains(hurricane)) {
             hurricanes.add(hurricane);
