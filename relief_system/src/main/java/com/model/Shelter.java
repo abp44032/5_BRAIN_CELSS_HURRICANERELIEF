@@ -16,6 +16,10 @@ public class Shelter {
     private ArrayList<AccommodationType> accommodations;
     private Location location;
     private String hoursOfOperation;
+    private int currentOccupancy = 0;
+    private ArrayList<String> occupants = new ArrayList<>();
+    private ArrayList<String> accompanyingPets = new ArrayList<>();
+
 
     private static Shelter instance;
     private ArrayList<Shelter> shelters = new ArrayList<>();
@@ -236,6 +240,41 @@ public class Shelter {
     public void cacheLocation() {
     }
 
+    public int getCurrentOccupancy() {
+        return currentOccupancy;
+    }
+
+    public int getAvailableSpaces() {
+        return capacity - currentOccupancy;
+    }
+
+    public ArrayList<String> getOccupants() {
+        return occupants;
+    }
+
+    public ArrayList<String> getAccompanyingPets() {
+        return accompanyingPets;
+    }
+
+    public boolean checkInFamily(
+            ArrayList<String> familyMembers,
+            ArrayList<String> pets) {
+
+        if (familyMembers == null || pets == null) {
+            return false;
+        }
+
+        if (familyMembers.size() > getAvailableSpaces()) {
+            return false;
+        }
+
+        occupants.addAll(familyMembers);
+        currentOccupancy += familyMembers.size();
+        accompanyingPets.addAll(pets);
+
+        return true;
+    }
+
     /**
      * adds a shelter to the list of shelters if it is not already present.
      * @param shelter the shelter to be added
@@ -245,6 +284,25 @@ public class Shelter {
             shelters.add(shelter);
         }
     }
+    
+    public void setCurrentOccupancy(int currentOccupancy) {
+        if (currentOccupancy >= 0 && currentOccupancy <= capacity) {
+            this.currentOccupancy = currentOccupancy;
+        }
+    }
+
+    public void setOccupants(ArrayList<String> occupants) {
+        this.occupants = occupants == null
+            ? new ArrayList<>()
+            : new ArrayList<>(occupants);
+    }
+
+    public void setAccompanyingPets(ArrayList<String> accompanyingPets) {
+        this.accompanyingPets = accompanyingPets == null
+            ? new ArrayList<>()
+            : new ArrayList<>(accompanyingPets);
+    }
+
     
     /**   
      * returns a readable string representation of the shelter.
@@ -261,4 +319,5 @@ public class Shelter {
                 ", hoursOfOperation='" + hoursOfOperation + '\'' +
                 '}';
     }
+
 }

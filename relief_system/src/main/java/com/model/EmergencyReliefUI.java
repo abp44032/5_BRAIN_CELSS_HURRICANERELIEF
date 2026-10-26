@@ -72,6 +72,7 @@ public class EmergencyReliefUI {
     }
 
     // Main menu shown after a successful login
+    
     private void mainMenu() {
         User user = app.getCurrentUser();
 
@@ -79,12 +80,15 @@ public class EmergencyReliefUI {
             return;
         }
 
-        if (User.VOLUNTEER.equals(user.getRole())) {
+        if ("SHELTER_MANAGER".equals(user.getRole())) {
+            shelterManagerMenu();
+        } else if (User.VOLUNTEER.equals(user.getRole())) {
             volunteerMenu();
         } else {
             residentMenu();
         }
     }
+
 
     // Volunteer menu
     private void volunteerMenu() {
@@ -129,6 +133,41 @@ public class EmergencyReliefUI {
             }
         } while (!choice.equals("6"));
     }
+
+    // Manager menu
+    private void shelterManagerMenu() {
+        String choice;
+
+        do {
+            System.out.println("\n===== Shelter Manager Menu =====");
+            System.out.println("1. View Available Shelters");
+            System.out.println("2. Check In Family");
+            System.out.println("3. Complete Relief Request");
+            System.out.println("4. Log Out");
+            System.out.print("Choose an option: ");
+
+            choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    viewShelters();
+                    break;
+                case "2":
+                    checkInFamilyMenu();
+                    break;
+                case "3":
+                    completeReliefRequestMenu();
+                    break;
+                case "4":
+                    app.logout();
+                    System.out.println("Logged out successfully.");
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        } while (!choice.equals("4"));
+    }
+
 
     // view volunteer profile
     private void viewVolunteerProfile() {
@@ -368,8 +407,14 @@ public class EmergencyReliefUI {
                 System.out.println("--------------------------------");
                 System.out.println();
             }
+            
             System.out.println("Shelter: " + shelter.getName());
-            System.out.println("Capacity: " + shelter.getCapacity());
+            System.out.println("Location: " + shelter.getLocation());
+            System.out.println("Total Capacity: " + shelter.getCapacity());
+            System.out.println("Current Occupancy: " + shelter.getCurrentOccupancy());
+            System.out.println("Available Spaces: " + shelter.getAvailableSpaces());
+            System.out.println("Occupants: " + shelter.getOccupants());
+            System.out.println("Accompanying Pets: " + shelter.getAccompanyingPets());
             System.out.println("Hours: " + shelter.getHoursOfOperation());
             System.out.println("Available: " + shelter.getAvailability());
             System.out.println("Accommodations: " + shelter.getAccommodations());
@@ -402,45 +447,55 @@ public class EmergencyReliefUI {
             return;
         }
 
-    System.out.println("\nWhat best describes you?");
-    System.out.println("1. Resident (I need help)");
-    System.out.println("2. Volunteer (I want to help others)");
-    System.out.print("Choose an option: ");
-
-    String roleChoice = scanner.nextLine();
-    String role;
-    String specialty = null;
-
-    if (roleChoice.equals("1")) {
-        role = User.RESIDENT;
-    } else if (roleChoice.equals("2")) {
-        role = User.VOLUNTEER;
     
-        System.out.println("\nChoose your volunteer specialty:");
-        System.out.println("1. Medical");
-        System.out.println("2. Fire Protection");
-        System.out.println("3. EMS");
-        System.out.println("4. Transportation");
+        System.out.println("\nWhat best describes you?");
+        System.out.println("1. Resident (I need help)");
+        System.out.println("2. Volunteer (I want to help others)");
+        System.out.println("3. Shelter Manager");
         System.out.print("Choose an option: ");
 
-        String specialtyChoice = scanner.nextLine();
+        String roleChoice = scanner.nextLine();
+        String role;
+        String specialty = null;
 
-        if (specialtyChoice.equals("1")) {
-            specialty = "MEDICAL";
-        } else if (specialtyChoice.equals("2")) {
-            specialty = "FIRE_PROTECTION";
-        } else if (specialtyChoice.equals("3")) {
-            specialty = "EMS";
-        } else if (specialtyChoice.equals("4")) {
-            specialty = "TRANSPORTATION";
+        if (roleChoice.equals("1")) {
+            role = User.RESIDENT;
+        } else if (roleChoice.equals("2")) {
+            role = User.VOLUNTEER;
+
+            System.out.println("\nChoose your volunteer specialty:");
+            System.out.println("1. Medical");
+            System.out.println("2. Fire Protection");
+            System.out.println("3. EMS");
+            System.out.println("4. Transportation");
+            System.out.print("Choose an option: ");
+
+            String specialtyChoice = scanner.nextLine();
+
+            switch (specialtyChoice) {
+                case "1":
+                    specialty = "MEDICAL";
+                    break;
+                case "2":
+                    specialty = "FIRE_PROTECTION";
+                    break;
+                case "3":
+                    specialty = "EMS";
+                    break;
+                case "4":
+                    specialty = "TRANSPORTATION";
+                    break;
+                default:
+                    System.out.println("Invalid specialty.");
+                    return;
+            }
+
+        } else if (roleChoice.equals("3")) {
+            role = "SHELTER_MANAGER";
         } else {
-            System.out.println("Invalid specialty. Account not created.");
+            System.out.println("Invalid option.");
             return;
         }
-    } else {
-        System.out.println("Invalid choice. Account not created.");
-        return;
-    }
 
         System.out.println("\nEnter your location:");
 

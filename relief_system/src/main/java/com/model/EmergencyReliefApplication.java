@@ -116,7 +116,7 @@ public class EmergencyReliefApplication {
      * @return a list of shelters
      */
     public ArrayList<Shelter> getShelters() {
-        return DataLoader.getShelters();
+        return Shelter.getInstance().getShelters();
     }
 
     public void sendMessage(User recipient, String message) {

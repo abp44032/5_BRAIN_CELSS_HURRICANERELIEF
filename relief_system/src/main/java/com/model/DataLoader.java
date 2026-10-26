@@ -116,10 +116,42 @@ public class DataLoader extends DataConstants {
                     hoursOfOperation = hoursValue.toString();
                 }
 
-                shelters.add(new Shelter(
+                Shelter loadedShelter = new Shelter(
                     id, shelterName, capacity,
                     resources, accommodations, location, hoursOfOperation
-                ));
+                );
+
+                // Restore saved occupancy.
+                Object occupancyValue = shelter.get("currentOccupancy");
+                if (occupancyValue instanceof Number) {
+                    loadedShelter.setCurrentOccupancy(
+                        ((Number) occupancyValue).intValue()
+                    );
+                }
+
+                // Restore family members.
+                JSONArray occupantsJSON = (JSONArray) shelter.get("occupants");
+                if (occupantsJSON != null) {
+                    ArrayList<String> occupants = new ArrayList<>();
+                    for (Object occupant : occupantsJSON) {
+                        occupants.add((String) occupant);
+                    }
+                    loadedShelter.setOccupants(occupants);
+                }
+
+                // Restore accompanying pets.
+                JSONArray accompanyingPetsJSON =
+                    (JSONArray) shelter.get("accompanyingPets");
+
+                if (accompanyingPetsJSON != null) {
+                    ArrayList<String> pets = new ArrayList<>();
+                    for (Object pet : accompanyingPetsJSON) {
+                        pets.add((String) pet);
+                    }
+                    loadedShelter.setAccompanyingPets(pets);
+                }
+
+                shelters.add(loadedShelter);
             }
         } catch (Exception e) {
             e.printStackTrace();

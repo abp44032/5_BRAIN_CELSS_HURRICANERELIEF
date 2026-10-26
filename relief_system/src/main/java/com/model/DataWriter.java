@@ -142,6 +142,20 @@ public class DataWriter extends DataConstants {
 		shelterDetails.put(SHELTER_NAME, shelter.getName());
 		shelterDetails.put(SHELTER_CAPACITY, shelter.getCapacity());
 
+        shelterDetails.put("currentOccupancy", shelter.getCurrentOccupancy());
+
+        JSONArray occupantsJSON = new JSONArray();
+        for (String occupant : shelter.getOccupants()) {
+            occupantsJSON.add(occupant);
+        }
+        shelterDetails.put("occupants", occupantsJSON);
+
+        JSONArray petsJSON = new JSONArray();
+        for (String pet : shelter.getAccompanyingPets()) {
+            petsJSON.add(pet);
+        }
+        shelterDetails.put("accompanyingPets", petsJSON);
+
         JSONArray resourcesJSON = new JSONArray();
         for (Resource resource : shelter.getResources()) {
             JSONObject resourceJSON = new JSONObject();
