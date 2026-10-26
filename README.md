@@ -13,9 +13,9 @@ The Hurricane Relief System is an object-oriented hurricane relief platform that
 
 [UML Class Diagram](docs/uml-class-diagram.pdf)
 
-[UML Sequence Diagram 1](docs/uml-sequence-diagram1.pdf)
+[UML Sequence Diagram 1](docs/sequence1.pdf)
 
-[UML Sequence Diagram 2](docs/uml-sequence-diagram2.pdf)
+[UML Sequence Diagram 2](docs/sequence2.pdf)
 
 ## Project Board
 
