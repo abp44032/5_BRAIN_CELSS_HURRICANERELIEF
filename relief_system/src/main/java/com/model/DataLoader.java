@@ -171,6 +171,8 @@ public class DataLoader extends DataConstants {
                     contactInformation = "";
                 }
 
+                String acceptedBy = (String) requestJSON.get("acceptedBy");
+
                 ArrayList<Pet> pets = new ArrayList<>();
                 JSONArray petsJSON = (JSONArray) requestJSON.get("pets");
                 if (petsJSON != null) {
@@ -179,9 +181,13 @@ public class DataLoader extends DataConstants {
                         pets.add(new Pet((String) petJSON.get("name"), (String) petJSON.get("type")));
                     }
                 }
-                requests.add(new ReliefRequest(
-                    id, status, type, severity, urgency, description, totalPeople, pets, location, contactInformation
-                ));
+                ReliefRequest request = new ReliefRequest(
+                    id, status, type, severity, urgency, description,
+                    totalPeople, pets, location, contactInformation
+                );
+
+                request.setAcceptedBy(acceptedBy);
+                requests.add(request);
             }
         } catch (Exception e) {
             e.printStackTrace();

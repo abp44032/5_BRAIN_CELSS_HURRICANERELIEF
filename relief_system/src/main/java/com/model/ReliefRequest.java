@@ -15,6 +15,7 @@ public class ReliefRequest {
     private ArrayList<Pet> pets;
     private ArrayList<String> comments;
     private String contactInformation;
+    private String acceptedBy;
 
     public ReliefRequest(UUID requestId, RequestStatus status,
             RequestType type, SeverityLevel severity,
@@ -33,6 +34,14 @@ public class ReliefRequest {
         this.location = location;
         this.contactInformation = contactInformation;
         this.comments = new ArrayList<>();
+    }
+
+    public String getAcceptedBy() {
+    return acceptedBy;
+    }
+
+    public void setAcceptedBy(String acceptedBy) {
+        this.acceptedBy = acceptedBy;
     }
 
     public UUID getRequestId() {

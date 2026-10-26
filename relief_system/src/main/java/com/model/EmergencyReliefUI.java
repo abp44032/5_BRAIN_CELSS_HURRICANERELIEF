@@ -178,6 +178,10 @@ public class EmergencyReliefUI {
                 }
 
                 System.out.println(request.getDetails());
+
+                if (request.getAcceptedBy() != null) {
+                    System.out.println("Accepted by: " + request.getAcceptedBy());
+                }
             }
         }
 
@@ -212,7 +216,7 @@ public class EmergencyReliefUI {
             return;
         }
 
-        // Display all availble releif requests
+        // Display all availble relief requests
         User currentUser = app.getCurrentUser();
 
         for (int i = 0; i < requests.size(); i++) {

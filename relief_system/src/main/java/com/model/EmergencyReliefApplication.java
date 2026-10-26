@@ -113,6 +113,10 @@ public class EmergencyReliefApplication {
             return false;
         }
         
+        request.setAcceptedBy(
+        volunteer.getFirstName() + " " + volunteer.getLastName()
+        );
+
         request.updateStatus(RequestStatus.ACCEPTED);
 
         return DataWriter.saveReliefRequests();
