@@ -153,6 +153,7 @@ public class DataLoader extends DataConstants {
                 shelters.add(loadedShelter);
 
             }
+        }
         } catch (Exception e) {
             e.printStackTrace();
         }
