@@ -1,0 +1,49 @@
+==================================================
+           HURRICANE RELIEF - TRIP PLAN
+==================================================
+
+FAMILY MEMBERS
+--------------------------------------------------
+Adult 1: [Name], Age: [Age]
+Adult 2: [Name], Age: [Age]
+Child: Sophie, Age: [Age]
+
+PET
+--------------------------------------------------
+Name: Buddy
+Type: Dog
+
+FAMILY CONTACT INFORMATION
+--------------------------------------------------
+Phone: [Family Contact Number]
+
+PICKUP ADDRESS
+--------------------------------------------------
+[Carter Family Home Address]
+
+MEDICAL INFORMATION
+--------------------------------------------------
+Sophie has asthma and needs medical assistance
+during evacuation and at the shelter.
+
+ASSIGNED VOLUNTEER
+--------------------------------------------------
+Name: Rosa Delgado
+Vehicle: Ford F-350
+
+DIRECTIONS: ROSA'S LOCATION TO CARTER HOME
+--------------------------------------------------
+[Directions from Rosa's location to the Carter home]
+
+SELECTED SHELTER
+--------------------------------------------------
+Shelter Name: [Selected Shelter Name]
+Shelter Address: [Selected Shelter Address]
+
+DIRECTIONS: CARTER HOME TO SHELTER
+--------------------------------------------------
+[Directions from the Carter home to the selected shelter]
+
+==================================================
+                END OF TRIP PLAN
+==================================================

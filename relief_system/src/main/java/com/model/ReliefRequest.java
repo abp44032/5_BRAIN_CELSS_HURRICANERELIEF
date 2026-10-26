@@ -18,6 +18,7 @@ public class ReliefRequest {
     private ArrayList<Pet> pets;
     private ArrayList<String> comments;
     private String contactInformation;
+    private String acceptedBy;
 
     /**
      * Constructs a new ReliefRequest with the specified details.
@@ -51,10 +52,14 @@ public class ReliefRequest {
         this.comments = new ArrayList<>();
     }
 
-    /**
-     * Returns the unique ID of the relief request.
-     * @return the unique ID of the relief request
-     */
+    public String getAcceptedBy() {
+    return acceptedBy;
+    }
+
+    public void setAcceptedBy(String acceptedBy) {
+        this.acceptedBy = acceptedBy;
+    }
+
     public UUID getRequestId() {
         return requestId;
     }
@@ -107,39 +112,6 @@ public class ReliefRequest {
         return contactInformation;
     }
 
-    /**
-     * Adds a new relief request to the list of requests.
-     * @param request the relief request to add
-     */
-    public void addRequest(ReliefRequest request) {
-        if (request != null && !requests.contains(request)) {
-            requests.add(request);
-        }
-    }
-
-    /**
-     * Deletes the relief request.
-     * @return true if the deletion was successful, false otherwise
-     */
-    public boolean delete() {
-        return false;
-    }
-
-    /**
-     * Updates the status of the relief request.
-     * @param newStatus the new status to set
-     */
-    public void updateStatus(RequestStatus newStatus) {
-        this.status = newStatus;
-    }
-
-    /**
-     * Notifies the user with a message.
-     * @param message the message to send to the user
-     */
-    public void notifyUser(String message) {
-        System.out.println("Notification to user: " + message);
-    }
 
     /**
      * Returns the detailed information of the relief request.
@@ -239,24 +211,5 @@ public class ReliefRequest {
      */
     public int priority() {
         return severity.ordinal() + urgency.ordinal();
-    }
-
-    /**
-     * Returns the detailed information of the relief request as a string.
-     * @return the detailed information of the relief request
-     */
-    public String getDetails() {
-        return "Relief Request\n"
-                + "ID: " + requestId + "\n"
-                + "Status: " + status + "\n"
-                + "Type: " + type + "\n"
-                + "Severity: " + severity + "\n"
-                + "Urgency: " + urgency + "\n"
-                + "Location: " + location + "\n"
-                + "Description: " + description + "\n"
-                + "People: " + totalPeople + "\n"
-                + "Pets: " + pets + "\n"
-                + "Contact Information: " + contactInformation + "\n"
-                + "Comments: " + comments + "\n";
     }
 }
