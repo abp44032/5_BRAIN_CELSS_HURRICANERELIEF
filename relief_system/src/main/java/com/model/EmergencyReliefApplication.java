@@ -161,6 +161,21 @@ public class EmergencyReliefApplication {
         return DataWriter.saveReliefRequests();
     }
 
+    public boolean assignShelter(ReliefRequest request, Shelter shelter) {
+        if (request == null || shelter == null) {
+            return false;
+        }
+
+        if (request.getStatus() != RequestStatus.ACCEPTED) {
+            return false;
+        }
+
+        request.setAssignedShelterId(shelter.getId());
+        request.updateStatus(RequestStatus.ASSIGNED);
+
+        return DataWriter.saveReliefRequests();
+    }   
+
     public void updateVolunteerStatus(String status) {
         // TODO
     }

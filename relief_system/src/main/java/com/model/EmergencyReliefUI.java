@@ -312,6 +312,8 @@ public class EmergencyReliefUI {
 
         if (accepted) {
             System.out.println("Request accepted successfully!");
+            assignShelterToRequest(request);
+
         } else {
             System.out.println("Unable to accept this request.");
         }
@@ -675,10 +677,137 @@ public class EmergencyReliefUI {
             contactInformation
         );
 
-    app.submitRequest(request);
+        app.submitRequest(request);
 
     }
 
+    private void assignShelterToRequest(ReliefRequest request) {
+    ArrayList<Shelter> shelters = app.getShelters();
+
+        if (shelters == null || shelters.isEmpty()) {
+            System.out.println("No shelters are available.");
+            return;
+        }
+
+        System.out.println("\n===== Choose a Shelter =====");
+
+        for (int i = 0; i < shelters.size(); i++) {
+            Shelter shelter = shelters.get(i);
+            System.out.println((i + 1) + ". " + shelter.getName()
+                    + " | Capacity: " + shelter.getCapacity()
+                    + " | Accommodations: " + shelter.getAccommodations());
+        }
+
+        System.out.print("Choose a shelter number: ");
+
+        int choice;
+        try {
+            choice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid choice.");
+            return;
+        }
+
+        if (choice < 1 || choice > shelters.size()) {
+            System.out.println("Invalid choice.");
+            return;
+        }
+
+        Shelter selectedShelter = shelters.get(choice - 1);
+
+        if (app.assignShelter(request, selectedShelter)) {
+            System.out.println("Shelter assigned successfully!");
+        } else {
+            System.out.println("Could not assign shelter.");
+        }
+    }
+    // EXPORT TRIP SCENARIO
+    private void exportTripInformation() {
+    User volunteer = app.getCurrentUser();
+
+        if (volunteer == null) {
+            System.out.println("Please log in first.");
+            return;
+        }
+
+        ArrayList<ReliefRequest> requests = DataLoader.getReliefRequests();
+        ArrayList<ReliefRequest> assignedRequests = new ArrayList<>();
+
+        for (ReliefRequest request : requests) {
+            if (request.getStatus() == RequestStatus.ASSIGNED
+                    && request.getAssignedShelterId() != null) {
+                assignedRequests.add(request);
+            }
+        }
+
+        if (assignedRequests.isEmpty()) {
+            System.out.println("No assigned trips are available to export.");
+            return;
+        }
+
+        for (int i = 0; i < assignedRequests.size(); i++) {
+            System.out.println("\n" + (i + 1) + ". "
+                    + assignedRequests.get(i).getDetails());
+        }
+
+        System.out.print("Choose a trip to export: ");
+
+        int choice;
+        try {
+            choice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid choice.");
+            return;
+        }
+
+        if (choice < 1 || choice > assignedRequests.size()) {
+            System.out.println("Invalid choice.");
+            return;
+        }
+
+        ReliefRequest request = assignedRequests.get(choice - 1);
+        Shelter selectedShelter = null;
+
+        for (Shelter shelter : app.getShelters()) {
+            if (shelter.getId().equals(request.getAssignedShelterId())) {
+                selectedShelter = shelter;
+                break;
+            }
+        }
+
+        if (selectedShelter == null) {
+            System.out.println("The assigned shelter could not be found.");
+            return;
+        }
+
+        System.out.print("Family members' names and ages: ");
+        String familyMembers = scanner.nextLine();
+
+        System.out.print("Medical information: ");
+        String medicalNote = scanner.nextLine();
+
+        System.out.print("Directions from your location to the family: ");
+        String directionsToFamily = scanner.nextLine();
+
+        System.out.print("Directions from the family to the shelter: ");
+        String directionsToShelter = scanner.nextLine();
+
+        boolean exported = TripExporter.exportTrip(
+                request,
+                volunteer,
+                selectedShelter,
+                familyMembers,
+                medicalNote,
+                directionsToFamily,
+                directionsToShelter
+        );
+
+        if (exported) {
+            System.out.println("Trip exported successfully.");
+        } else {
+            System.out.println("Trip export failed.");
+        }
+    }
     public static void main(String[] args) {
         EmergencyReliefUI emergencyReliefUI =
             new EmergencyReliefUI();
