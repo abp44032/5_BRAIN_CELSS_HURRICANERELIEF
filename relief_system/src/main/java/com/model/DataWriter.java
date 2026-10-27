@@ -210,7 +210,7 @@ public class DataWriter extends DataConstants {
             return false;
         }
 
-        // Add new requests that are not already in the JSON file.
+    // Add new requests that are not already in the JSON file.
     ArrayList<ReliefRequest> newRequests =
             ReliefRequestList.getInstance().getRequests();
 
