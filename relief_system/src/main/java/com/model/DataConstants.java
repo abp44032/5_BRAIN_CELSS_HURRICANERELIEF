@@ -5,9 +5,13 @@ public class DataConstants {
      * File Names
      */
     public static final String USER_FILE_NAME = "JSON/users.json";
+    public static final String JUNIT_USER_FILE_NAME = "/data/users.json";
     public static final String SHELTER_FILE_NAME = "JSON/shelters.json";
+    public static final String JUNIT_SHELTER_FILE_NAME = "/data/shelters.json";
     public static final String REQUEST_FILE_NAME = "JSON/reliefRequests.json";
+    public static final String JUNIT_REQUEST_FILE_NAME = "/data/reliefRequests.json";
     public static final String HURRICANE_FILE_NAME = "JSON/hurricanes.json";
+    public static final String JUNIT_HURRICANE_FILE_NAME = "/data/hurricanes.json";
 
     /**
      * User constants
@@ -63,4 +67,16 @@ public class DataConstants {
     public static final String HURRICANE_EVACUATION_STEPS = "evacuationSteps";
     public static final String HURRICANE_EMERGENCY_SUPPLIES = "emergencySupplies";
 
+    /**
+     * Helper method to check if code is running under JUnit testing
+     * @return true if a JUnit class is in the current call stack. Returns false otherwise
+     */
+    public static boolean isJUnitTest() {  
+		for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
+		  if (element.getClassName().startsWith("org.junit.")) {
+			return true;
+		  }           
+		}
+		return false;
+	}
 }
