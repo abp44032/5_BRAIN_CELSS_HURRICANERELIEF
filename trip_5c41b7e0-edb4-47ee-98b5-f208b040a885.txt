@@ -1,0 +1,45 @@
+==================================================
+           HURRICANE RELIEF - TRIP PLAN
+==================================================
+
+FAMILY MEMBERS
+--------------------------------------------------
+Sophie (14), Daniel (44), Samantha (42)
+
+PET
+--------------------------------------------------
+Pet{name='buddy', type='dog'}
+
+FAMILY CONTACT INFORMATION
+--------------------------------------------------
+huzztowel@email.com
+
+PICKUP ADDRESS
+--------------------------------------------------
+123 main street, charleston, sc 29204 | Coordinates: null
+
+MEDICAL INFORMATION
+--------------------------------------------------
+sophie needs medical assistance
+
+ASSIGNED VOLUNTEER
+--------------------------------------------------
+Rosa Delgado
+Vehicle: Ford F-350
+
+DIRECTIONS: VOLUNTEER TO FAMILY
+--------------------------------------------------
+123 Rainbow Row
+
+SELECTED SHELTER
+--------------------------------------------------
+Shelter Name: Charleston Family Relief Shelter
+Shelter Address: 100 Harbor View Dr, Charleston, SC 29401 | Coordinates: null
+
+DIRECTIONS: FAMILY TO SHELTER
+--------------------------------------------------
+100 Harbor View Dr, Charleston, SC 29401
+
+==================================================
+                END OF TRIP PLAN
+==================================================
