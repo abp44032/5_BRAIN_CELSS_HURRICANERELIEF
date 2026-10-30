@@ -1,0 +1,24 @@
+[
+    {
+        "uuid": "93e0a9ed-1844-4705-baf6-9d8e1c8c6f99",
+        "name" : "Tracy",
+        "hurricaneZipCodes" : ["73301", "75201"],
+        "hurricaneStatus" : "ACTIVE",
+        "evacuationSteps" : ["Prepare emergency supplies", "Follow local evacuation orders"],
+        "emergencySupplies" : [
+            {"resourceID" : 301, "name" : "Bottled Water", "quantity" : 100} ,
+            {"resourceID" : 302, "name" : "First Aid Kit", "quantity" : 20}
+        ] 
+    },
+    {
+        "uuid": "e92c0bb4-7ae6-43a3-ba87-33e436496ac6",
+        "name" : "Andrew",
+        "hurricaneZipCodes" : ["73301", "75201"],
+        "hurricaneStatus" : "WEAKENING",
+        "evacuationSteps" : ["Avoid flooded roads", "Check official local alerts"],
+        "emergencySupplies" : [
+            {"resourceID" : 303, "name" : "Blankets", "quantity" : 100} ,
+            {"resourceID" : 304, "name" : "Infant Formula", "quantity" : 20}
+        ] 
+    }
+]

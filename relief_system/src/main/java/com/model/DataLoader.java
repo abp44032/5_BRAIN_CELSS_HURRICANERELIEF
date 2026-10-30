@@ -1,6 +1,9 @@
 package com.model;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -19,7 +22,7 @@ public class DataLoader extends DataConstants {
         ArrayList<User> users = new ArrayList<>();
 
         try {
-            FileReader reader = new FileReader(USER_FILE_NAME);
+            BufferedReader reader = getReaderFromFile(USER_FILE_NAME, JUNIT_USER_FILE_NAME);
             JSONArray usersJSON = (JSONArray) new JSONParser().parse(reader);
             for(int i = 0; i < usersJSON.size(); i++) {
                 JSONObject userJSON = (JSONObject) usersJSON.get(i);
@@ -64,7 +67,7 @@ public class DataLoader extends DataConstants {
         ArrayList<Shelter> shelters = new ArrayList<>();
 
         try {
-            FileReader reader = new FileReader(SHELTER_FILE_NAME);
+            BufferedReader reader = getReaderFromFile(SHELTER_FILE_NAME, JUNIT_SHELTER_FILE_NAME);
             JSONArray sheltersJSON = (JSONArray) new JSONParser().parse(reader);
             reader.close();
 
@@ -167,7 +170,7 @@ public class DataLoader extends DataConstants {
         ArrayList<ReliefRequest> requests = new ArrayList<>();
 
         try {
-            FileReader reader = new FileReader(REQUEST_FILE_NAME);
+            BufferedReader reader = getReaderFromFile(REQUEST_FILE_NAME, JUNIT_REQUEST_FILE_NAME);
             JSONArray requestsJSON = (JSONArray) new JSONParser().parse(reader);
             reader.close();
 
@@ -266,7 +269,7 @@ public class DataLoader extends DataConstants {
         ArrayList<Hurricane> hurricanes = new ArrayList<>();
 
         try {
-            FileReader reader = new FileReader(HURRICANE_FILE_NAME);
+            BufferedReader reader = getReaderFromFile(HURRICANE_FILE_NAME, JUNIT_HURRICANE_FILE_NAME);
             JSONArray hurricanesJSON = (JSONArray) new JSONParser().parse(reader);
             reader.close();
 
@@ -314,4 +317,26 @@ public class DataLoader extends DataConstants {
         }
         return hurricanes;
     }
+
+    /**
+     * Helper method to distinguish between reading from normal JSON files and reading from the test JSON files 
+     * @param fileName path of the normal JSON file
+     * @param jsonFileName path of the test JSON file
+     * @return BufferedReader for the file or null if the file can't load
+     */
+    static BufferedReader getReaderFromFile(String fileName, String jsonFileName){
+		try {
+			if(isJUnitTest()) {
+				InputStream inputStream = DataLoader.class.getResourceAsStream(jsonFileName);
+				InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+				return new BufferedReader(inputStreamReader);
+			} else {
+				FileReader reader = new FileReader(fileName);
+				return new BufferedReader(reader);
+			}
+		} catch(Exception e){
+			System.out.println("Can't load");
+			return null;
+		}		
+	}
 }

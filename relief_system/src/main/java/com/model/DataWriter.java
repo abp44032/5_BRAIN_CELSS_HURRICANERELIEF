@@ -1,11 +1,14 @@
 package com.model;
 
 	
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -23,7 +26,7 @@ public class DataWriter extends DataConstants {
 		JSONArray jsonUsers = new JSONArray();
 
         // Read existing users first.
-        try (FileReader reader = new FileReader(USER_FILE_NAME)) {
+        try (BufferedReader reader = DataLoader.getReaderFromFile(USER_FILE_NAME, JUNIT_USER_FILE_NAME)) {
             JSONParser parser = new JSONParser();
             Object data = parser.parse(reader);
 
@@ -69,7 +72,7 @@ public class DataWriter extends DataConstants {
         }
 
         // Write the updated JSON array.
-        try (FileWriter file = new FileWriter(USER_FILE_NAME)) {
+        try (FileWriter file = new FileWriter(getFileWritingPath(USER_FILE_NAME, JUNIT_USER_FILE_NAME))) {
             file.write(jsonUsers.toJSONString());
             return true;
         } catch (IOException e) {
@@ -124,7 +127,7 @@ public class DataWriter extends DataConstants {
 		}
 		
 		//writing JSON file
-        try (FileWriter file = new FileWriter(SHELTER_FILE_NAME)) {
+        try (FileWriter file = new FileWriter(getFileWritingPath(SHELTER_FILE_NAME, JUNIT_SHELTER_FILE_NAME))) {
  
             file.write(jsonShelter.toJSONString());
             return true;
@@ -195,7 +198,7 @@ public class DataWriter extends DataConstants {
 		JSONArray jsonRequest = new JSONArray();
 		
 		//writing JSON file
-        try (FileReader reader = new FileReader(REQUEST_FILE_NAME)) {
+        try (BufferedReader reader = DataLoader.getReaderFromFile(REQUEST_FILE_NAME, JUNIT_REQUEST_FILE_NAME)) {
             JSONParser parser = new JSONParser();
             Object data = parser.parse(reader);
             
@@ -243,7 +246,7 @@ public class DataWriter extends DataConstants {
         }
     }
 
-    try (FileWriter file = new FileWriter(REQUEST_FILE_NAME)) {
+    try (FileWriter file = new FileWriter(getFileWritingPath(REQUEST_FILE_NAME, JUNIT_REQUEST_FILE_NAME))) {
         file.write(jsonRequest.toJSONString());
         return true;
     } catch (IOException e) {
@@ -302,7 +305,7 @@ public class DataWriter extends DataConstants {
         }
 		
 		//writing JSON file
-        try (FileWriter file = new FileWriter(HURRICANE_FILE_NAME)) {
+        try (FileWriter file = new FileWriter(getFileWritingPath(HURRICANE_FILE_NAME, JUNIT_HURRICANE_FILE_NAME))) {
  
             file.write(jsonHurricane.toJSONString());
             return true;
@@ -346,6 +349,26 @@ public class DataWriter extends DataConstants {
         json.put("zip", location.getZip());
         return json;
     }
+
+    /**
+     * Helper method to distinguish between writing to normal JSON files or writing to test JSON files 
+     * @param PATH_NAME path of the normal JSON file
+     * @param JUNIT_PATH_NAME path of the test JSON file
+     * @return the path to write to. Returns empty string if test file isn't found
+     */
+    private static String getFileWritingPath(String PATH_NAME, String JUNIT_PATH_NAME) {
+		try {
+			if(isJUnitTest()){
+				URI url = DataWriter.class.getResource(JUNIT_PATH_NAME).toURI();
+				return url.getPath();
+			} else {
+				return PATH_NAME;
+			}
+		} catch(Exception e){
+			System.out.println("Difficulty getting resource path");
+			return "";
+		}
+	}
 
     //main method that tests if the data writer saved all instances to JSON files
     public static void main(String[] args){
