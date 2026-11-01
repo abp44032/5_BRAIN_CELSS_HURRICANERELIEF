@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -140,5 +141,195 @@ class DataWriterTest {
 
         assertTrue(
                 DataWriter.getUserJSON(userList.get(0)).containsKey("location"));
+    }
+
+/**
+ ----------------------------------------------------------------------------------------
+ * TEST                         | REASONING
+ * writing zero shelters        | Checks that saving an empty shelter list works.
+ * writing one shelter          | Checks that the shelter's details are saved.
+ * writing multiple shelters    | Checks that all shelters in the list are saved.
+ ----------------------------------------------------------------------------------------
+ */
+    @Test
+    public void testSaveZeroShelters() {
+        Shelter.getInstance().getShelters().clear();
+
+        assertTrue(DataWriter.saveShelters());
+    }
+
+    @Test
+    public void testSaveOneShelter() {
+        Shelter.getInstance().getShelters().clear();
+
+        Shelter shelter = new Shelter(
+                UUID.randomUUID(),
+                "Community Shelter",
+                200,
+                new ArrayList<Resource>(),
+                new ArrayList<AccommodationType>(),
+                new Location("456 Oak Street", "Columbia", "SC", "29201"),
+                "8:00 AM - 8:00 PM"
+        );
+
+        Shelter.getInstance().getShelters().add(shelter);
+
+        assertTrue(DataWriter.saveShelters());
+
+        assertEquals("Community Shelter",
+        DataWriter.getShelterJSON(shelter).get("name"));
+    }
+
+    @Test
+    public void testSaveMultipleShelters() {
+        Shelter.getInstance().getShelters().clear();
+
+        Shelter firstShelter = new Shelter(
+                UUID.randomUUID(), "North Shelter", 100,
+                new ArrayList<Resource>(), new ArrayList<AccommodationType>(),
+                new Location("456 Oak Street", "Columbia", "SC", "29201"),
+                "8:00 AM - 8:00 PM"
+        );
+
+        Shelter secondShelter = new Shelter(
+                UUID.randomUUID(), "South Shelter", 150,
+                new ArrayList<Resource>(), new ArrayList<AccommodationType>(),
+                new Location("789 Pine Street", "Columbia", "SC", "29201"),
+                "8:00 AM - 8:00 PM"
+        );
+
+        Shelter.getInstance().getShelters().add(firstShelter);
+        Shelter.getInstance().getShelters().add(secondShelter);
+
+        assertTrue(DataWriter.saveShelters());
+    }
+
+/**
+ ----------------------------------------------------------------------------------------
+ * TEST                         | REASONING
+ * writing zero hurricanes      | Checks that saving an empty hurricane list works.
+ * writing one hurricane        | Checks that the hurricane's details are saved.
+ * writing multiple hurricanes  | Checks that all hurricanes in the list are saved.
+ ----------------------------------------------------------------------------------------
+ */
+    @Test
+    public void testSaveZeroHurricanes() {
+        Hurricane.getInstance().getHurricane().clear();
+
+        assertTrue(DataWriter.saveHurricanes());
+    }
+
+    @Test
+    public void testSaveOneHurricane() {
+        Hurricane.getInstance().getHurricane().clear();
+
+        Hurricane hurricane = new Hurricane(
+                UUID.randomUUID(),
+                "Hurricane Example",
+                new ArrayList<String>(),
+                HurricaneStatus.ACTIVE,
+                new ArrayList<String>(),
+                new ArrayList<Resource>()
+        );
+
+        Hurricane.getInstance().getHurricane().add(hurricane);
+
+        assertTrue(DataWriter.saveHurricanes());
+
+        assertEquals("Hurricane Example",
+        DataWriter.getHurricaneJSON(hurricane).get("name"));
+
+    }
+
+    @Test
+    public void testSaveMultipleHurricanes() {
+        Hurricane.getInstance().getHurricane().clear();
+
+        Hurricane firstHurricane = new Hurricane(
+                UUID.randomUUID(), "Hurricane Alpha",
+                new ArrayList<String>(), HurricaneStatus.ACTIVE,
+                new ArrayList<String>(), new ArrayList<Resource>()
+        );
+
+        Hurricane secondHurricane = new Hurricane(
+                UUID.randomUUID(), "Hurricane Beta",
+                new ArrayList<String>(), HurricaneStatus.FORMING,
+                new ArrayList<String>(), new ArrayList<Resource>()
+        );
+
+        Hurricane.getInstance().getHurricane().add(firstHurricane);
+        Hurricane.getInstance().getHurricane().add(secondHurricane);
+
+        assertTrue(DataWriter.saveHurricanes());
+
+    }
+
+/**
+ ----------------------------------------------------------------------------------------
+ * TEST                              | REASONING
+ * writing zero relief requests      | Checks that saving an empty request list works.
+ * writing one relief request        | Checks that the request's details are saved.
+ * writing multiple relief requests  | Checks that all requests in the list are saved.
+ ----------------------------------------------------------------------------------------
+ */
+    @Test
+    public void testSaveZeroReliefRequests() {
+        ReliefRequestList.getInstance().getRequests().clear();
+
+        assertTrue(DataWriter.saveReliefRequests());
+    }
+
+    @Test
+    public void testSaveOneReliefRequest() {
+        ReliefRequestList.getInstance().getRequests().clear();
+
+        ReliefRequest request = new ReliefRequest(
+                UUID.randomUUID(),
+                RequestStatus.RECEIVED,
+                RequestType.MEDICAL,
+                SeverityLevel.HIGH,
+                UrgencyLevel.CRITICAL,
+                "Need medical assistance.",
+                2,
+                new ArrayList<Pet>(),
+                new Location("789 Pine Street", "Columbia", "SC", "29201"),
+                "555-0100"
+        );
+
+        ReliefRequestList.getInstance().getRequests().add(request);
+
+        assertTrue(DataWriter.saveReliefRequests());
+
+        // testSaveOneReliefRequest
+        assertEquals("Need medical assistance.",
+        DataWriter.getReliefRequestJSON(request).get("description"));
+    }
+
+    @Test
+    public void testSaveMultipleReliefRequests() {
+        ReliefRequestList.getInstance().getRequests().clear();
+
+        ReliefRequest firstRequest = new ReliefRequest(
+                UUID.randomUUID(), RequestStatus.RECEIVED,
+                RequestType.MEDICAL, SeverityLevel.HIGH, UrgencyLevel.CRITICAL,
+                "Need medical assistance.", 2,
+                new ArrayList<Pet>(),
+                new Location("789 Pine Street", "Columbia", "SC", "29201"),
+                "555-0100"
+        );
+
+        ReliefRequest secondRequest = new ReliefRequest(
+                UUID.randomUUID(), RequestStatus.RECEIVED,
+                RequestType.TRANSPORTATION, SeverityLevel.LOW, UrgencyLevel.HIGH,
+                "Need transportation.", 1,
+                new ArrayList<Pet>(),
+                new Location("321 Elm Street", "Columbia", "SC", "29201"),
+                "555-0101"
+        );
+
+        ReliefRequestList.getInstance().getRequests().add(firstRequest);
+        ReliefRequestList.getInstance().getRequests().add(secondRequest);
+
+        assertTrue(DataWriter.saveReliefRequests());
     }
 }
