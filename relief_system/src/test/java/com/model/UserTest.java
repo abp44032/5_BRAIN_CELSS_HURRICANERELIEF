@@ -8,18 +8,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * -------------------------------------------------------------------------
- * TEST                         | REASONING
- * correct password             | Checks that a matching password is accepted.
- * incorrect password           | Checks that a nonmatching password is rejected.
- * null password                | Checks that a null password is rejected.
- * user string representation   | Checks that the user's information is
- *                              | formatted the right way.
- * user with supplied ID        | Checks that the constructor uses the
- *                              | provided ID.
- * -------------------------------------------------------------------------
+ * -------------------------------------------------------------------------------
+ * TEST                         | REASONING                                      |
+ * -------------------------------------------------------------------------------
+ * correct password             | Checks that a matching password is accepted.   |
+ * incorrect password           | Checks that a nonmatching password is rejected.|
+ * null password                | Checks that a null password is rejected.       |
+ * user string representation   | Checks that the user's information is.         |
+ *                              | formatted the right way.                       |
+ * user with supplied ID        | Checks that the constructor uses the.          |
+ *                              | provided ID.                                   |
+ * -------------------------------------------------------------------------------
  */
-class UserTest {
+public class UserTest {
 
     private User user;
 
