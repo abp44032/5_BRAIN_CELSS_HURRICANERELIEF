@@ -17,6 +17,14 @@ The Hurricane Relief System is an object-oriented hurricane relief platform that
 
 [UML Sequence Diagram 2](docs/sequence2.pdf)
 
+[Implementation and Presentation Video](https://youtu.be/qdovOa3EMMA)
+
+## Prototype
+
+[Prototype Version 1](docs/prototype-version-1.pdf)
+
+[Prototype Version 1 Demo Video](https://www.youtube.com/watch?v=tCYKwUhVsUg)
+
 ## Project Board
 
 [Project Board](https://github.com/users/abp44032/projects/1)
@@ -30,6 +38,3 @@ The Hurricane Relief System is an object-oriented hurricane relief platform that
 |   Leighton Keenan |
 |   Robert Porter   |
 |   Savannah Allen  |
-
-## YouTube Video Assignment
-https://youtu.be/qdovOa3EMMA
