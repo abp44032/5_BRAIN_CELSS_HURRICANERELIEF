@@ -10,6 +10,8 @@ module com.hurricane {
     opens com.hurricane to javafx.fxml;
     exports com.hurricane;
 
+    opens com.controllers to javafx.fxml;
+
     opens com.model to javafx.fxml; 
     exports com.model;
 }

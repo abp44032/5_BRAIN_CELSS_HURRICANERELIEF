@@ -3,6 +3,13 @@
   "configurations": [
     {
         "type": "java",
+        "name": "App",
+        "request": "launch",
+        "mainClass": "com.hurricane/com.hurricane.App",
+        "projectName": "demo"
+    },
+    {
+        "type": "java",
         "name": "DataLoader",
         "request": "launch",
         "mainClass": "com.hurricane/com.model.DataLoader",
