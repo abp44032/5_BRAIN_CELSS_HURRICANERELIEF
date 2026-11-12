@@ -6,6 +6,7 @@ module com.hurricane {
     requires transitive javafx.web;
     requires json.simple;
     requires junit;
+    requires javafx.base;
 
     opens com.hurricane to javafx.fxml;
     exports com.hurricane;
