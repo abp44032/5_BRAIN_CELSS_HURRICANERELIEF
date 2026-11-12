@@ -6,8 +6,8 @@ import com.hurricane.App;
 
 public class HomeController {
 
-    @FXML
-    private void switchToSecondary() throws IOException {
-        App.setRoot("secondary");
+   @FXML
+    private void goToLogin() throws IOException {
+        App.setRoot("login");
     }
 }

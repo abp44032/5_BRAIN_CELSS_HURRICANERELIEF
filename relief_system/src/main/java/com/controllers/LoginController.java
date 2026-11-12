@@ -4,11 +4,15 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import com.hurricane.App;
 
 public class LoginController {
+
+    @FXML
+    private Button btn_login;
 
     @FXML 
     private TextField txt_password;
