@@ -79,7 +79,7 @@
                     <execution>
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example/com.example.App</mainClass>
+                            <mainClass>com.hurricane/com.hurricane.App</mainClass>
                         </configuration>
                     </execution>
                 </executions>
