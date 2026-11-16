@@ -25,6 +25,8 @@ The Hurricane Relief System is an object-oriented hurricane relief platform that
 
 [Prototype Version 1 Demo Video](https://www.youtube.com/watch?v=pqCiNDuSjzM)
 
+[Prototype Version 2](docs/prototype-version-2.pdf)
+
 ## Project Board
 
 [Project Board](https://github.com/users/abp44032/projects/1)
