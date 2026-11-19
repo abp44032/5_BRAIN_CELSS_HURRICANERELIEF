@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="919.0" prefWidth="442.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="919.0" prefWidth="442.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="13.0" layoutY="8.0" prefHeight="98.0" prefWidth="416.0" text="Create your account">
          <font>
@@ -80,7 +79,7 @@
             <Font name="Agency FB Bold" size="25.0" />
          </font>
       </Label>
-      <TextArea layoutX="15.0" layoutY="640.0" prefHeight="110.0" prefWidth="416.0" />
+      <TextArea layoutX="15.0" layoutY="640.0" prefHeight="186.0" prefWidth="416.0" />
       <Label layoutX="24.0" layoutY="649.0" text="Use my current location">
          <font>
             <Font name="Agency FB" size="20.0" />
@@ -91,12 +90,12 @@
             <Font name="Agency FB" size="15.0" />
          </font>
       </Label>
-      <Button layoutX="64.0" layoutY="706.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="318.0" text="Use Current Location">
+      <Button layoutX="64.0" layoutY="698.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="318.0" text="Use Current Location">
          <font>
             <Font name="Agency FB" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="64.0" layoutY="758.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="318.0" text="OR ENTER ADDRESS MANUALLY">
+      <Button layoutX="64.0" layoutY="778.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="318.0" text="Enter Address Manually">
          <font>
             <Font name="Agency FB" size="18.0" />
          </font>
@@ -106,5 +105,10 @@
             <Font name="Agency FB Bold" size="20.0" />
          </font>
       </Button>
+      <Label layoutX="210.0" layoutY="739.0" text="OR">
+         <font>
+            <Font name="Agency FB Bold" size="25.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
