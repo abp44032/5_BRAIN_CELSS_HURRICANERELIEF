@@ -6,6 +6,13 @@
         "name": "App",
         "request": "launch",
         "mainClass": "com.hurricane/com.hurricane.App",
+        "projectName": "relief_system"
+    },
+    {
+        "type": "java",
+        "name": "App",
+        "request": "launch",
+        "mainClass": "com.hurricane/com.hurricane.App",
         "projectName": "demo"
     },
     {
